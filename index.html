@@ -22,7 +22,6 @@
       --bg:#07070a;
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.72);
-      --line:rgba(255,255,255,.12);
 
       /* Difuminado / degradés */
       --fire1:#ffe08a;
@@ -38,8 +37,8 @@
       --app-fade-ms:560ms;
 
       /* Assets */
-      --header-banner: url("https://iili.io/fDcStyl.jpg"); /* ahora va en el HEADER */
-      --brand-logo: url("https://iili.io/fDcQUU7.jpg");    /* logo header */
+      --header-banner: url("https://iili.io/fDcStyl.jpg"); /* imagen en header */
+      --brand-logo: url("https://iili.io/fDcQUU7.jpg");    /* logo */
     }
 
     *{box-sizing:border-box}
@@ -54,7 +53,7 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
 
-    /* INTRO: SOLO VIDEO */
+    /* INTRO */
     .intro{ position:fixed; inset:0; z-index:9999; background:#000; overflow:hidden; }
     .intro video{
       position:absolute; inset:0; width:100%; height:100%;
@@ -70,16 +69,14 @@
     }
     .intro.hide{ opacity:0; pointer-events:none; transition: opacity var(--intro-fade-ms) ease; }
 
-    /* APP */
+    /* APP (sin “manchas” gigantes en overlay, más limpio) */
     .app{
       opacity:0; transform: translateY(10px);
       transition: opacity var(--app-fade-ms) ease, transform var(--app-fade-ms) ease;
       min-height:100%;
       background:
-        radial-gradient(900px 600px at 18% 8%, rgba(255,224,138,.16), transparent 58%),
-        radial-gradient(900px 650px at 88% 12%, rgba(255,106,42,.14), transparent 60%),
-        radial-gradient(900px 650px at 70% 95%, rgba(255,42,77,.10), transparent 55%),
-        radial-gradient(700px 500px at 25% 75%, rgba(255,178,74,.10), transparent 55%),
+        radial-gradient(1200px 900px at 20% 10%, rgba(255,178,74,.08), transparent 62%),
+        radial-gradient(1200px 900px at 85% 10%, rgba(255,42,77,.06), transparent 62%),
         linear-gradient(180deg, rgba(7,7,10,1) 0%, rgba(7,7,10,1) 100%);
     }
     .app.show{ opacity:1; transform: translateY(0); }
@@ -90,16 +87,15 @@
     }
 
     /* =========================
-       HEADER con BANNER (imagen fDcStyl) + menú hamburguesa
+       HEADER: SIEMPRE estilo “móvil”
+       (banner + burger + panel)
        ========================= */
     .topbar{
       position:sticky; top:0; z-index:60;
-      border-bottom:1px solid rgba(255,255,255,.10);
+      border-bottom:1px solid rgba(255,255,255,.12);
       overflow:hidden;
       backdrop-filter: blur(10px);
     }
-
-    /* Banner como fondo del header */
     .topbar::before{
       content:"";
       position:absolute; inset:0;
@@ -110,14 +106,11 @@
       filter: saturate(1.05) contrast(1.06);
       z-index:0;
     }
-    /* Oscurecedor + toques de fuego (difuminado) */
     .topbar::after{
       content:"";
       position:absolute; inset:0;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.78)),
-        radial-gradient(900px 260px at 22% 20%, rgba(255,224,138,.12), transparent 64%),
-        radial-gradient(900px 260px at 82% 30%, rgba(255,42,77,.10), transparent 66%);
+        linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.82));
       z-index:1;
       pointer-events:none;
     }
@@ -126,68 +119,41 @@
       position:relative; z-index:2;
       display:flex; align-items:center; justify-content:space-between;
       gap:12px;
-      padding:12px 0;
+      padding: 10px 0;
     }
 
     .brand{
       display:flex; align-items:center; gap:12px;
-      min-width: 240px;
+      min-width: 0;
     }
     .brand .logo{
-      width:46px; height:46px;
+      width:42px; height:42px;
       border-radius: 14px;
       background-image: var(--brand-logo);
       background-size: cover;
       background-position: center;
       border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 18px 60px rgba(255,106,42,.10);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
       flex: 0 0 auto;
     }
     .brand b{
       letter-spacing:.10em;
       text-transform:uppercase;
       display:block;
-      font-size:14px;
+      font-size:13px;
       line-height:1.05;
       text-shadow: 0 10px 30px rgba(0,0,0,.65);
-    }
-    .brand span{
-      display:block;
-      font-size:12px;
-      color: rgba(255,255,255,.78);
-      margin-top:2px;
-      text-shadow: 0 10px 30px rgba(0,0,0,.65);
-    }
-
-    /* Desktop nav */
-    .nav{
-      display:flex; gap:10px; flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .nav a{
-      font-size:13px;
-      color: rgba(255,255,255,.88);
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
       white-space:nowrap;
-      backdrop-filter: blur(8px);
     }
-    .nav a:hover{
-      transform: translateY(-1px);
-      background: rgba(0,0,0,.28);
-      border-color: rgba(255,255,255,.22);
-    }
+    .brand span{ display:none; } /* SIEMPRE como móvil */
 
-    /* Hamburguesa (solo mobile) */
+    /* Burger SIEMPRE visible */
     .burger{
-      display:none;
+      display:flex;
       width:46px; height:46px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.20);
+      background: rgba(0,0,0,.22);
       backdrop-filter: blur(10px);
       box-shadow: 0 18px 55px rgba(0,0,0,.45);
       align-items:center; justify-content:center;
@@ -214,56 +180,45 @@
     .burger span::before{ top:-6px; }
     .burger span::after{ top:6px; }
 
-    /* Estado abierto */
     .topbar.open .burger span{ opacity:0; }
     .topbar.open .burger span::before{ top:0; transform: rotate(45deg); }
     .topbar.open .burger span::after{ top:0; transform: rotate(-45deg); }
 
-    /* Mobile layout */
-    @media (max-width: 840px){
-      .brand{ min-width: 0; }
-      .brand span{ display:none; } /* móvil más limpio */
-      .nav{ display:none; }        /* se oculta y se abre en panel */
-      .burger{ display:flex; }
-
-      .topbar .inner{ padding: 10px 0; }
-
-      /* Panel desplegable */
-      .mobile-panel{
-        display:none;
-        position:relative;
-        z-index:2;
-        padding: 0 0 12px;
-      }
-      .topbar.open .mobile-panel{ display:block; }
-
-      .mobile-nav{
-        margin-top: 8px;
-        border-radius: 18px;
-        border: 1px solid rgba(255,255,255,.14);
-        background: rgba(0,0,0,.35);
-        backdrop-filter: blur(10px);
-        overflow:hidden;
-      }
-      .mobile-nav a{
-        display:block;
-        padding: 12px 14px;
-        border-top: 1px solid rgba(255,255,255,.10);
-        color: rgba(255,255,255,.92);
-        font-weight: 800;
-        letter-spacing: .02em;
-      }
-      .mobile-nav a:first-child{ border-top:none; }
-      .mobile-nav a:active{ background: rgba(255,255,255,.05); }
+    /* Panel menú (para mobile y desktop) */
+    .mobile-panel{
+      display:none;
+      position:relative;
+      z-index:2;
+      padding: 0 0 12px;
     }
+    .topbar.open .mobile-panel{ display:block; }
+
+    .mobile-nav{
+      margin-top: 8px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.38);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+    }
+    .mobile-nav a{
+      display:block;
+      padding: 12px 14px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      font-weight: 850;
+      letter-spacing: .02em;
+    }
+    .mobile-nav a:first-child{ border-top:none; }
+    .mobile-nav a:active{ background: rgba(255,255,255,.05); }
 
     /* =========================
-       HERO (sin banner, ahora el banner está en header)
+       HERO
        ========================= */
     .hero{
       position:relative;
       min-height: calc(100vh - 68px);
-      padding: 18px 0 26px;
+      padding: 22px 0 28px;
       display:flex;
       align-items:flex-start;
       overflow:hidden;
@@ -286,30 +241,14 @@
       position:absolute; inset:-40px;
       z-index:-2;
       background:
-        radial-gradient(1200px 700px at 50% 24%, rgba(0,0,0,.05), rgba(0,0,0,.82) 64%),
-        linear-gradient(to bottom, rgba(0,0,0,.06), rgba(0,0,0,.90));
+        radial-gradient(1200px 700px at 50% 24%, rgba(0,0,0,.08), rgba(0,0,0,.86) 66%),
+        linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.92));
     }
 
-    .side-emit{
-      position:absolute;
-      top: 18%;
-      width: 34vw;
-      max-width: 420px;
-      min-width: 200px;
-      height: 52vh;
-      border-radius: 32px;
-      filter: blur(10px);
-      opacity: .35;
-      z-index: -1;
-      pointer-events:none;
-      background:
-        radial-gradient(240px 360px at 40% 30%, rgba(255,224,138,.75), transparent 70%),
-        radial-gradient(260px 380px at 55% 55%, rgba(255,106,42,.70), transparent 72%),
-        radial-gradient(260px 380px at 60% 80%, rgba(255,42,77,.55), transparent 74%);
-    }
-    .side-left{ left: -18vw; }
-    .side-right{ right: -18vw; transform: scaleX(-1); }
+    /* (Manchas laterales removidas del overlay) */
+    .side-emit{ display:none !important; }
 
+    /* Reveals */
     .reveal{
       opacity: 0;
       transform: translateY(10px);
@@ -317,17 +256,20 @@
       will-change: opacity, transform;
     }
     .reveal.in{ opacity: 1; transform: translateY(0); }
-    .from-left{ transform: translateX(-28px); }
-    .from-right{ transform: translateX(28px); }
-    .reveal.in.from-left, .reveal.in.from-right{ transform: translateX(0); }
 
     .hero-grid{
       width:100%;
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
+      gap: 16px;
       align-items: stretch;
-      margin-top: 10px;
+      margin-top: 6px;
+    }
+
+    /* Más aire en móviles */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; gap: 14px; }
+      .hero{ padding: 18px 0 26px; }
     }
 
     .card{
@@ -343,14 +285,14 @@
       content:"";
       position:absolute; inset:-2px;
       background:
-        radial-gradient(900px 280px at 20% 15%, rgba(255,224,138,.14), transparent 62%),
-        radial-gradient(900px 280px at 85% 30%, rgba(255,42,77,.10), transparent 66%);
+        radial-gradient(900px 280px at 20% 15%, rgba(255,224,138,.12), transparent 64%),
+        radial-gradient(900px 280px at 85% 30%, rgba(255,42,77,.08), transparent 68%);
       z-index:0;
       pointer-events:none;
     }
     .card > *{ position:relative; z-index:1; }
 
-    .hero-main{ padding: 20px 18px; }
+    .hero-main{ padding: 22px 18px; }
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
       font-size:12px;
@@ -363,7 +305,7 @@
     .kicker i{
       width:8px; height:8px; border-radius:999px;
       background: linear-gradient(135deg, var(--fire1), var(--fire2), var(--fire3), var(--fire4));
-      box-shadow:0 0 18px rgba(255,106,42,.22);
+      box-shadow:0 0 18px rgba(255,106,42,.18);
       display:inline-block;
     }
 
@@ -372,24 +314,55 @@
       letter-spacing:.10em;
       text-transform:uppercase;
       font-weight: 980;
-      font-size: clamp(38px, 7.6vw, 72px);
+      font-size: clamp(40px, 8vw, 76px);
       line-height: .96;
       background: linear-gradient(180deg, var(--fire1) 0%, var(--fire2) 30%, var(--fire3) 58%, var(--fire4) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: 0 12px 40px rgba(0,0,0,.60), 0 0 22px rgba(255,106,42,.16);
+      text-shadow: 0 12px 40px rgba(0,0,0,.60), 0 0 22px rgba(255,106,42,.14);
     }
 
     .sub{
-      margin: 0 0 12px;
+      margin: 0 0 14px;
       color: rgba(255,255,255,.84);
-      font-size: clamp(14px, 2.5vw, 18px);
-      line-height:1.35;
-      max-width: 58ch;
+      font-size: clamp(14px, 2.6vw, 18px);
+      line-height:1.38;
+      max-width: 62ch;
     }
 
-    .cta-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 8px; }
+    /* NUEVO: descripción de servicios (más aireado, pensado para móvil) */
+    .services{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .svc{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 12px 12px;
+      backdrop-filter: blur(6px);
+    }
+    .svc b{
+      display:block;
+      font-size: 13px;
+      letter-spacing:.02em;
+      margin-bottom: 4px;
+    }
+    .svc span{
+      display:block;
+      font-size: 12.5px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.25;
+    }
+    @media (max-width: 560px){
+      .services{ grid-template-columns: 1fr; }
+      .hero-main{ padding: 20px 16px; }
+    }
+
+    .cta-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 14px; }
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding: 14px 16px;
@@ -398,7 +371,7 @@
       letter-spacing:.02em;
       border: 1px solid rgba(255,255,255,.10);
       background: linear-gradient(135deg, rgba(255,224,138,.92), rgba(255,178,74,.88), rgba(255,106,42,.82), rgba(255,42,77,.78));
-      box-shadow: 0 20px 60px rgba(255,106,42,.14);
+      box-shadow: 0 20px 60px rgba(255,106,42,.12);
       transition: transform .18s ease, filter .18s ease;
       user-select:none;
     }
@@ -426,7 +399,7 @@
     .badge .dot{
       width:10px; height:10px; border-radius:999px;
       background: linear-gradient(135deg, var(--fire1), var(--fire2), var(--fire3), var(--fire4));
-      box-shadow:0 0 18px rgba(255,106,42,.18);
+      box-shadow:0 0 18px rgba(255,106,42,.14);
       margin-top:3px; flex: 0 0 auto;
     }
     .badge b{ display:block; font-size: 13px; color: rgba(255,255,255,.92); margin-bottom:2px; letter-spacing:.02em; }
@@ -439,16 +412,6 @@
       text-transform: uppercase; color: rgba(255,255,255,.88);
     }
     .section-title p{ margin:0; font-size: 13px; color: rgba(255,255,255,.66); }
-
-    .grid-3{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
-    .tile{
-      padding: 14px; border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      min-height: 92px; backdrop-filter: blur(6px);
-    }
-    .tile .t{ font-weight: 900; letter-spacing:.02em; margin-bottom: 6px; }
-    .tile .d{ color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35; }
 
     .checks{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .check{
@@ -466,16 +429,25 @@
       border: 1px solid rgba(255,224,138,.22);
       color: rgba(255,255,255,.92);
       font-style: normal;
-      box-shadow: 0 0 22px rgba(255,106,42,.08);
       flex: 0 0 auto;
     }
+
+    .grid-3{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
+    .tile{
+      padding: 14px; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      min-height: 92px; backdrop-filter: blur(6px);
+    }
+    .tile .t{ font-weight: 900; letter-spacing:.02em; margin-bottom: 6px; }
+    .tile .d{ color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35; }
 
     .manifest{
       margin-top: 12px; padding: 14px; border-radius: 16px;
       border: 1px solid rgba(255,224,138,.16);
       background: linear-gradient(135deg, rgba(255,224,138,.08), rgba(255,106,42,.06), rgba(255,42,77,.05));
       color: rgba(255,255,255,.88);
-      font-weight: 900; letter-spacing: .01em;
+      font-weight: 900;
       line-height: 1.35; backdrop-filter: blur(6px);
     }
     .manifest small{ display:block; margin-top: 6px; color: rgba(255,255,255,.72); font-weight: 700; }
@@ -499,13 +471,7 @@
       aspect-ratio: 3/4;
       position:relative;
     }
-    .shot img{
-      width:100%; height:100%;
-      object-fit: cover;
-      object-position: center;
-      display:block;
-      transform: scale(1.02);
-    }
+    .shot img{ width:100%; height:100%; object-fit: cover; object-position: center; display:block; transform: scale(1.02); }
     .shot::after{
       content:""; position:absolute; inset:0; pointer-events:none;
       background: linear-gradient(to bottom, rgba(0,0,0,.02), rgba(0,0,0,.22));
@@ -522,8 +488,8 @@
     .cta-final::before{
       content:""; position:absolute; inset:-2px; pointer-events:none; z-index:0;
       background:
-        radial-gradient(980px 300px at 22% 20%, rgba(255,224,138,.20), transparent 64%),
-        radial-gradient(980px 300px at 90% 40%, rgba(255,42,77,.14), transparent 68%);
+        radial-gradient(980px 300px at 22% 20%, rgba(255,224,138,.16), transparent 64%),
+        radial-gradient(980px 300px at 90% 40%, rgba(255,42,77,.10), transparent 68%);
     }
     .cta-final > *{ position:relative; z-index:1; }
     .cta-final h3{ margin:0 0 8px; font-size: 18px; letter-spacing:.08em; text-transform:uppercase; }
@@ -566,15 +532,13 @@
     .wsp-text span{ font-size: 12px; color: rgba(255,255,255,.70); margin-top: 2px; }
 
     @media (max-width: 980px){
-      .hero-grid{ grid-template-columns: 1fr; }
       .grid-3{ grid-template-columns: 1fr; }
       .locations{ grid-template-columns: 1fr; }
       .gallery{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .hero{ min-height: auto; }
       .shot{ aspect-ratio: 9/16; }
+      .checks{ grid-template-columns: 1fr; } /* más aire en móvil */
     }
     @media (max-width: 520px){
-      .checks{ grid-template-columns: 1fr; }
       .gallery{ grid-template-columns: 1fr; }
       .wsp-float{ right: 12px; bottom: 12px; }
       footer{ padding-bottom: 100px; }
@@ -602,25 +566,15 @@
             </div>
           </div>
 
-          <!-- Desktop nav -->
-          <nav class="nav" aria-label="Navegación">
-            <a href="#beneficios">Beneficios</a>
-            <a href="#clases">Clases</a>
-            <a href="#galeria">Galería</a>
-            <a href="#ubicaciones">Ubicaciones</a>
-            <a href="#contacto">Contacto</a>
-          </nav>
-
-          <!-- Mobile burger -->
           <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" type="button">
             <span aria-hidden="true"></span>
           </button>
         </div>
 
-        <!-- Mobile panel -->
-        <div class="mobile-panel" id="mobilePanel" aria-label="Menú móvil">
+        <div class="mobile-panel" id="mobilePanel" aria-label="Menú">
           <div class="mobile-nav">
             <a href="#beneficios" data-close>Beneficios</a>
+            <a href="#servicios" data-close>Servicios</a>
             <a href="#clases" data-close>Clases</a>
             <a href="#galeria" data-close>Galería</a>
             <a href="#ubicaciones" data-close>Ubicaciones</a>
@@ -639,15 +593,32 @@
         </div>
         <div class="hero-vignette" aria-hidden="true"></div>
 
-        <div class="side-emit side-left reveal from-left" data-reveal></div>
-        <div class="side-emit side-right reveal from-right" data-reveal></div>
-
         <div class="wrap">
           <div class="hero-grid">
-            <div class="card hero-main reveal from-left" data-reveal>
+            <div class="card hero-main reveal" data-reveal>
               <div class="kicker"><i></i> Entrenamiento con disciplina y progreso real</div>
               <div class="fire-title">FIRE TEAM</div>
               <p class="sub">Clases grupales y personalizadas. Arrancás en tu nivel y progresás con orden, constancia y disciplina.</p>
+
+              <!-- Servicios (descripción, aireado, pensado para móvil) -->
+              <div class="services" id="servicios" aria-label="Servicios">
+                <div class="svc">
+                  <b>Clases grupales</b>
+                  <span>Entrenamiento con energía y motivación, ideal para sostener el hábito.</span>
+                </div>
+                <div class="svc">
+                  <b>Clases personalizadas</b>
+                  <span>Objetivo puntual + seguimiento. Plan adaptado a tu nivel y progreso.</span>
+                </div>
+                <div class="svc">
+                  <b>Progreso y disciplina</b>
+                  <span>Orden, constancia y control. Entrenás con método.</span>
+                </div>
+                <div class="svc">
+                  <b>Info / cupos</b>
+                  <span>Te pasamos horarios, ubicaciones y cupos disponibles por WhatsApp.</span>
+                </div>
+              </div>
 
               <div class="cta-row">
                 <a class="btn" id="ctaHero" href="#" rel="noopener">Hablar por WhatsApp</a>
@@ -657,7 +628,7 @@
               <div class="micro">WSP: <b>1171297183</b></div>
             </div>
 
-            <aside class="card hero-side reveal from-right" data-reveal>
+            <aside class="card hero-side reveal" data-reveal>
               <div class="badge">
                 <span class="dot" aria-hidden="true"></span>
                 <div>
@@ -692,11 +663,11 @@
           </div>
 
           <div class="checks" aria-label="Beneficios">
-            <div class="check reveal from-left" data-reveal><i>✓</i> Desarrollo físico</div>
-            <div class="check reveal from-right" data-reveal><i>✓</i> Constancia y disciplina</div>
-            <div class="check reveal from-left" data-reveal><i>✓</i> Personalidad segura</div>
-            <div class="check reveal from-right" data-reveal><i>✓</i> Cuerpos fuertes</div>
-            <div class="check reveal from-left" data-reveal><i>✓</i> Mentes tranquilas</div>
+            <div class="check reveal" data-reveal><i>✓</i> Desarrollo físico</div>
+            <div class="check reveal" data-reveal><i>✓</i> Constancia y disciplina</div>
+            <div class="check reveal" data-reveal><i>✓</i> Personalidad segura</div>
+            <div class="check reveal" data-reveal><i>✓</i> Cuerpos fuertes</div>
+            <div class="check reveal" data-reveal><i>✓</i> Mentes tranquilas</div>
           </div>
 
           <div class="manifest reveal" data-reveal>
@@ -714,7 +685,7 @@
           </div>
 
           <div class="grid-3">
-            <div class="tile reveal from-left" data-reveal>
+            <div class="tile reveal" data-reveal>
               <div class="t">Grupales</div>
               <div class="d">Entrenamiento con energía, constancia y motivación.</div>
             </div>
@@ -722,7 +693,7 @@
               <div class="t">Personalizadas</div>
               <div class="d">Enfoque en tu objetivo + progresión según tu nivel.</div>
             </div>
-            <div class="tile reveal from-right" data-reveal>
+            <div class="tile reveal" data-reveal>
               <div class="t">Info y cupos</div>
               <div class="d">Te respondemos por WhatsApp y coordinamos.</div>
             </div>
@@ -738,10 +709,10 @@
           </div>
 
           <div class="gallery" aria-label="Galería de imágenes">
-            <div class="shot reveal from-left" data-reveal><img src="assets/img/flyer-1.jpg" alt="Fire Team flyer 1"></div>
+            <div class="shot reveal" data-reveal><img src="assets/img/flyer-1.jpg" alt="Fire Team flyer 1"></div>
             <div class="shot reveal" data-reveal><img src="assets/img/flyer-2.jpg" alt="Fire Team flyer 2"></div>
             <div class="shot reveal" data-reveal><img src="assets/img/flyer-3.jpg" alt="Fire Team flyer 3"></div>
-            <div class="shot reveal from-right" data-reveal><img src="assets/img/flyer-4.jpg" alt="Fire Team flyer 4"></div>
+            <div class="shot reveal" data-reveal><img src="assets/img/flyer-4.jpg" alt="Fire Team flyer 4"></div>
           </div>
         </div>
       </section>
@@ -754,11 +725,11 @@
           </div>
 
           <div class="locations">
-            <div class="loc reveal from-left" data-reveal>
+            <div class="loc reveal" data-reveal>
               <b>Ubicación 1</b>
               <span>José María Moreno 1189</span>
             </div>
-            <div class="loc reveal from-right" data-reveal>
+            <div class="loc reveal" data-reveal>
               <b>Ubicación 2</b>
               <span>Gral. Jose de San Martín 201</span>
             </div>
@@ -814,22 +785,14 @@
       return `https://wa.me/${WSP_NUMBER}?text=${txt}`;
     }
 
-    // CTAs
     const link = buildWspLink();
     document.getElementById("ctaHero").href = link;
     document.getElementById("ctaFinal").href = link;
     document.getElementById("wspFloat").href = link;
 
-    // Año
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Smooth scroll
-    function scrollToHash(href){
-      const el = document.querySelector(href);
-      if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
-    }
-
-    // Close mobile menu helper
+    // Burger menu (siempre)
     const topbar = document.getElementById("topbar");
     const burger = document.getElementById("burger");
 
@@ -846,7 +809,12 @@
 
     burger.addEventListener("click", toggleMenu);
 
-    // Nav clicks (desktop + mobile)
+    // Smooth scroll + close menu
+    function scrollToHash(href){
+      const el = document.querySelector(href);
+      if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener("click", (e)=>{
         const href = a.getAttribute("href");
@@ -860,12 +828,7 @@
       });
     });
 
-    // Mobile links: cerrar al tocar
-    document.querySelectorAll("[data-close]").forEach(a=>{
-      a.addEventListener("click", ()=> closeMenu());
-    });
-
-    // INTRO CONTROL: video más tiempo antes de mostrar textos
+    // INTRO CONTROL
     const intro = document.getElementById("intro");
     const app = document.getElementById("app");
     const introVideo = document.getElementById("introVideo");
@@ -905,7 +868,7 @@
     setTimeout(finish, INTRO_MAX_MS);
     intro.addEventListener("pointerdown", finish);
 
-    // IntersectionObserver reveals
+    // Reveals
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -924,9 +887,10 @@
       document.querySelectorAll("[data-reveal]").forEach(el => el.classList.add("in"));
     }
 
-    // Cerrar menú si se agranda a desktop
-    window.addEventListener("resize", ()=>{
-      if(window.innerWidth > 840) closeMenu();
+    // Cerrar menú si clic afuera (más cómodo en desktop)
+    document.addEventListener("click", (e)=>{
+      const isClickInside = topbar.contains(e.target);
+      if(!isClickInside) closeMenu();
     });
   </script>
 </body>
