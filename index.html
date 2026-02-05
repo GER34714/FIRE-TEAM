@@ -1,0 +1,717 @@
+<!-- PARTE 1/2 -->
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FIRE TEAM | Clases grupales y personalizadas</title>
+  <meta name="description" content="Entrená con disciplina y progreso real. Clases grupales y personalizadas. Escribinos por WhatsApp y coordinamos." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FIRE TEAM | Clases grupales y personalizadas" />
+  <meta property="og:description" content="¿Te gustaría comenzar un cambio físico? Sumate al team. Consultá por WhatsApp." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://TU-IMAGEN-OG.jpg" />
+  <meta property="og:locale" content="es_AR" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FIRE TEAM | Clases grupales y personalizadas" />
+  <meta name="twitter:description" content="¿Te gustaría comenzar un cambio físico? Sumate al team. Consultá por WhatsApp." />
+  <meta name="twitter:image" content="https://TU-IMAGEN-OG.jpg" />
+
+  <meta name="theme-color" content="#0b0b0f" />
+
+  <style>
+    :root{
+      /* Pegá tu logo acá (PNG ideal) */
+      --hero-logo-url: url("https://TU-LOGO.png");
+
+      --bg: #07070a;
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --line: rgba(255,255,255,.12);
+
+      --fire1: #ffb300;
+      --fire2: #ff4d00;
+      --fire3: #ff0038;
+
+      --radius: 18px;
+      --shadow: 0 14px 40px rgba(0,0,0,.55);
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 900px at 20% 10%, rgba(255,90,0,.18), transparent 55%),
+                  radial-gradient(900px 700px at 90% 15%, rgba(255,0,56,.12), transparent 55%),
+                  radial-gradient(900px 700px at 70% 95%, rgba(255,179,0,.10), transparent 50%),
+                  var(--bg);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    .topbar{
+      position:sticky; top:0; z-index:40;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(7,7,10,.72), rgba(7,7,10,.45));
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 12px 0;
+      gap: 12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 180px;
+    }
+    .brand .mark{
+      width: 38px; height: 38px; border-radius: 12px;
+      background:
+        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(18px 18px at 60% 60%, rgba(255,179,0,.35), transparent 65%),
+        linear-gradient(135deg, rgba(255,179,0,.9), rgba(255,0,56,.8));
+      box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 18px 45px rgba(255,90,0,.22);
+    }
+    .brand .name{ line-height:1.05; }
+    .brand .name b{ display:block; letter-spacing:.08em; font-size: 14px; }
+    .brand .name span{ display:block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .nav{
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      font-size: 13px;
+      color: rgba(255,255,255,.78);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      white-space:nowrap;
+    }
+    .nav a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.16);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-weight: 750;
+      letter-spacing: .02em;
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(135deg, rgba(255,179,0,.98), rgba(255,77,0,.92), rgba(255,0,56,.82));
+      box-shadow: 0 18px 55px rgba(255,77,0,.18);
+      transition: transform .18s ease, filter .18s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05) saturate(1.05); }
+    .btn:active{ transform: translateY(0px); filter: brightness(0.98); }
+
+    .btn.secondary{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow:none;
+      font-weight: 650;
+      color: rgba(255,255,255,.90);
+    }
+
+    /* HERO con VIDEO de fondo */
+    .hero{
+      position:relative;
+      padding: 34px 0 22px;
+      min-height: calc(100vh - 62px);
+      display:flex;
+      align-items:stretch;
+    }
+
+    .hero-bg{
+      position:absolute;
+      inset: -40px -20px -40px -20px;
+      z-index:-3;
+      overflow:hidden;
+      background: #000;
+    }
+    .hero-bg video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      filter: saturate(1.05) contrast(1.06);
+      opacity: .95;
+    }
+
+    /* overlay oscuro arriba del video */
+    .hero-overlay{
+      position:absolute;
+      inset: -40px -20px -40px -20px;
+      z-index:-2;
+      background:
+        radial-gradient(1200px 700px at 20% 20%, rgba(0,0,0,.18), rgba(0,0,0,.75) 55%),
+        radial-gradient(900px 700px at 85% 20%, rgba(0,0,0,.12), rgba(0,0,0,.75) 60%),
+        linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.82));
+    }
+
+    .hero-grid{
+      width:100%;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(to bottom, rgba(12,10,9,.60), rgba(12,10,9,.82));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset: -2px;
+      background: radial-gradient(700px 260px at 10% 10%, rgba(255,179,0,.18), transparent 60%),
+                  radial-gradient(700px 260px at 90% 20%, rgba(255,0,56,.12), transparent 60%);
+      z-index:0;
+      pointer-events:none;
+    }
+    .card > *{ position:relative; z-index:1; }
+
+    .hero-main{ padding: 22px 18px; }
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+    .kicker i{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--fire1), var(--fire2), var(--fire3));
+      box-shadow: 0 0 18px rgba(255,77,0,.28);
+      display:inline-block;
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(30px, 6.2vw, 52px);
+      letter-spacing: .08em;
+      line-height: 1.02;
+      text-transform: uppercase;
+      text-shadow: 0 10px 35px rgba(0,0,0,.55);
+    }
+    .sub{
+      margin: 0 0 14px;
+      font-size: clamp(14px, 2.4vw, 18px);
+      color: rgba(255,255,255,.82);
+      line-height: 1.35;
+      max-width: 52ch;
+    }
+
+    .cta-row{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      margin-top: 10px;
+    }
+
+    .micro{
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,.70);
+    }
+
+    .hero-side{
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      justify-content:space-between;
+    }
+
+    .logo-box{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 18px;
+      min-height: 190px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .logo-box::before{
+      content:"";
+      position:absolute; inset:-40px;
+      background: radial-gradient(260px 200px at 30% 30%, rgba(255,179,0,.18), transparent 60%),
+                  radial-gradient(260px 200px at 70% 70%, rgba(255,0,56,.14), transparent 60%);
+      filter: blur(2px);
+    }
+    .hero-logo{
+      width:min(280px, 72%);
+      aspect-ratio: 1 / 1;
+      background-image: var(--hero-logo-url);
+      background-repeat:no-repeat;
+      background-size: contain;
+      background-position: center;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,.55));
+      animation: pulseFire 2.2s ease-in-out infinite;
+      position:relative;
+      z-index:1;
+    }
+    @keyframes pulseFire{
+      0%,100%{ transform: translateY(0) scale(1); filter: drop-shadow(0 20px 40px rgba(0,0,0,.55)) saturate(1.00); }
+      50%{ transform: translateY(-2px) scale(1.02); filter: drop-shadow(0 24px 55px rgba(255,77,0,.18)) saturate(1.08); }
+    }
+
+    .side-points{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .pill{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 12px 12px;
+      font-size: 13px;
+      color: rgba(255,255,255,.82);
+      display:flex; gap:10px; align-items:flex-start;
+    }
+    .pill b{
+      display:block;
+      color: rgba(255,255,255,.94);
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+    .pill span{ color: rgba(255,255,255,.72); font-size: 12.5px; line-height:1.25; }
+    .pill .dot{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--fire1), var(--fire2), var(--fire3));
+      box-shadow: 0 0 18px rgba(255,77,0,.22);
+      flex: 0 0 auto;
+      margin-top: 3px;
+    }
+
+    section{ padding: 18px 0; }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap: 12px;
+      margin: 0 0 12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.03em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.88);
+    }
+    .section-title p{
+      margin:0;
+      font-size: 13px;
+      color: rgba(255,255,255,.68);
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .tile{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      min-height: 92px;
+    }
+    .tile .t{ font-weight: 800; letter-spacing:.02em; margin-bottom: 6px; }
+    .tile .d{ color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35; }
+
+    .checks{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .check{
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      display:flex; gap:10px; align-items:center;
+      color: rgba(255,255,255,.86);
+      font-weight: 650;
+    }
+    .check i{
+      width: 22px; height: 22px; border-radius: 7px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(255,179,0,.14);
+      border: 1px solid rgba(255,179,0,.22);
+      color: rgba(255,255,255,.90);
+      font-style: normal;
+      box-shadow: 0 0 22px rgba(255,77,0,.12);
+      flex: 0 0 auto;
+    }
+
+    .manifest{
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,179,0,.18);
+      background: linear-gradient(135deg, rgba(255,179,0,.08), rgba(255,0,56,.06));
+      color: rgba(255,255,255,.86);
+      font-weight: 720;
+      letter-spacing: .01em;
+      line-height: 1.35;
+    }
+    .manifest small{
+      display:block;
+      margin-top: 6px;
+      color: rgba(255,255,255,.70);
+      font-weight: 600;
+    }
+
+    .locations{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .loc{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .loc b{ display:block; margin-bottom: 6px; letter-spacing:.02em; }
+    .loc span{ color: rgba(255,255,255,.72); font-size: 13px; line-height:1.35; display:block; }
+<!-- PARTE 2/2 -->
+    .cta-final{
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(to bottom, rgba(12,10,9,.55), rgba(12,10,9,.85));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .cta-final::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(800px 260px at 20% 20%, rgba(255,179,0,.20), transparent 60%),
+                  radial-gradient(800px 260px at 90% 40%, rgba(255,0,56,.14), transparent 65%);
+      z-index:0;
+      pointer-events:none;
+    }
+    .cta-final > *{ position:relative; z-index:1; }
+    .cta-final h3{ margin:0 0 8px; font-size: 18px; letter-spacing:.02em; }
+    .cta-final p{
+      margin:0 0 14px;
+      color: rgba(255,255,255,.74);
+      line-height:1.35;
+      max-width: 60ch;
+    }
+
+    footer{
+      padding: 20px 0 90px;
+      border-top: 1px solid var(--line);
+      background: rgba(0,0,0,.20);
+      margin-top: 18px;
+    }
+    footer .foot{
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      color: rgba(255,255,255,.65);
+      font-size: 12.5px;
+    }
+    footer a{
+      color: rgba(255,255,255,.78);
+      border-bottom: 1px solid rgba(255,255,255,.22);
+    }
+
+    .wsp-float{
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 80;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(10,10,12,.70);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .wsp-float:hover{
+      transform: translateY(-2px);
+      background: rgba(10,10,12,.82);
+      border-color: rgba(255,255,255,.22);
+    }
+    .wsp-ico{
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: rgba(37, 211, 102, .14);
+      border: 1px solid rgba(37, 211, 102, .22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex: 0 0 auto;
+    }
+    .wsp-ico svg{ width: 20px; height: 20px; }
+    .wsp-text{ display:flex; flex-direction:column; line-height:1.1; }
+    .wsp-text b{ font-size: 13px; color: rgba(255,255,255,.92); }
+    .wsp-text span{ font-size: 12px; color: rgba(255,255,255,.70); margin-top: 2px; }
+
+    @media (max-width: 920px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .hero-side{ padding-top: 0; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .locations{ grid-template-columns: 1fr; }
+      .hero{ min-height: auto; }
+    }
+    @media (max-width: 540px){
+      .nav a{ padding: 8px 9px; font-size: 12.5px; }
+      .checks{ grid-template-columns: 1fr; }
+      .wsp-float{ right: 12px; bottom: 12px; }
+      footer{ padding-bottom: 100px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="inner">
+        <div class="brand" aria-label="Fire Team">
+          <div class="mark" aria-hidden="true"></div>
+          <div class="name">
+            <b>FIRE TEAM</b>
+            <span>Clases grupales y personalizadas</span>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Navegación">
+          <a href="#beneficios">Beneficios</a>
+          <a href="#clases">Clases</a>
+          <a href="#ubicaciones">Ubicaciones</a>
+          <a href="#contacto" class="secondary">Contacto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <!-- VIDEO DE FONDO -->
+      <div class="hero-bg" aria-hidden="true">
+        <video autoplay muted loop playsinline preload="metadata"
+          poster="https://TU-POSTER.jpg">
+          <source src="https://zgegdqmrvuxxwickywkp.supabase.co/storage/v1/object/public/FIRE%20TEAM/grok_video_2026-02-04-23-07-09.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="card hero-main">
+            <div class="kicker"><i></i> Entrenamiento con disciplina y progreso real</div>
+            <h1>FIRE TEAM</h1>
+            <p class="sub">¿Te gustaría comenzar un cambio físico? Sumate al team. Te guiamos para que arranques en tu nivel y avances de verdad.</p>
+
+            <div class="cta-row">
+              <a class="btn" id="ctaHero" href="#" rel="noopener">Hablar por WhatsApp</a>
+              <a class="btn secondary" href="#ubicaciones">Ver ubicaciones</a>
+            </div>
+
+            <div class="micro">WSP: <b>1171297183</b> · Respuesta rápida</div>
+          </div>
+
+          <aside class="card hero-side">
+            <div class="logo-box" aria-label="Logo / imagen principal">
+              <div class="hero-logo" role="img" aria-label="Logo Fire Team"></div>
+            </div>
+
+            <div class="side-points" aria-label="Puntos clave">
+              <div class="pill">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <b>Grupales</b>
+                  <span>Energía, motivación y constancia.</span>
+                </div>
+              </div>
+              <div class="pill">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <b>Personalizadas</b>
+                  <span>Objetivos específicos y seguimiento.</span>
+                </div>
+              </div>
+              <div class="pill">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <b>Progreso</b>
+                  <span>Entrenás con orden y disciplina.</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Lo que vas a lograr</h2>
+          <p>Simple, claro, medible.</p>
+        </div>
+
+        <div class="checks" aria-label="Beneficios">
+          <div class="check"><i>✓</i> Desarrollo físico</div>
+          <div class="check"><i>✓</i> Constancia y disciplina</div>
+          <div class="check"><i>✓</i> Personalidad segura</div>
+          <div class="check"><i>✓</i> Cuerpos fuertes</div>
+          <div class="check"><i>✓</i> Mentes tranquilas</div>
+        </div>
+
+        <div class="manifest">
+          No creamos violencia: la ordenamos
+          <small>Control, disciplina y enfoque.</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="clases">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Clases</h2>
+          <p>Elegí la modalidad y arrancá.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="tile">
+            <div class="t">Grupales</div>
+            <div class="d">Entrenamiento con energía, ritmo y motivación para sostener el hábito.</div>
+          </div>
+          <div class="tile">
+            <div class="t">Personalizadas</div>
+            <div class="d">Enfoque en tu objetivo. Ajustes y progresión según tu nivel.</div>
+          </div>
+          <div class="tile">
+            <div class="t">Consulta por cupos</div>
+            <div class="d">Te respondemos por WhatsApp y coordinamos horarios/ubicación.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ubicaciones">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Ubicaciones</h2>
+          <p>Elegí la que te quede mejor.</p>
+        </div>
+
+        <div class="locations">
+          <div class="loc">
+            <b>Ubicación 1</b>
+            <span>José María Moreno 1189</span>
+          </div>
+          <div class="loc">
+            <b>Ubicación 2</b>
+            <span>Gral. Jose de San Martín 201</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="wrap">
+        <div class="cta-final">
+          <h3>¿Te gustaría comenzar un cambio físico?</h3>
+          <p>Escribinos por WhatsApp y te decimos cómo arrancar según tu nivel. Simple, directo y sin vueltas.</p>
+          <div class="cta-row">
+            <a class="btn" id="ctaFinal" href="#" rel="noopener">Reservar por WhatsApp</a>
+            <a class="btn secondary" href="#beneficios">Ver beneficios</a>
+          </div>
+          <div class="micro" style="margin-top:12px;">WSP: <b>1171297183</b></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>© <span id="year"></span> FIRE TEAM</div>
+        <div><a href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Creado y diseñado por Ciborg 347</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wsp-float" id="wspFloat" href="#" rel="noopener" aria-label="Contactar por WhatsApp">
+    <span class="wsp-ico" aria-hidden="true">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 3C9.373 3 4 8.373 4 15c0 2.52.77 4.86 2.09 6.8L5 29l7.37-1.93A11.9 11.9 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3Z" fill="rgba(37,211,102,.25)"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 5.2c5.414 0 9.8 4.386 9.8 9.8S21.414 24.8 16 24.8c-1.63 0-3.17-.4-4.53-1.11l-.32-.17-4.32 1.13 1.16-4.2-.19-.34A9.76 9.76 0 0 1 6.2 15c0-5.414 4.386-9.8 9.8-9.8Z" fill="rgba(37,211,102,.35)"/>
+        <path d="M20.93 18.36c-.2-.1-1.2-.59-1.39-.66-.19-.07-.33-.1-.47.1-.14.2-.54.66-.66.8-.12.14-.24.16-.44.06-.2-.1-.85-.31-1.62-1-.6-.53-1-1.18-1.12-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.24.3-.36.1-.12.14-.2.2-.34.06-.14.03-.26-.01-.36-.04-.1-.47-1.14-.64-1.56-.17-.41-.34-.35-.47-.36-.12-.01-.26-.01-.4-.01-.14 0-.36.05-.55.26-.19.2-.72.7-.72 1.71 0 1.01.74 1.99.84 2.13.1.14 1.46 2.23 3.54 3.12.49.21.87.33 1.17.42.49.16.94.14 1.3.09.4-.06 1.2-.49 1.37-.97.17-.48.17-.9.12-.97-.05-.07-.19-.12-.39-.22Z" fill="white" opacity=".92"/>
+      </svg>
+    </span>
+    <span class="wsp-text">
+      <b>WhatsApp</b>
+      <span>1171297183</span>
+    </span>
+  </a>
+
+  <script>
+    const WSP_NUMBER = "5491171297183";
+    const WSP_TEXT = "Hola! Quiero info para arrancar en FIRE TEAM. ¿Me pasás horarios y ubicaciones?";
+
+    function buildWspLink(){
+      const txt = encodeURIComponent(WSP_TEXT);
+      return `https://wa.me/${WSP_NUMBER}?text=${txt}`;
+    }
+
+    const link = buildWspLink();
+    document.getElementById("ctaHero").href = link;
+    document.getElementById("ctaFinal").href = link;
+    document.getElementById("wspFloat").href = link;
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        const href = a.getAttribute("href");
+        if(!href || href === "#") return;
+        const el = document.querySelector(href);
+        if(el){
+          e.preventDefault();
+          el.scrollIntoView({behavior:"smooth", block:"start"});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
