@@ -6,42 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>FIRE TEAM | Clases grupales y personalizadas</title>
-  <meta name="description" content="Entrená con disciplina y progreso real. Clases grupales y personalizadas. Escribinos por WhatsApp y coordinamos." />
+  <meta name="description" content="Clases grupales y personalizadas. Entrená con disciplina y progreso real. Consultá por WhatsApp." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="FIRE TEAM | Clases grupales y personalizadas" />
-  <meta property="og:description" content="¿Te gustaría comenzar un cambio físico? Sumate al team. Consultá por WhatsApp." />
+  <meta property="og:description" content="Sumate al team. Clases grupales y personalizadas. Consultá por WhatsApp." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://TU-IMAGEN-OG.jpg" />
+  <meta property="og:image" content="https://iili.io/fDcStyl.jpg" />
   <meta property="og:locale" content="es_AR" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="FIRE TEAM | Clases grupales y personalizadas" />
-  <meta name="twitter:description" content="¿Te gustaría comenzar un cambio físico? Sumate al team. Consultá por WhatsApp." />
-  <meta name="twitter:image" content="https://TU-IMAGEN-OG.jpg" />
 
   <meta name="theme-color" content="#0b0b0f" />
 
   <style>
     :root{
-      --hero-logo-url: url("https://TU-LOGO.png");
+      --bg:#07070a;
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --line:rgba(255,255,255,.12);
 
-      --bg: #07070a;
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
-      --line: rgba(255,255,255,.12);
+      --fire1:#ffcc3a;
+      --fire2:#ff5a00;
+      --fire3:#ff0038;
 
-      --fire1: #ffb300;
-      --fire2: #ff4d00;
-      --fire3: #ff0038;
+      --radius:18px;
+      --shadow:0 16px 55px rgba(0,0,0,.60);
+      --max:1100px;
 
-      --radius: 18px;
-      --shadow: 0 14px 40px rgba(0,0,0,.55);
-      --max: 1120px;
+      --intro-fade-ms:520ms;
+      --app-fade-ms:520ms;
 
-      --intro-fade-ms: 520ms;
-      --app-fade-ms: 520ms;
+      /* ASSETS (los que me pasaste) */
+      --hero-banner: url("https://iili.io/fDcStyl.jpg"); /* horizontal arriba del hero */
+      --brand-logo: url("https://iili.io/fDcQUU7.jpg");  /* logo header + mini */
     }
 
     *{box-sizing:border-box}
@@ -49,106 +45,115 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      color: var(--text);
-      background: radial-gradient(1200px 900px at 20% 10%, rgba(255,90,0,.18), transparent 55%),
-                  radial-gradient(900px 700px at 90% 15%, rgba(255,0,56,.12), transparent 55%),
-                  radial-gradient(900px 700px at 70% 95%, rgba(255,179,0,.10), transparent 50%),
-                  var(--bg);
+      color:var(--text);
+      background: var(--bg);
       overflow-x:hidden;
     }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
 
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
-
-    /* INTRO: SOLO VIDEO full-screen (sin UI) */
+    /* INTRO: SOLO VIDEO */
     .intro{
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: #000;
-      overflow:hidden;
+      position:fixed; inset:0; z-index:9999;
+      background:#000; overflow:hidden;
     }
     .intro video{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      transform: scale(1.02);
-      filter: saturate(1.05) contrast(1.06);
-      opacity: 1;
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      transform:scale(1.02);
+      filter:saturate(1.05) contrast(1.07);
     }
-    /* overlay suave (solo para que quede más cinemático) */
     .intro::after{
       content:"";
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       background:
-        radial-gradient(1200px 700px at 20% 20%, rgba(0,0,0,.08), rgba(0,0,0,.55) 60%),
-        radial-gradient(900px 700px at 85% 20%, rgba(0,0,0,.08), rgba(0,0,0,.55) 60%),
-        linear-gradient(to bottom, rgba(0,0,0,.06), rgba(0,0,0,.68));
+        radial-gradient(1200px 700px at 20% 20%, rgba(0,0,0,.10), rgba(0,0,0,.55) 60%),
+        radial-gradient(900px 700px at 85% 20%, rgba(0,0,0,.10), rgba(0,0,0,.55) 60%),
+        linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.70));
       pointer-events:none;
     }
-
     .intro.hide{
-      opacity: 0;
-      pointer-events: none;
+      opacity:0;
+      pointer-events:none;
       transition: opacity var(--intro-fade-ms) ease;
     }
 
     /* App hidden until intro ends */
     .app{
-      opacity: 0;
-      transform: translateY(6px);
+      opacity:0;
+      transform: translateY(8px);
       transition: opacity var(--app-fade-ms) ease, transform var(--app-fade-ms) ease;
+      min-height:100%;
+      background:
+        radial-gradient(1200px 850px at 20% 0%, rgba(255,90,0,.16), transparent 55%),
+        radial-gradient(900px 700px at 90% 12%, rgba(255,0,56,.12), transparent 55%),
+        radial-gradient(900px 700px at 70% 95%, rgba(255,204,58,.10), transparent 50%),
+        var(--bg);
     }
     .app.show{
-      opacity: 1;
+      opacity:1;
       transform: translateY(0);
     }
 
     @media (prefers-reduced-motion: reduce){
-      .intro.hide, .app{ transition: none; }
-      .app{ opacity: 1; transform: none; }
+      .intro.hide, .app{ transition:none; }
+      .app{ opacity:1; transform:none; }
     }
 
+    /* HEADER */
     .topbar{
-      position:sticky; top:0; z-index:40;
+      position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(7,7,10,.72), rgba(7,7,10,.45));
-      border-bottom: 1px solid var(--line);
+      background: linear-gradient(to bottom, rgba(7,7,10,.78), rgba(7,7,10,.45));
+      border-bottom:1px solid var(--line);
     }
     .topbar .inner{
       display:flex; align-items:center; justify-content:space-between;
-      padding: 12px 0;
-      gap: 12px;
+      gap:12px; padding:12px 0;
     }
+
     .brand{
       display:flex; align-items:center; gap:12px;
-      min-width: 180px;
+      min-width: 220px;
     }
-    .brand .mark{
-      width: 38px; height: 38px; border-radius: 12px;
-      background:
-        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
-        radial-gradient(18px 18px at 60% 60%, rgba(255,179,0,.35), transparent 65%),
-        linear-gradient(135deg, rgba(255,179,0,.9), rgba(255,0,56,.8));
-      box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 18px 45px rgba(255,90,0,.22);
+
+    /* Logo real (tu imagen) en el header */
+    .brand .logo{
+      width:44px; height:44px;
+      border-radius: 14px;
+      background-image: var(--brand-logo);
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 18px 55px rgba(255,90,0,.12);
+      flex: 0 0 auto;
     }
-    .brand .name{ line-height:1.05; }
-    .brand .name b{ display:block; letter-spacing:.08em; font-size: 14px; }
-    .brand .name span{ display:block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .brand b{
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      display:block;
+      font-size:14px;
+      line-height:1.05;
+    }
+    .brand span{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+    }
 
     .nav{
-      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+      display:flex; gap:10px; flex-wrap:wrap;
       justify-content:flex-end;
     }
     .nav a{
-      font-size: 13px;
+      font-size:13px;
       color: rgba(255,255,255,.78);
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.08);
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.08);
       background: rgba(255,255,255,.03);
       transition: transform .18s ease, background .18s ease, border-color .18s ease;
       white-space:nowrap;
@@ -159,238 +164,260 @@
       border-color: rgba(255,255,255,.16);
     }
 
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      font-weight: 750;
-      letter-spacing: .02em;
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(135deg, rgba(255,179,0,.98), rgba(255,77,0,.92), rgba(255,0,56,.82));
-      box-shadow: 0 18px 55px rgba(255,77,0,.18);
-      transition: transform .18s ease, filter .18s ease;
-      user-select:none;
-    }
-    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05) saturate(1.05); }
-    .btn:active{ transform: translateY(0px); filter: brightness(0.98); }
-
-    .btn.secondary{
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow:none;
-      font-weight: 650;
-      color: rgba(255,255,255,.90);
-    }
-
-    /* HERO con VIDEO de fondo */
+    /* HERO */
     .hero{
       position:relative;
-      padding: 34px 0 22px;
       min-height: calc(100vh - 62px);
+      padding: 18px 0 18px;
       display:flex;
-      align-items:stretch;
+      align-items:flex-start;
+      overflow:hidden;
     }
-
     .hero-bg{
-      position:absolute;
-      inset: -40px -20px -40px -20px;
+      position:absolute; inset:-40px;
       z-index:-3;
       overflow:hidden;
-      background: #000;
+      background:#000;
     }
     .hero-bg video{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      transform: scale(1.02);
-      filter: saturate(1.05) contrast(1.06);
-      opacity: .95;
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      transform:scale(1.02);
+      filter:saturate(1.05) contrast(1.07);
+      opacity:.95;
     }
-
-    .hero-overlay{
-      position:absolute;
-      inset: -40px -20px -40px -20px;
+    .hero-vignette{
+      position:absolute; inset:-40px;
       z-index:-2;
       background:
-        radial-gradient(1200px 700px at 20% 20%, rgba(0,0,0,.18), rgba(0,0,0,.75) 55%),
-        radial-gradient(900px 700px at 85% 20%, rgba(0,0,0,.12), rgba(0,0,0,.75) 60%),
-        linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.82));
+        radial-gradient(1200px 700px at 50% 25%, rgba(0,0,0,.05), rgba(0,0,0,.78) 62%),
+        linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.86));
+    }
+
+    /* Flames laterales (sutil) */
+    .flame-side{
+      position:absolute;
+      top:-60px; bottom:-60px;
+      width: 22vw; min-width: 140px; max-width: 280px;
+      z-index:-1;
+      opacity: .78;
+      pointer-events:none;
+      background:
+        radial-gradient(120px 220px at 40% 20%, rgba(255,204,58,.55), transparent 60%),
+        radial-gradient(180px 320px at 50% 50%, rgba(255,90,0,.55), transparent 65%),
+        radial-gradient(220px 420px at 60% 80%, rgba(255,0,56,.32), transparent 70%),
+        linear-gradient(to right, rgba(0,0,0,.0), rgba(0,0,0,.55));
+      mask-image: radial-gradient(closest-side at 50% 50%, #000 60%, transparent 100%);
+    }
+    .flame-left{ left:-40px; transform: skewX(-6deg); }
+    .flame-right{ right:-40px; transform: skewX(6deg) scaleX(-1); }
+
+    /* Banner horizontal ARRIBA del hero (tu imagen) */
+    .hero-banner{
+      width:100%;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      position:relative;
+    }
+    .hero-banner::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: var(--hero-banner);
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.05);
+      transform: scale(1.02);
+    }
+    /* overlay para que no se “lave” con el video de fondo */
+    .hero-banner::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.45));
+      pointer-events:none;
+    }
+    .hero-banner-inner{
+      position:relative;
+      z-index:1;
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .hero-banner-left{
+      display:flex; align-items:center; gap: 12px;
+      min-width: 220px;
+    }
+    .hero-banner-logo{
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      background-image: var(--brand-logo);
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 18px 55px rgba(255,90,0,.12);
+      flex: 0 0 auto;
+    }
+    .hero-banner-text b{
+      display:block;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 15px;
+      line-height:1.05;
+      text-shadow: 0 10px 30px rgba(0,0,0,.60);
+    }
+    .hero-banner-text span{
+      display:block;
+      color: rgba(255,255,255,.78);
+      font-size: 13px;
+      margin-top: 2px;
+      text-shadow: 0 10px 30px rgba(0,0,0,.60);
     }
 
     .hero-grid{
       width:100%;
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 18px;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 14px;
       align-items: stretch;
+      margin-top: 12px;
     }
 
     .card{
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(to bottom, rgba(12,10,9,.60), rgba(12,10,9,.82));
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(to bottom, rgba(10,10,12,.46), rgba(10,10,12,.82));
       box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
     .card::before{
       content:"";
-      position:absolute; inset: -2px;
-      background: radial-gradient(700px 260px at 10% 10%, rgba(255,179,0,.18), transparent 60%),
-                  radial-gradient(700px 260px at 90% 20%, rgba(255,0,56,.12), transparent 60%);
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(800px 260px at 20% 12%, rgba(255,204,58,.14), transparent 60%),
+        radial-gradient(800px 260px at 85% 30%, rgba(255,0,56,.12), transparent 65%);
       z-index:0;
       pointer-events:none;
     }
     .card > *{ position:relative; z-index:1; }
 
-    .hero-main{ padding: 22px 18px; }
+    .hero-main{ padding: 18px 16px; }
     .kicker{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      font-size: 12px;
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:12px;
       color: rgba(255,255,255,.78);
-      border: 1px solid rgba(255,255,255,.12);
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
-      padding: 8px 10px;
-      border-radius: 999px;
     }
     .kicker i{
-      width: 8px; height: 8px; border-radius: 999px;
+      width:8px; height:8px; border-radius:999px;
       background: linear-gradient(135deg, var(--fire1), var(--fire2), var(--fire3));
-      box-shadow: 0 0 18px rgba(255,77,0,.28);
+      box-shadow:0 0 18px rgba(255,90,0,.25);
       display:inline-block;
     }
 
-    h1{
-      margin: 14px 0 10px;
-      font-size: clamp(30px, 6.2vw, 52px);
-      letter-spacing: .08em;
-      line-height: 1.02;
-      text-transform: uppercase;
-      text-shadow: 0 10px 35px rgba(0,0,0,.55);
+    .fire-title{
+      margin: 12px 0 10px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-weight: 950;
+      font-size: clamp(34px, 7vw, 62px);
+      line-height: .98;
+      background: linear-gradient(180deg, #ffe18a 0%, #ffcc3a 30%, #ff7a1a 58%, #ff0038 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow:
+        0 10px 35px rgba(0,0,0,.55),
+        0 0 22px rgba(255,90,0,.18);
+      position:relative;
     }
+
     .sub{
-      margin: 0 0 14px;
+      margin: 0 0 12px;
+      color: rgba(255,255,255,.84);
       font-size: clamp(14px, 2.4vw, 18px);
-      color: rgba(255,255,255,.82);
-      line-height: 1.35;
-      max-width: 52ch;
+      line-height:1.35;
+      max-width: 58ch;
     }
 
     .cta-row{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items:center;
-      margin-top: 10px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top: 6px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-weight: 850;
+      letter-spacing:.02em;
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(135deg, rgba(255,204,58,.98), rgba(255,90,0,.92), rgba(255,0,56,.82));
+      box-shadow: 0 18px 55px rgba(255,90,0,.14);
+      transition: transform .18s ease, filter .18s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05) saturate(1.05); }
+    .btn.secondary{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow:none;
+      font-weight: 750;
+      color: rgba(255,255,255,.90);
     }
 
     .micro{
-      margin-top: 12px;
+      margin-top: 10px;
       font-size: 12px;
-      color: rgba(255,255,255,.70);
+      color: rgba(255,255,255,.72);
     }
+    .micro b{ color: rgba(255,255,255,.92); }
 
-    .hero-side{
-      padding: 18px;
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      justify-content:space-between;
-    }
-
-    .logo-box{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      padding: 18px;
-      min-height: 190px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      overflow:hidden;
-    }
-    .logo-box::before{
-      content:"";
-      position:absolute; inset:-40px;
-      background: radial-gradient(260px 200px at 30% 30%, rgba(255,179,0,.18), transparent 60%),
-                  radial-gradient(260px 200px at 70% 70%, rgba(255,0,56,.14), transparent 60%);
-      filter: blur(2px);
-    }
-    .hero-logo{
-      width:min(280px, 72%);
-      aspect-ratio: 1 / 1;
-      background-image: var(--hero-logo-url);
-      background-repeat:no-repeat;
-      background-size: contain;
-      background-position: center;
-      filter: drop-shadow(0 20px 40px rgba(0,0,0,.55));
-      animation: pulseFire 2.2s ease-in-out infinite;
-      position:relative;
-      z-index:1;
-    }
-    @keyframes pulseFire{
-      0%,100%{ transform: translateY(0) scale(1); filter: drop-shadow(0 20px 40px rgba(0,0,0,.55)) saturate(1.00); }
-      50%{ transform: translateY(-2px) scale(1.02); filter: drop-shadow(0 24px 55px rgba(255,77,0,.18)) saturate(1.08); }
-    }
-
-    .side-points{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-    .pill{
+    .hero-side{ padding: 16px; display:flex; flex-direction:column; gap:10px; justify-content:space-between; }
+    .badge{
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.05);
       padding: 12px 12px;
-      font-size: 13px;
-      color: rgba(255,255,255,.82);
       display:flex; gap:10px; align-items:flex-start;
     }
-    .pill b{
-      display:block;
-      color: rgba(255,255,255,.94);
-      font-size: 13px;
-      margin-bottom: 2px;
-    }
-    .pill span{ color: rgba(255,255,255,.72); font-size: 12.5px; line-height:1.25; }
-    .pill .dot{
-      width: 10px; height: 10px; border-radius: 999px;
+    .badge .dot{
+      width:10px; height:10px; border-radius:999px;
       background: linear-gradient(135deg, var(--fire1), var(--fire2), var(--fire3));
-      box-shadow: 0 0 18px rgba(255,77,0,.22);
+      box-shadow:0 0 18px rgba(255,90,0,.22);
+      margin-top:3px;
       flex: 0 0 auto;
-      margin-top: 3px;
     }
+    .badge b{ display:block; font-size: 13px; color: rgba(255,255,255,.92); margin-bottom:2px; letter-spacing:.02em; }
+    .badge span{ display:block; font-size: 12.5px; color: rgba(255,255,255,.74); line-height:1.25; }
 
     section{ padding: 18px 0; }
     .section-title{
-      display:flex; align-items:flex-end; justify-content:space-between; gap: 12px;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
       margin: 0 0 12px;
     }
     .section-title h2{
       margin:0;
       font-size: 18px;
-      letter-spacing:.03em;
+      letter-spacing:.08em;
       text-transform: uppercase;
       color: rgba(255,255,255,.88);
     }
     .section-title p{
       margin:0;
       font-size: 13px;
-      color: rgba(255,255,255,.68);
+      color: rgba(255,255,255,.66);
     }
 
-    .grid-3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
+    .grid-3{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
     .tile{
       padding: 14px;
       border-radius: 16px;
@@ -398,31 +425,27 @@
       background: rgba(255,255,255,.04);
       min-height: 92px;
     }
-    .tile .t{ font-weight: 800; letter-spacing:.02em; margin-bottom: 6px; }
+    .tile .t{ font-weight: 900; letter-spacing:.02em; margin-bottom: 6px; }
     .tile .d{ color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.35; }
 
-    .checks{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
+    .checks{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .check{
       padding: 12px 12px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
       display:flex; gap:10px; align-items:center;
-      color: rgba(255,255,255,.86);
-      font-weight: 650;
+      color: rgba(255,255,255,.88);
+      font-weight: 750;
     }
     .check i{
       width: 22px; height: 22px; border-radius: 7px;
       display:inline-flex; align-items:center; justify-content:center;
-      background: rgba(255,179,0,.14);
-      border: 1px solid rgba(255,179,0,.22);
-      color: rgba(255,255,255,.90);
+      background: rgba(255,204,58,.14);
+      border: 1px solid rgba(255,204,58,.22);
+      color: rgba(255,255,255,.92);
       font-style: normal;
-      box-shadow: 0 0 22px rgba(255,77,0,.12);
+      box-shadow: 0 0 22px rgba(255,90,0,.10);
       flex: 0 0 auto;
     }
 
@@ -430,25 +453,21 @@
       margin-top: 12px;
       padding: 14px;
       border-radius: 16px;
-      border: 1px solid rgba(255,179,0,.18);
-      background: linear-gradient(135deg, rgba(255,179,0,.08), rgba(255,0,56,.06));
-      color: rgba(255,255,255,.86);
-      font-weight: 720;
+      border: 1px solid rgba(255,204,58,.18);
+      background: linear-gradient(135deg, rgba(255,204,58,.08), rgba(255,0,56,.06));
+      color: rgba(255,255,255,.88);
+      font-weight: 850;
       letter-spacing: .01em;
       line-height: 1.35;
     }
     .manifest small{
       display:block;
       margin-top: 6px;
-      color: rgba(255,255,255,.70);
-      font-weight: 600;
+      color: rgba(255,255,255,.72);
+      font-weight: 650;
     }
 
-    .locations{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+    .locations{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .loc{
       padding: 14px;
       border-radius: 16px;
@@ -456,13 +475,40 @@
       background: rgba(255,255,255,.04);
     }
     .loc b{ display:block; margin-bottom: 6px; letter-spacing:.02em; }
-    .loc span{ color: rgba(255,255,255,.72); font-size: 13px; line-height:1.35; display:block; }
+    .loc span{ color: rgba(255,255,255,.74); font-size: 13px; line-height:1.35; display:block; }
+
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .shot{
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 10px 40px rgba(0,0,0,.45);
+      aspect-ratio: 9/16;
+      position:relative;
+    }
+    .shot img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.01);
+    }
+    .shot::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,.35));
+      pointer-events:none;
+    }
 
     .cta-final{
       padding: 18px;
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(to bottom, rgba(12,10,9,.55), rgba(12,10,9,.85));
+      background: linear-gradient(to bottom, rgba(10,10,12,.46), rgba(10,10,12,.86));
       box-shadow: var(--shadow);
       position:relative;
       overflow:hidden;
@@ -470,19 +516,15 @@
     .cta-final::before{
       content:"";
       position:absolute; inset:-2px;
-      background: radial-gradient(800px 260px at 20% 20%, rgba(255,179,0,.20), transparent 60%),
-                  radial-gradient(800px 260px at 90% 40%, rgba(255,0,56,.14), transparent 65%);
+      background:
+        radial-gradient(900px 280px at 20% 20%, rgba(255,204,58,.20), transparent 62%),
+        radial-gradient(900px 280px at 90% 40%, rgba(255,0,56,.14), transparent 66%);
       z-index:0;
       pointer-events:none;
     }
     .cta-final > *{ position:relative; z-index:1; }
-    .cta-final h3{ margin:0 0 8px; font-size: 18px; letter-spacing:.02em; }
-    .cta-final p{
-      margin:0 0 14px;
-      color: rgba(255,255,255,.74);
-      line-height:1.35;
-      max-width: 60ch;
-    }
+    .cta-final h3{ margin:0 0 8px; font-size: 18px; letter-spacing:.06em; text-transform:uppercase; }
+    .cta-final p{ margin:0 0 14px; color: rgba(255,255,255,.74); line-height:1.35; max-width: 60ch; }
 
     footer{
       padding: 20px 0 90px;
@@ -495,10 +537,7 @@
       color: rgba(255,255,255,.65);
       font-size: 12.5px;
     }
-    footer a{
-      color: rgba(255,255,255,.78);
-      border-bottom: 1px solid rgba(255,255,255,.22);
-    }
+    footer a{ color: rgba(255,255,255,.80); border-bottom: 1px solid rgba(255,255,255,.22); }
 
     .wsp-float{
       position: fixed;
@@ -537,24 +576,29 @@
     .wsp-text b{ font-size: 13px; color: rgba(255,255,255,.92); }
     .wsp-text span{ font-size: 12px; color: rgba(255,255,255,.70); margin-top: 2px; }
 
-    @media (max-width: 920px){
+    @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; }
-      .hero-side{ padding-top: 0; }
       .grid-3{ grid-template-columns: 1fr; }
       .locations{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: repeat(2, 1fr); }
       .hero{ min-height: auto; }
+      .hero-banner-inner{ padding: 12px; }
+      .hero-banner-logo{ width: 48px; height:48px; }
     }
-    @media (max-width: 540px){
+    @media (max-width: 520px){
       .nav a{ padding: 8px 9px; font-size: 12.5px; }
       .checks{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: 1fr; }
       .wsp-float{ right: 12px; bottom: 12px; }
       footer{ padding-bottom: 100px; }
+      .hero-banner-text b{ font-size: 14px; }
+      .hero-banner-text span{ font-size: 12.5px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- INTRO: SOLO VIDEO, NADA MÁS -->
+  <!-- INTRO: SOLO VIDEO -->
   <div class="intro" id="intro" aria-hidden="true">
     <video id="introVideo" autoplay muted playsinline preload="metadata">
       <source src="https://zgegdqmrvuxxwickywkp.supabase.co/storage/v1/object/public/FIRE%20TEAM/grok_video_2026-02-04-23-07-09.mp4" type="video/mp4">
@@ -566,8 +610,8 @@
       <div class="wrap">
         <div class="inner">
           <div class="brand" aria-label="Fire Team">
-            <div class="mark" aria-hidden="true"></div>
-            <div class="name">
+            <div class="logo" aria-hidden="true"></div>
+            <div>
               <b>FIRE TEAM</b>
               <span>Clases grupales y personalizadas</span>
             </div>
@@ -576,8 +620,9 @@
           <nav class="nav" aria-label="Navegación">
             <a href="#beneficios">Beneficios</a>
             <a href="#clases">Clases</a>
+            <a href="#galeria">Galería</a>
             <a href="#ubicaciones">Ubicaciones</a>
-            <a href="#contacto" class="secondary">Contacto</a>
+            <a href="#contacto">Contacto</a>
           </nav>
         </div>
       </div>
@@ -590,49 +635,59 @@
             <source src="https://zgegdqmrvuxxwickywkp.supabase.co/storage/v1/object/public/FIRE%20TEAM/grok_video_2026-02-04-23-07-09.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-vignette" aria-hidden="true"></div>
+        <div class="flame-side flame-left" aria-hidden="true"></div>
+        <div class="flame-side flame-right" aria-hidden="true"></div>
 
         <div class="wrap">
+
+          <!-- BANNER HORIZONTAL ARRIBA (tu imagen fDcStyl) -->
+          <div class="hero-banner" aria-label="Banner Fire Team">
+            <div class="hero-banner-inner">
+              <div class="hero-banner-left">
+                <div class="hero-banner-logo" aria-hidden="true"></div>
+                <div class="hero-banner-text">
+                  <b>FIRE TEAM</b>
+                  <span>Clases grupales y personalizadas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="hero-grid">
             <div class="card hero-main">
               <div class="kicker"><i></i> Entrenamiento con disciplina y progreso real</div>
-              <h1>FIRE TEAM</h1>
-              <p class="sub">¿Te gustaría comenzar un cambio físico? Sumate al team. Te guiamos para que arranques en tu nivel y avances de verdad.</p>
+              <div class="fire-title">FIRE TEAM</div>
+              <p class="sub">Clases grupales y personalizadas. Arrancás en tu nivel y progresás con orden, constancia y disciplina.</p>
 
               <div class="cta-row">
                 <a class="btn" id="ctaHero" href="#" rel="noopener">Hablar por WhatsApp</a>
                 <a class="btn secondary" href="#ubicaciones">Ver ubicaciones</a>
               </div>
 
-              <div class="micro">WSP: <b>1171297183</b> · Respuesta rápida</div>
+              <div class="micro">WSP: <b>1171297183</b></div>
             </div>
 
             <aside class="card hero-side">
-              <div class="logo-box" aria-label="Logo / imagen principal">
-                <div class="hero-logo" role="img" aria-label="Logo Fire Team"></div>
+              <div class="badge">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <b>Grupales</b>
+                  <span>Energía, motivación y ritmo para sostener el hábito.</span>
+                </div>
               </div>
-
-              <div class="side-points" aria-label="Puntos clave">
-                <div class="pill">
-                  <span class="dot" aria-hidden="true"></span>
-                  <div>
-                    <b>Grupales</b>
-                    <span>Energía, motivación y constancia.</span>
-                  </div>
+              <div class="badge">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <b>Personalizadas</b>
+                  <span>Objetivo puntual + seguimiento y ajustes.</span>
                 </div>
-                <div class="pill">
-                  <span class="dot" aria-hidden="true"></span>
-                  <div>
-                    <b>Personalizadas</b>
-                    <span>Objetivos específicos y seguimiento.</span>
-                  </div>
-                </div>
-                <div class="pill">
-                  <span class="dot" aria-hidden="true"></span>
-                  <div>
-                    <b>Progreso</b>
-                    <span>Entrenás con orden y disciplina.</span>
-                  </div>
+              </div>
+              <div class="badge">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <b>Progreso</b>
+                  <span>Entrenás con orden y disciplina.</span>
                 </div>
               </div>
             </aside>
@@ -643,8 +698,8 @@
       <section id="beneficios">
         <div class="wrap">
           <div class="section-title">
-            <h2>Lo que vas a lograr</h2>
-            <p>Simple, claro, medible.</p>
+            <h2>Beneficios</h2>
+            <p>Lo que te llevás entrenando con el team</p>
           </div>
 
           <div class="checks" aria-label="Beneficios">
@@ -666,22 +721,38 @@
         <div class="wrap">
           <div class="section-title">
             <h2>Clases</h2>
-            <p>Elegí la modalidad y arrancá.</p>
+            <p>Elegí modalidad y arrancá</p>
           </div>
 
           <div class="grid-3">
             <div class="tile">
               <div class="t">Grupales</div>
-              <div class="d">Entrenamiento con energía, ritmo y motivación para sostener el hábito.</div>
+              <div class="d">Entrenamiento con energía, constancia y motivación.</div>
             </div>
             <div class="tile">
               <div class="t">Personalizadas</div>
-              <div class="d">Enfoque en tu objetivo. Ajustes y progresión según tu nivel.</div>
+              <div class="d">Enfoque en tu objetivo + progresión según tu nivel.</div>
             </div>
             <div class="tile">
-              <div class="t">Consulta por cupos</div>
-              <div class="d">Te respondemos por WhatsApp y coordinamos horarios/ubicación.</div>
+              <div class="t">Info y cupos</div>
+              <div class="d">Te respondemos por WhatsApp y coordinamos.</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="galeria">
+        <div class="wrap">
+          <div class="section-title">
+            <h2>Galería</h2>
+            <p>Flyers/visual del team</p>
+          </div>
+
+          <div class="gallery" aria-label="Galería de imágenes">
+            <div class="shot"><img src="assets/img/flyer-1.jpg" alt="Fire Team flyer 1"></div>
+            <div class="shot"><img src="assets/img/flyer-2.jpg" alt="Fire Team flyer 2"></div>
+            <div class="shot"><img src="assets/img/flyer-3.jpg" alt="Fire Team flyer 3"></div>
+            <div class="shot"><img src="assets/img/flyer-4.jpg" alt="Fire Team flyer 4"></div>
           </div>
         </div>
       </section>
@@ -690,7 +761,7 @@
         <div class="wrap">
           <div class="section-title">
             <h2>Ubicaciones</h2>
-            <p>Elegí la que te quede mejor.</p>
+            <p>Elegí la que te quede mejor</p>
           </div>
 
           <div class="locations">
@@ -709,11 +780,11 @@
       <section id="contacto">
         <div class="wrap">
           <div class="cta-final">
-            <h3>¿Te gustaría comenzar un cambio físico?</h3>
-            <p>Escribinos por WhatsApp y te decimos cómo arrancar según tu nivel. Simple, directo y sin vueltas.</p>
+            <h3>Sumate al team</h3>
+            <p>Escribinos por WhatsApp y te pasamos horarios, cupos y la ubicación que te quede más cómoda.</p>
             <div class="cta-row">
-              <a class="btn" id="ctaFinal" href="#" rel="noopener">Reservar por WhatsApp</a>
-              <a class="btn secondary" href="#beneficios">Ver beneficios</a>
+              <a class="btn" id="ctaFinal" href="#" rel="noopener">Consultar por WhatsApp</a>
+              <a class="btn secondary" href="#inicio">Volver arriba</a>
             </div>
             <div class="micro" style="margin-top:12px;">WSP: <b>1171297183</b></div>
           </div>
@@ -747,7 +818,7 @@
 
   <script>
     const WSP_NUMBER = "5491171297183";
-    const WSP_TEXT = "Hola! Quiero info para arrancar en FIRE TEAM. ¿Me pasás horarios y ubicaciones?";
+    const WSP_TEXT = "Hola! Quiero info para arrancar en FIRE TEAM. ¿Me pasás horarios, cupos y ubicación?";
 
     function buildWspLink(){
       const txt = encodeURIComponent(WSP_TEXT);
@@ -773,14 +844,14 @@
       });
     });
 
-    // INTRO: muestra video X ms / o hasta X segundos, luego entra la landing
+    // INTRO: solo video -> landing
     const intro = document.getElementById("intro");
     const app = document.getElementById("app");
     const introVideo = document.getElementById("introVideo");
 
-    const INTRO_MIN_MS = 900;     // mínimo para que se vea el video
-    const INTRO_MAX_MS = 2200;    // fallback si no reproduce/carga
-    const INTRO_TARGET_SEC = 1.8; // si llega a este segundo, cortamos
+    const INTRO_MIN_MS = 900;
+    const INTRO_TARGET_SEC = 2.0;
+    const INTRO_MAX_MS = 2400;
 
     let done = false;
     const startAt = performance.now();
@@ -796,17 +867,18 @@
       setTimeout(()=> intro.remove(), 650);
     }
 
+    introVideo.addEventListener("canplay", async ()=>{
+      try { await introVideo.play(); } catch(e) {}
+    });
+
     introVideo.addEventListener("timeupdate", ()=>{
       if(introVideo.currentTime >= INTRO_TARGET_SEC){
         if((performance.now() - startAt) >= INTRO_MIN_MS) finish();
       }
     });
 
-    introVideo.addEventListener("canplay", async ()=>{
-      try { await introVideo.play(); } catch(e) {}
-    });
-
     setTimeout(finish, INTRO_MAX_MS);
+    intro.addEventListener("pointerdown", finish);
 
     if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){
       finish();
