@@ -37,8 +37,6 @@
 
       --header-banner: url("https://iili.io/fDcStyl.jpg");
       --brand-logo: url("https://iili.io/fDcQUU7.jpg");
-
-      /* NUEVO: logo WhatsApp (PNG) */
       --wsp-logo: url("https://iili.io/fDEWBGj.png");
     }
 
@@ -54,6 +52,7 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
 
+    /* INTRO */
     .intro{ position:fixed; inset:0; z-index:9999; background:#000; overflow:hidden; }
     .intro video{
       position:absolute; inset:0; width:100%; height:100%;
@@ -69,6 +68,7 @@
     }
     .intro.hide{ opacity:0; pointer-events:none; transition: opacity var(--intro-fade-ms) ease; }
 
+    /* APP */
     .app{
       opacity:0; transform: translateY(10px);
       transition: opacity var(--app-fade-ms) ease, transform var(--app-fade-ms) ease;
@@ -85,6 +85,10 @@
       .app{ opacity:1; transform:none; }
     }
 
+    /* =========================
+       HEADER
+       - desktop: imagen un poco más arriba (más texto visible)
+       ========================= */
     .topbar{
       position:sticky; top:0; z-index:60;
       border-bottom:1px solid rgba(255,255,255,.12);
@@ -108,10 +112,12 @@
       z-index:1;
       pointer-events:none;
     }
+
+    /* SOLO DESKTOP: subir encuadre (mostrar más “arriba” donde está el texto del banner) */
     @media (min-width: 981px){
       .topbar::before{
         background-size: 120% auto;
-        background-position: center 22%;
+        background-position: center 10%; /* antes: 22% -> ahora más arriba */
       }
       .topbar::after{
         background: linear-gradient(180deg, rgba(0,0,0,.58), rgba(0,0,0,.88));
@@ -125,30 +131,27 @@
       padding: 10px 0;
     }
 
-    .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
-    .brand .logo{
-      width:42px; height:42px;
-      border-radius: 14px;
-      background-image: var(--brand-logo);
-      background-size: cover;
-      background-position: center;
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 18px 60px rgba(0,0,0,.45);
-      flex: 0 0 auto;
-    }
-    .brand .txt{ display:none; }
+    /* SACAR logo del header */
+    .brand{ display:none; }
 
+    /* Burger */
     .burger{
       display:flex;
       width:46px; height:46px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
-      backdrop-filter: blur(10px);
+
+      /* SACAR transparencia */
+      background: rgba(0,0,0,.92);
+
+      /* sin blur */
+      backdrop-filter: none;
+
       box-shadow: 0 18px 55px rgba(0,0,0,.45);
       align-items:center; justify-content:center;
       cursor:pointer;
       -webkit-tap-highlight-color: transparent;
+      margin-left:auto; /* como no hay brand, empuja a la derecha */
     }
     .burger span{
       display:block;
@@ -201,6 +204,9 @@
     .mobile-nav a:first-child{ border-top:none; }
     .mobile-nav a:active{ background: rgba(255,255,255,.05); }
 
+    /* =========================
+       HERO
+       ========================= */
     .hero{
       position:relative;
       min-height: calc(100vh - 68px);
@@ -232,13 +238,34 @@
     }
     .side-emit{ display:none !important; }
 
+    /* =========================
+       REVEAL: ahora desde laterales y el overlay (gradientes del app) se activa a partir de #beneficios
+       ========================= */
     .reveal{
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateX(-18px);
       transition: opacity .75s ease, transform .75s ease;
       will-change: opacity, transform;
     }
-    .reveal.in{ opacity: 1; transform: translateY(0); }
+    .reveal.from-right{
+      transform: translateX(18px);
+    }
+    .reveal.in{
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Overlay apagado hasta que el usuario llegue a Beneficios */
+    .app{
+      --overlay-on: 0;
+      background:
+        radial-gradient(1200px 900px at 20% 10%, rgba(255,178,74, calc(.08 * var(--overlay-on))), transparent 62%),
+        radial-gradient(1200px 900px at 85% 10%, rgba(255,42,77, calc(.06 * var(--overlay-on))), transparent 62%),
+        linear-gradient(180deg, rgba(7,7,10,1) 0%, rgba(7,7,10,1) 100%);
+    }
+    .app.overlay-on{
+      --overlay-on: 1;
+    }
 
     .hero-grid{
       width:100%;
@@ -279,10 +306,11 @@
       gap: 12px;
       margin-bottom: 10px;
     }
+    /* HERO: logo un poquito más grande */
     .hero-mark .hero-logo{
-      width: 54px;
-      height: 54px;
-      border-radius: 18px;
+      width: 64px;   /* antes 54 */
+      height: 64px;  /* antes 54 */
+      border-radius: 20px;
       background-image: var(--brand-logo);
       background-size: cover;
       background-position: center;
@@ -525,7 +553,6 @@
     }
     .wsp-float:hover{ transform: translateY(-2px); background: rgba(10,10,12,.82); border-color: rgba(255,255,255,.22); }
 
-    /* NUEVO: ícono WhatsApp por PNG */
     .wsp-ico{
       width: 38px; height: 38px;
       border-radius: 999px;
@@ -576,14 +603,6 @@
     <header class="topbar" id="topbar">
       <div class="wrap">
         <div class="inner">
-          <div class="brand" aria-label="Logo Fire Team">
-            <div class="logo" aria-hidden="true"></div>
-            <div class="txt">
-              <b>FIRE TEAM</b>
-              <span>Clases grupales y personalizadas</span>
-            </div>
-          </div>
-
           <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" type="button">
             <span aria-hidden="true"></span>
           </button>
@@ -812,6 +831,7 @@
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // Burger menu
     const topbar = document.getElementById("topbar");
     const burger = document.getElementById("burger");
 
@@ -845,7 +865,7 @@
       });
     });
 
-    // INTRO CONTROL
+    // INTRO CONTROL (se mantiene)
     const intro = document.getElementById("intro");
     const app = document.getElementById("app");
     const introVideo = document.getElementById("introVideo");
@@ -868,7 +888,11 @@
       setTimeout(()=> intro.remove(), 700);
 
       requestAnimationFrame(()=> {
-        document.querySelectorAll("[data-reveal]").forEach(el => el.classList.add("in"));
+        document.querySelectorAll("[data-reveal]").forEach((el, idx) => {
+          // alterna izquierda/derecha para “desde los laterales”
+          if(idx % 2 === 1) el.classList.add("from-right");
+          el.classList.add("in");
+        });
       });
     }
 
@@ -885,7 +909,7 @@
     setTimeout(finish, INTRO_MAX_MS);
     intro.addEventListener("pointerdown", finish);
 
-    // Reveals
+    // Reveals (laterales + alternado)
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -895,15 +919,31 @@
       });
     }, { threshold: 0.14 });
 
-    document.querySelectorAll("[data-reveal]").forEach(el => io.observe(el));
+    document.querySelectorAll("[data-reveal]").forEach((el, idx) => {
+      if(idx % 2 === 1) el.classList.add("from-right");
+      io.observe(el);
+    });
+
+    // Overlay aparece cuando llega a Beneficios
+    const beneficios = document.getElementById("beneficios");
+    const overlayIO = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          app.classList.add("overlay-on");
+        }
+      });
+    }, { threshold: 0.18 });
+    if(beneficios) overlayIO.observe(beneficios);
 
     if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){
       intro.classList.add("hide");
       app.classList.add("show");
       setTimeout(()=> intro.remove(), 50);
       document.querySelectorAll("[data-reveal]").forEach(el => el.classList.add("in"));
+      app.classList.add("overlay-on");
     }
 
+    // Cerrar menú al click afuera
     document.addEventListener("click", (e)=>{
       const isClickInside = topbar.contains(e.target);
       if(!isClickInside) closeMenu();
