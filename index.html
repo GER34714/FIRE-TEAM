@@ -35,8 +35,11 @@
       --intro-fade-ms:560ms;
       --app-fade-ms:560ms;
 
-      --header-banner: url("https://iili.io/fDcStyl.jpg"); /* imagen en header */
-      --brand-logo: url("https://iili.io/fDcQUU7.jpg");    /* logo */
+      --header-banner: url("https://iili.io/fDcStyl.jpg");
+      --brand-logo: url("https://iili.io/fDcQUU7.jpg");
+
+      /* NUEVO: logo WhatsApp (PNG) */
+      --wsp-logo: url("https://iili.io/fDEWBGj.png");
     }
 
     *{box-sizing:border-box}
@@ -51,7 +54,6 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
 
-    /* INTRO */
     .intro{ position:fixed; inset:0; z-index:9999; background:#000; overflow:hidden; }
     .intro video{
       position:absolute; inset:0; width:100%; height:100%;
@@ -67,7 +69,6 @@
     }
     .intro.hide{ opacity:0; pointer-events:none; transition: opacity var(--intro-fade-ms) ease; }
 
-    /* APP */
     .app{
       opacity:0; transform: translateY(10px);
       transition: opacity var(--app-fade-ms) ease, transform var(--app-fade-ms) ease;
@@ -84,10 +85,6 @@
       .app{ opacity:1; transform:none; }
     }
 
-    /* =========================
-       HEADER (solo logo + burger + fondo imagen)
-       + ajuste imagen SOLO en desktop para que se lea mejor
-       ========================= */
     .topbar{
       position:sticky; top:0; z-index:60;
       border-bottom:1px solid rgba(255,255,255,.12);
@@ -111,16 +108,13 @@
       z-index:1;
       pointer-events:none;
     }
-
-    /* Desktop: “acomodar” imagen al header para lectura */
     @media (min-width: 981px){
       .topbar::before{
-        background-size: 120% auto;     /* más “encuadrada” al alto del header */
-        background-position: center 22%; /* sube un poco para que se vea mejor */
+        background-size: 120% auto;
+        background-position: center 22%;
       }
       .topbar::after{
-        background:
-          linear-gradient(180deg, rgba(0,0,0,.58), rgba(0,0,0,.88));
+        background: linear-gradient(180deg, rgba(0,0,0,.58), rgba(0,0,0,.88));
       }
     }
 
@@ -131,11 +125,7 @@
       padding: 10px 0;
     }
 
-    /* SACAMOS “FIRE TEAM” del header: solo queda el icono/logo */
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width: 0;
-    }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
     .brand .logo{
       width:42px; height:42px;
       border-radius: 14px;
@@ -146,9 +136,8 @@
       box-shadow: 0 18px 60px rgba(0,0,0,.45);
       flex: 0 0 auto;
     }
-    .brand .txt{ display:none; } /* oculto total */
+    .brand .txt{ display:none; }
 
-    /* Burger */
     .burger{
       display:flex;
       width:46px; height:46px;
@@ -185,7 +174,6 @@
     .topbar.open .burger span::before{ top:0; transform: rotate(45deg); }
     .topbar.open .burger span::after{ top:0; transform: rotate(-45deg); }
 
-    /* Panel menú */
     .mobile-panel{
       display:none;
       position:relative;
@@ -213,9 +201,6 @@
     .mobile-nav a:first-child{ border-top:none; }
     .mobile-nav a:active{ background: rgba(255,255,255,.05); }
 
-    /* =========================
-       HERO
-       ========================= */
     .hero{
       position:relative;
       min-height: calc(100vh - 68px);
@@ -245,8 +230,6 @@
         radial-gradient(1200px 700px at 50% 24%, rgba(0,0,0,.08), rgba(0,0,0,.86) 66%),
         linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.92));
     }
-
-    /* Sin manchas en overlay */
     .side-emit{ display:none !important; }
 
     .reveal{
@@ -265,17 +248,16 @@
       align-items: stretch;
       margin-top: 6px;
     }
-
     @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; gap: 14px; }
       .hero{ padding: 18px 0 26px; }
     }
 
     .card{
-      border-radius: var(--radius);
+      border-radius: 18px;
       border:1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
+      box-shadow: 0 18px 70px rgba(0,0,0,.62);
       overflow:hidden;
       position:relative;
       backdrop-filter: blur(6px);
@@ -291,7 +273,6 @@
     }
     .card > *{ position:relative; z-index:1; }
 
-    /* NUEVO: logo también en el HERO */
     .hero-mark{
       display:flex;
       align-items:center;
@@ -543,13 +524,28 @@
       transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
     .wsp-float:hover{ transform: translateY(-2px); background: rgba(10,10,12,.82); border-color: rgba(255,255,255,.22); }
+
+    /* NUEVO: ícono WhatsApp por PNG */
     .wsp-ico{
-      width: 38px; height: 38px; border-radius: 999px;
-      background: rgba(37, 211, 102, .14);
-      border: 1px solid rgba(37, 211, 102, .22);
-      display:flex; align-items:center; justify-content:center; flex: 0 0 auto;
+      width: 38px; height: 38px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      display:flex; align-items:center; justify-content:center;
+      flex: 0 0 auto;
+      overflow:hidden;
     }
-    .wsp-ico svg{ width: 20px; height: 20px; }
+    .wsp-ico::before{
+      content:"";
+      width: 22px; height: 22px;
+      background-image: var(--wsp-logo);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,.45));
+      display:block;
+    }
+
     .wsp-text{ display:flex; flex-direction:column; line-height:1.1; }
     .wsp-text b{ font-size: 13px; color: rgba(255,255,255,.92); }
     .wsp-text span{ font-size: 12px; color: rgba(255,255,255,.70); margin-top: 2px; }
@@ -618,8 +614,6 @@
         <div class="wrap">
           <div class="hero-grid">
             <div class="card hero-main reveal" data-reveal>
-
-              <!-- Logo agregado al hero -->
               <div class="hero-mark">
                 <div class="hero-logo" aria-hidden="true"></div>
                 <div class="hero-tag">
@@ -740,10 +734,11 @@
           </div>
 
           <div class="gallery" aria-label="Galería de imágenes">
-            <div class="shot reveal" data-reveal><img src="assets/img/flyer-1.jpg" alt="Fire Team flyer 1"></div>
-            <div class="shot reveal" data-reveal><img src="assets/img/flyer-2.jpg" alt="Fire Team flyer 2"></div>
-            <div class="shot reveal" data-reveal><img src="assets/img/flyer-3.jpg" alt="Fire Team flyer 3"></div>
-            <div class="shot reveal" data-reveal><img src="assets/img/flyer-4.jpg" alt="Fire Team flyer 4"></div>
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJIBS.jpg" alt="Fire Team galería 1"></div>
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJu49.jpg" alt="Fire Team galería 2"></div>
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJxQ2.jpg" alt="Fire Team galería 3"></div>
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJTE7.jpg" alt="Fire Team galería 4"></div>
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJlhQ.jpg" alt="Fire Team galería 5"></div>
           </div>
         </div>
       </section>
@@ -793,13 +788,7 @@
     </footer>
 
     <a class="wsp-float" id="wspFloat" href="#" rel="noopener" aria-label="Contactar por WhatsApp">
-      <span class="wsp-ico" aria-hidden="true">
-        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M16 3C9.373 3 4 8.373 4 15c0 2.52.77 4.86 2.09 6.8L5 29l7.37-1.93A11.9 11.9 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3Z" fill="rgba(37,211,102,.25)"/>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M16 5.2c5.414 0 9.8 4.386 9.8 9.8S21.414 24.8 16 24.8c-1.63 0-3.17-.4-4.53-1.11l-.32-.17-4.32 1.13 1.16-4.2-.19-.34A9.76 9.76 0 0 1 6.2 15c0-5.414 4.386-9.8 9.8-9.8Z" fill="rgba(37,211,102,.35)"/>
-          <path d="M20.93 18.36c-.2-.1-1.2-.59-1.39-.66-.19-.07-.33-.1-.47.1-.14.2-.54.66-.66.8-.12.14-.24.16-.44.06-.2-.1-.85-.31-1.62-1-.6-.53-1-1.18-1.12-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.24.3-.36.1-.12.14-.2.2-.34.06-.14.03-.26-.01-.36-.04-.1-.47-1.14-.64-1.56-.17-.41-.34-.35-.47-.36-.12-.01-.26-.01-.4-.01-.14 0-.36.05-.55.26-.19.2-.72.7-.72 1.71 0 1.01.74 1.99.84 2.13.1.14 1.46 2.23 3.54 3.12.49.21.87.33 1.17.42.49.16.94.14 1.3.09.4-.06 1.2-.49 1.37-.97.17-.48.17-.9.12-.97-.05-.07-.19-.12-.39-.22Z" fill="white" opacity=".92"/>
-        </svg>
-      </span>
+      <span class="wsp-ico" aria-hidden="true"></span>
       <span class="wsp-text">
         <b>WhatsApp</b>
         <span>1171297183</span>
@@ -823,7 +812,6 @@
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Burger menu
     const topbar = document.getElementById("topbar");
     const burger = document.getElementById("burger");
 
@@ -837,10 +825,8 @@
       burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
       burger.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
     }
-
     burger.addEventListener("click", toggleMenu);
 
-    // Smooth scroll + close menu
     function scrollToHash(href){
       const el = document.querySelector(href);
       if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
@@ -918,7 +904,6 @@
       document.querySelectorAll("[data-reveal]").forEach(el => el.classList.add("in"));
     }
 
-    // Cerrar menú al click afuera
     document.addEventListener("click", (e)=>{
       const isClickInside = topbar.contains(e.target);
       if(!isClickInside) closeMenu();
