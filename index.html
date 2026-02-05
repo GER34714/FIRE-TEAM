@@ -12,7 +12,7 @@
   <meta property="og:title" content="FIRE TEAM | Clases grupales y personalizadas" />
   <meta property="og:description" content="Sumate al team. Clases grupales y personalizadas. Consultá por WhatsApp." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://iili.io/fDcQUU7.jpg" />
+  <meta property="og:image" content="https://iili.io/fDcStyl.jpg" />
   <meta property="og:locale" content="es_AR" />
 
   <meta name="theme-color" content="#0b0b0f" />
@@ -23,7 +23,6 @@
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.72);
 
-      /* Difuminado / degradés */
       --fire1:#ffe08a;
       --fire2:#ffb24a;
       --fire3:#ff6a2a;
@@ -36,9 +35,8 @@
       --intro-fade-ms:560ms;
       --app-fade-ms:560ms;
 
-      /* Assets */
-      --header-banner: url("https://iili.io/fDcStyl.jpg"); /* imagen en header */
-      --brand-logo: url("https://iili.io/fDcQUU7.jpg");    /* logo */
+      --header-banner: url("https://iili.io/fDcStyl.jpg");
+      --brand-logo: url("https://iili.io/fDcQUU7.jpg");
     }
 
     *{box-sizing:border-box}
@@ -53,7 +51,6 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
 
-    /* INTRO */
     .intro{ position:fixed; inset:0; z-index:9999; background:#000; overflow:hidden; }
     .intro video{
       position:absolute; inset:0; width:100%; height:100%;
@@ -69,7 +66,6 @@
     }
     .intro.hide{ opacity:0; pointer-events:none; transition: opacity var(--intro-fade-ms) ease; }
 
-    /* APP (sin “manchas” gigantes en overlay, más limpio) */
     .app{
       opacity:0; transform: translateY(10px);
       transition: opacity var(--app-fade-ms) ease, transform var(--app-fade-ms) ease;
@@ -86,10 +82,6 @@
       .app{ opacity:1; transform:none; }
     }
 
-    /* =========================
-       HEADER: SIEMPRE estilo “móvil”
-       (banner + burger + panel)
-       ========================= */
     .topbar{
       position:sticky; top:0; z-index:60;
       border-bottom:1px solid rgba(255,255,255,.12);
@@ -109,10 +101,18 @@
     .topbar::after{
       content:"";
       position:absolute; inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.82));
+      background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.84));
       z-index:1;
       pointer-events:none;
+    }
+    @media (min-width: 981px){
+      .topbar::before{
+        background-size: 120% auto;
+        background-position: center 22%;
+      }
+      .topbar::after{
+        background: linear-gradient(180deg, rgba(0,0,0,.58), rgba(0,0,0,.88));
+      }
     }
 
     .topbar .inner{
@@ -122,10 +122,7 @@
       padding: 10px 0;
     }
 
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width: 0;
-    }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
     .brand .logo{
       width:42px; height:42px;
       border-radius: 14px;
@@ -136,18 +133,8 @@
       box-shadow: 0 18px 60px rgba(0,0,0,.45);
       flex: 0 0 auto;
     }
-    .brand b{
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      display:block;
-      font-size:13px;
-      line-height:1.05;
-      text-shadow: 0 10px 30px rgba(0,0,0,.65);
-      white-space:nowrap;
-    }
-    .brand span{ display:none; } /* SIEMPRE como móvil */
+    .brand .txt{ display:none; }
 
-    /* Burger SIEMPRE visible */
     .burger{
       display:flex;
       width:46px; height:46px;
@@ -184,7 +171,6 @@
     .topbar.open .burger span::before{ top:0; transform: rotate(45deg); }
     .topbar.open .burger span::after{ top:0; transform: rotate(-45deg); }
 
-    /* Panel menú (para mobile y desktop) */
     .mobile-panel{
       display:none;
       position:relative;
@@ -212,9 +198,6 @@
     .mobile-nav a:first-child{ border-top:none; }
     .mobile-nav a:active{ background: rgba(255,255,255,.05); }
 
-    /* =========================
-       HERO
-       ========================= */
     .hero{
       position:relative;
       min-height: calc(100vh - 68px);
@@ -244,11 +227,8 @@
         radial-gradient(1200px 700px at 50% 24%, rgba(0,0,0,.08), rgba(0,0,0,.86) 66%),
         linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.92));
     }
-
-    /* (Manchas laterales removidas del overlay) */
     .side-emit{ display:none !important; }
 
-    /* Reveals */
     .reveal{
       opacity: 0;
       transform: translateY(10px);
@@ -265,18 +245,16 @@
       align-items: stretch;
       margin-top: 6px;
     }
-
-    /* Más aire en móviles */
     @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; gap: 14px; }
       .hero{ padding: 18px 0 26px; }
     }
 
     .card{
-      border-radius: var(--radius);
+      border-radius: 18px;
       border:1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
+      box-shadow: 0 18px 70px rgba(0,0,0,.62);
       overflow:hidden;
       position:relative;
       backdrop-filter: blur(6px);
@@ -291,6 +269,40 @@
       pointer-events:none;
     }
     .card > *{ position:relative; z-index:1; }
+
+    .hero-mark{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .hero-mark .hero-logo{
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background-image: var(--brand-logo);
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 22px 70px rgba(0,0,0,.55);
+      flex: 0 0 auto;
+    }
+    .hero-mark .hero-tag{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+    .hero-mark .hero-tag b{
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,.88);
+    }
+    .hero-mark .hero-tag span{
+      font-size: 12px;
+      color: rgba(255,255,255,.72);
+      margin-top: 2px;
+    }
 
     .hero-main{ padding: 22px 18px; }
     .kicker{
@@ -331,7 +343,6 @@
       max-width: 62ch;
     }
 
-    /* NUEVO: descripción de servicios (más aireado, pensado para móvil) */
     .services{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -345,18 +356,8 @@
       padding: 12px 12px;
       backdrop-filter: blur(6px);
     }
-    .svc b{
-      display:block;
-      font-size: 13px;
-      letter-spacing:.02em;
-      margin-bottom: 4px;
-    }
-    .svc span{
-      display:block;
-      font-size: 12.5px;
-      color: rgba(255,255,255,.72);
-      line-height: 1.25;
-    }
+    .svc b{ display:block; font-size: 13px; letter-spacing:.02em; margin-bottom: 4px; }
+    .svc span{ display:block; font-size: 12.5px; color: rgba(255,255,255,.72); line-height: 1.25; }
     @media (max-width: 560px){
       .services{ grid-template-columns: 1fr; }
       .hero-main{ padding: 20px 16px; }
@@ -462,6 +463,7 @@
     .loc b{ display:block; margin-bottom: 6px; letter-spacing:.02em; }
     .loc span{ color: rgba(255,255,255,.74); font-size: 13px; line-height:1.35; display:block; }
 
+    /* GALERÍA: ahora incluye tus 5 URLs + las 4 locales (9 total) */
     .gallery{ display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
     .shot{
       border-radius: 18px; overflow:hidden;
@@ -536,7 +538,7 @@
       .locations{ grid-template-columns: 1fr; }
       .gallery{ grid-template-columns: repeat(2, minmax(0,1fr)); }
       .shot{ aspect-ratio: 9/16; }
-      .checks{ grid-template-columns: 1fr; } /* más aire en móvil */
+      .checks{ grid-template-columns: 1fr; }
     }
     @media (max-width: 520px){
       .gallery{ grid-template-columns: 1fr; }
@@ -547,7 +549,6 @@
 </head>
 
 <body>
-  <!-- INTRO: SOLO VIDEO -->
   <div class="intro" id="intro" aria-hidden="true">
     <video id="introVideo" autoplay muted playsinline preload="metadata">
       <source src="https://zgegdqmrvuxxwickywkp.supabase.co/storage/v1/object/public/FIRE%20TEAM/grok_video_2026-02-04-23-07-09.mp4" type="video/mp4">
@@ -558,9 +559,9 @@
     <header class="topbar" id="topbar">
       <div class="wrap">
         <div class="inner">
-          <div class="brand" aria-label="Fire Team">
+          <div class="brand" aria-label="Logo Fire Team">
             <div class="logo" aria-hidden="true"></div>
-            <div>
+            <div class="txt">
               <b>FIRE TEAM</b>
               <span>Clases grupales y personalizadas</span>
             </div>
@@ -596,11 +597,18 @@
         <div class="wrap">
           <div class="hero-grid">
             <div class="card hero-main reveal" data-reveal>
+              <div class="hero-mark">
+                <div class="hero-logo" aria-hidden="true"></div>
+                <div class="hero-tag">
+                  <b>FIRE TEAM</b>
+                  <span>Clases grupales y personalizadas</span>
+                </div>
+              </div>
+
               <div class="kicker"><i></i> Entrenamiento con disciplina y progreso real</div>
               <div class="fire-title">FIRE TEAM</div>
               <p class="sub">Clases grupales y personalizadas. Arrancás en tu nivel y progresás con orden, constancia y disciplina.</p>
 
-              <!-- Servicios (descripción, aireado, pensado para móvil) -->
               <div class="services" id="servicios" aria-label="Servicios">
                 <div class="svc">
                   <b>Clases grupales</b>
@@ -709,6 +717,14 @@
           </div>
 
           <div class="gallery" aria-label="Galería de imágenes">
+            <!-- NUEVAS (URLs) -->
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJIBS.jpg" alt="Fire Team galería 1"></div>
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJu49.jpg" alt="Fire Team galería 2"></div>
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJxQ2.jpg" alt="Fire Team galería 3"></div>
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJTE7.jpg" alt="Fire Team galería 4"></div>
+            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJlhQ.jpg" alt="Fire Team galería 5"></div>
+
+            <!-- EXISTENTES (locales) -->
             <div class="shot reveal" data-reveal><img src="assets/img/flyer-1.jpg" alt="Fire Team flyer 1"></div>
             <div class="shot reveal" data-reveal><img src="assets/img/flyer-2.jpg" alt="Fire Team flyer 2"></div>
             <div class="shot reveal" data-reveal><img src="assets/img/flyer-3.jpg" alt="Fire Team flyer 3"></div>
@@ -792,7 +808,6 @@
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Burger menu (siempre)
     const topbar = document.getElementById("topbar");
     const burger = document.getElementById("burger");
 
@@ -806,10 +821,8 @@
       burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
       burger.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
     }
-
     burger.addEventListener("click", toggleMenu);
 
-    // Smooth scroll + close menu
     function scrollToHash(href){
       const el = document.querySelector(href);
       if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
@@ -887,7 +900,7 @@
       document.querySelectorAll("[data-reveal]").forEach(el => el.classList.add("in"));
     }
 
-    // Cerrar menú si clic afuera (más cómodo en desktop)
+    // Cerrar menú al click afuera
     document.addEventListener("click", (e)=>{
       const isClickInside = topbar.contains(e.target);
       if(!isClickInside) closeMenu();
