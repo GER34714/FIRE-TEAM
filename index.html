@@ -1,4 +1,4 @@
-<!-- PARTE 1/2 -->
+```html
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -308,8 +308,8 @@
     }
     /* HERO: logo un poquito más grande */
     .hero-mark .hero-logo{
-      width: 64px;   /* antes 54 */
-      height: 64px;  /* antes 54 */
+      width: 64px;
+      height: 64px;
       border-radius: 20px;
       background-image: var(--brand-logo);
       background-size: cover;
@@ -494,21 +494,6 @@
     .loc b{ display:block; margin-bottom: 6px; letter-spacing:.02em; }
     .loc span{ color: rgba(255,255,255,.74); font-size: 13px; line-height:1.35; display:block; }
 
-    .gallery{ display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
-    .shot{
-      border-radius: 18px; overflow:hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      box-shadow: 0 14px 50px rgba(0,0,0,.48);
-      aspect-ratio: 3/4;
-      position:relative;
-    }
-    .shot img{ width:100%; height:100%; object-fit: cover; object-position: center; display:block; transform: scale(1.02); }
-    .shot::after{
-      content:""; position:absolute; inset:0; pointer-events:none;
-      background: linear-gradient(to bottom, rgba(0,0,0,.02), rgba(0,0,0,.22));
-    }
-
     .cta-final{
       padding: 18px; border-radius: 24px;
       border: 1px solid rgba(255,255,255,.12);
@@ -580,12 +565,9 @@
     @media (max-width: 980px){
       .grid-3{ grid-template-columns: 1fr; }
       .locations{ grid-template-columns: 1fr; }
-      .gallery{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .shot{ aspect-ratio: 9/16; }
       .checks{ grid-template-columns: 1fr; }
     }
     @media (max-width: 520px){
-      .gallery{ grid-template-columns: 1fr; }
       .wsp-float{ right: 12px; bottom: 12px; }
       footer{ padding-bottom: 100px; }
     }
@@ -613,7 +595,6 @@
             <a href="#beneficios" data-close>Beneficios</a>
             <a href="#servicios" data-close>Servicios</a>
             <a href="#clases" data-close>Clases</a>
-            <a href="#galeria" data-close>Galería</a>
             <a href="#ubicaciones" data-close>Ubicaciones</a>
             <a href="#contacto" data-close>Contacto</a>
           </div>
@@ -745,23 +726,6 @@
         </div>
       </section>
 
-      <section id="galeria">
-        <div class="wrap">
-          <div class="section-title reveal" data-reveal>
-            <h2>Galería</h2>
-            <p>Imágenes del team</p>
-          </div>
-
-          <div class="gallery" aria-label="Galería de imágenes">
-            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJIBS.jpg" alt="Fire Team galería 1"></div>
-            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJu49.jpg" alt="Fire Team galería 2"></div>
-            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJxQ2.jpg" alt="Fire Team galería 3"></div>
-            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJTE7.jpg" alt="Fire Team galería 4"></div>
-            <div class="shot reveal" data-reveal><img src="https://iili.io/fDGJlhQ.jpg" alt="Fire Team galería 5"></div>
-          </div>
-        </div>
-      </section>
-
       <section id="ubicaciones">
         <div class="wrap">
           <div class="section-title reveal" data-reveal>
@@ -796,7 +760,7 @@
         </div>
       </section>
     </main>
-<!-- PARTE 2/2 -->
+
     <footer>
       <div class="wrap">
         <div class="foot">
@@ -951,3 +915,4 @@
   </script>
 </body>
 </html>
+```
