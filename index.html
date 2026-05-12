@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -1109,6 +1110,10 @@
       transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, opacity .3s ease !important;
       cursor: pointer !important;
       -webkit-tap-highlight-color: transparent !important;
+      /* Ocultar durante el intro - sin !important para permitir JS */
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
     }
     .wsp-float:hover{ transform: translateY(-2px); box-shadow: 0 22px 70px rgba(0,0,0,.65); }
 
@@ -1124,8 +1129,21 @@
       transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, opacity .3s ease !important;
       cursor: pointer !important;
       -webkit-tap-highlight-color: transparent !important;
+      /* Ocultar durante el intro - sin !important para permitir JS */
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
     }
     .ig-float:hover{ transform: translateY(-2px); box-shadow: 0 22px 70px rgba(0,0,0,.65); }
+
+    /* Ocultar botones durante el intro */
+    .intro-active .wsp-float,
+    .intro-active .ig-float {
+      opacity: 0 !important;
+      transform: translateY(20px) !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+    }
 
     /* Ocultar botones cuando el footer es visible */
     .footer-visible .wsp-float,
@@ -1410,8 +1428,6 @@
         <div class="foot">
           <div>© <span id="year"></span> FIRE TEAM</div>
           <div>
-            <a href="https://www.instagram.com/fire_fighters_team/" target="_blank" rel="noopener" style="margin-right: 12px;">📷 Instagram</a>
-            <a href="#" id="adminLink" style="margin-right: 12px;">⚙️ Panel Admin</a>
             <a href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Creado y diseñado por Ciborg 347</a>
           </div>
         </div>
@@ -1764,6 +1780,9 @@
     const app = document.getElementById("app");
     const introVideo = document.getElementById("introVideo");
 
+    // Agregar clase para ocultar botones durante el intro
+    document.body.classList.add("intro-active");
+
     const INTRO_MIN_MS = 1600;
     const INTRO_TARGET_SEC = 4.0;
     const INTRO_MAX_MS = 5200;
@@ -1782,9 +1801,24 @@
       try{ introVideo.pause(); }catch(e){}
       setTimeout(()=> intro.remove(), 700);
 
+      // Quitar clase intro-active y mostrar botones flotantes cuando termina el intro
+      document.body.classList.remove("intro-active");
+      
+      const wspFloat = document.getElementById('wspFloat');
+      const igFloat = document.getElementById('igFloat');
+      if (wspFloat) {
+        wspFloat.style.opacity = '1';
+        wspFloat.style.transform = 'translateY(0)';
+        wspFloat.style.pointerEvents = 'auto';
+      }
+      if (igFloat) {
+        igFloat.style.opacity = '1';
+        igFloat.style.transform = 'translateY(0)';
+        igFloat.style.pointerEvents = 'auto';
+      }
+
       requestAnimationFrame(()=> {
         document.querySelectorAll("[data-reveal]").forEach((el, idx) => {
-          // alterna izquierda/derecha para “desde los laterales”
           if(idx % 2 === 1) el.classList.add("from-right");
           el.classList.add("in");
         });
@@ -2047,6 +2081,19 @@
         this.setupEventListeners();
         
         console.log('✅ ContentManager initialization complete');
+        
+        // Verificar que el footer esté visible
+        setTimeout(() => {
+          const footer = document.querySelector('footer');
+          const adminLink = document.getElementById('adminLink');
+          const instagramLink = document.querySelector('footer a[href*="instagram"]');
+          console.log('🔍 Footer verification:', {
+            footerExists: !!footer,
+            adminLinkExists: !!adminLink,
+            instagramLinkExists: !!instagramLink,
+            footerVisible: footer ? footer.getBoundingClientRect().top > 0 : false
+          });
+        }, 1000);
       }
 
       async loadProducts() {
@@ -3118,12 +3165,25 @@
         };
 
         // Footer link - acceso con autenticación Supabase
-        document.getElementById('adminLink').addEventListener('click', openAdminModal);
+        const adminLink = document.getElementById('adminLink');
+        if (adminLink) {
+          adminLink.addEventListener('click', openAdminModal);
+        } else {
+          console.log('ℹ️ Footer admin link not found (was removed from footer)');
+        }
         
         // Mobile admin link (si existe)
         const mobileAdminLink = document.getElementById('adminLinkMobile');
+        console.log('🔍 Mobile admin link found:', !!mobileAdminLink);
         if (mobileAdminLink) {
-          mobileAdminLink.addEventListener('click', openAdminModal);
+          console.log('✅ Adding click listener to mobile admin button');
+          mobileAdminLink.addEventListener('click', (e) => {
+            console.log('🔐 Mobile admin button clicked');
+            e.preventDefault();
+            openAdminModal(e);
+          });
+        } else {
+          console.log('❌ Mobile admin link not found');
         }
         
         // Header admin link (si existe)
@@ -3218,12 +3278,23 @@
 
     // Ocultar botones flotantes al llegar al footer con Intersection Observer
     function setupFloatingButtons() {
+      console.log('🔧 Setting up floating buttons and checking footer visibility');
       const wspFloat = document.getElementById('wspFloat');
       const igFloat = document.getElementById('igFloat');
       const footer = document.querySelector('footer');
+      const adminLink = document.getElementById('adminLink');
+      const footerIg = document.querySelector('footer a[href*="instagram"]');
+      
+      console.log('🔍 Footer elements found:', {
+        footer: !!footer,
+        adminLink: !!adminLink,
+        footerIg: !!footerIg,
+        wspFloat: !!wspFloat,
+        igFloat: !!igFloat
+      });
       
       if (!wspFloat || !igFloat || !footer) {
-        console.log('No se encontraron los elementos:', {wspFloat, igFloat, footer});
+        console.log('❌ No se encontraron los elementos:', {wspFloat, igFloat, footer});
         return;
       }
       
