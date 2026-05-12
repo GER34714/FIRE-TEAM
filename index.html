@@ -2676,6 +2676,46 @@
             closeModal();
           }
         });
+
+        // Ocultar botones flotantes al llegar al footer
+        const setupFloatingButtonsObserver = () => {
+          const wspFloat = document.getElementById('wspFloat');
+          const igFloat = document.getElementById('igFloat');
+          const footer = document.querySelector('footer');
+          
+          if (!wspFloat || !igFloat || !footer) return;
+          
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                // El footer es visible - ocultar botones flotantes
+                wspFloat.style.opacity = '0';
+                wspFloat.style.transform = 'translateY(20px)';
+                wspFloat.style.pointerEvents = 'none';
+                
+                igFloat.style.opacity = '0';
+                igFloat.style.transform = 'translateY(20px)';
+                igFloat.style.pointerEvents = 'none';
+              } else {
+                // El footer no es visible - mostrar botones flotantes
+                wspFloat.style.opacity = '1';
+                wspFloat.style.transform = 'translateY(0)';
+                wspFloat.style.pointerEvents = 'auto';
+                
+                igFloat.style.opacity = '1';
+                igFloat.style.transform = 'translateY(0)';
+                igFloat.style.pointerEvents = 'auto';
+              }
+            });
+          }, {
+            threshold: 0.1 // Ocultar cuando el 10% del footer sea visible
+          });
+          
+          observer.observe(footer);
+        };
+
+        // Inicializar el observer
+        setupFloatingButtonsObserver();
       }
     }
 
