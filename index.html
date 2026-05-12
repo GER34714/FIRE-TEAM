@@ -1724,6 +1724,36 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     (function() {
+    // Forzar reinicio completo de la página al cargar
+    window.addEventListener('load', function() {
+      // Resetear scroll al inicio
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      
+      // Resetear historia de navegación para evitar restauración de scroll
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      
+      // Forzar que el intro se muestre siempre
+      const intro = document.querySelector('.intro');
+      const app = document.querySelector('.app');
+      
+      if (intro && !intro.classList.contains('hide')) {
+        intro.classList.remove('hide');
+        app.classList.remove('show');
+        document.body.classList.add('intro-active');
+        
+        // Reiniciar video si existe
+        const introVideo = document.querySelector('.intro video');
+        if (introVideo) {
+          introVideo.currentTime = 0;
+          introVideo.play().catch(e => console.log('Autoplay bloqueado'));
+        }
+      }
+    });
+    
     const WSP_NUMBER = "+5491171297173";
     const WSP_TEXT = "Hola! Quiero info para arrancar en FIRE TEAM. ¿Me pasás horarios, cupos y ubicación?";
 
