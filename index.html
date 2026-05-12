@@ -2022,6 +2022,8 @@
           console.error('❌ Supabase no está disponible. Verifica la configuración de API.');
           this.renderProducts();
           this.renderGallery();
+          this.renderAdminList();
+          this.renderGalleryAdminList();
           this.setupEventListeners();
           return;
         }
@@ -2037,6 +2039,8 @@
         console.log('🎨 Rendering products and gallery...');
         this.renderProducts();
         this.renderGallery();
+        this.renderAdminList();
+        this.renderGalleryAdminList();
         
         console.log('⚙️ Setting up UI components...');
         this.setupGalleryTypeToggle();
@@ -2581,13 +2585,21 @@
       }
 
       renderAdminList() {
+        console.log('🎨 renderAdminList() called with', this.products.length, 'products');
         const list = document.getElementById('adminList');
         
+        if (!list) {
+          console.error('❌ adminList element not found');
+          return;
+        }
+        
         if (this.products.length === 0) {
+          console.log('📦 No products to display in admin list');
           list.innerHTML = '<p style="color: rgba(255,255,255,.60); text-align: center; padding: 20px;">No hay productos agregados</p>';
           return;
         }
 
+        console.log('📦 Displaying', this.products.length, 'products in admin list');
         list.innerHTML = this.products.map(product => `
           <div class="admin-item">
             <div class="admin-item-image">
@@ -2607,6 +2619,7 @@
             </div>
           </div>
         `).join('');
+        console.log('✅ Admin list rendered successfully');
       }
 
       renderGalleryAdminList() {
