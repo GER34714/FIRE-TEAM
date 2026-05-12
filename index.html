@@ -494,6 +494,533 @@
     .loc b{ display:block; margin-bottom: 6px; letter-spacing:.02em; }
     .loc span{ color: rgba(255,255,255,.74); font-size: 13px; line-height:1.35; display:block; }
 
+    /* Banner Promocional */
+    .banner-section{
+      padding: 20px 0;
+      background: rgba(0,0,0,.30);
+    }
+    .banner-container{
+      text-align: center;
+    }
+    .banner-image{
+      max-width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.40);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    @media (max-width: 768px){
+      .banner-section{
+        padding: 15px 0;
+      }
+      .banner-image{
+        border-radius: 12px;
+      }
+    }
+
+    /* Merchandise */
+    .merch-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 12px;
+    }
+    @media (max-width: 600px){
+      .merch-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+    .merch-item{
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: #1a1a1a;
+      overflow:hidden;
+      transition: transform .18s ease, border-color .18s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .merch-item:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.16);
+    }
+    .merch-img{
+      width: 100%;
+      height: 280px;
+      background: #000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position: relative;
+      overflow:hidden;
+    }
+    .merch-img img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display:block;
+    }
+    .merch-btn{
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(135deg, rgba(255,224,138,.92), rgba(255,178,74,.88), rgba(255,106,42,.82));
+      color: rgba(0,0,0,.92);
+      font-weight: 900;
+      text-align: center;
+      cursor: pointer;
+      transition: transform .15s ease, filter .15s ease;
+      user-select: none;
+    }
+    .merch-btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+    .merch-empty{
+      text-align: center;
+      padding: 40px 20px;
+      color: rgba(255,255,255,.60);
+      font-size: 16px;
+    }
+
+    /* Galería */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .gallery-item{
+      border-radius: 18px;
+      overflow:hidden;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(6px);
+      transition: transform .18s ease, border-color .18s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item:hover{
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,.16);
+      box-shadow: 0 20px 60px rgba(0,0,0,.40);
+    }
+    .gallery-img{
+      width: 100%;
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(0,0,0,.20);
+    }
+    .gallery-img img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      transition: transform .3s ease;
+    }
+    .gallery-item:hover .gallery-img img{
+      transform: scale(1.05);
+    }
+    .gallery-category{
+      position: absolute;
+      top: 12px; left: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing:.4px;
+      background: linear-gradient(135deg, rgba(255,224,138,.92), rgba(255,178,74,.88));
+      color: rgba(0,0,0,.92);
+      backdrop-filter: blur(6px);
+    }
+    .gallery-content{
+      padding: 14px;
+    }
+    .gallery-title{
+      font-weight: 900;
+      font-size: 15px;
+      color: rgba(255,255,255,.95);
+      margin-bottom: 6px;
+      letter-spacing:.02em;
+    }
+    .gallery-desc{
+      color: rgba(255,255,255,.70);
+      font-size: 12px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .gallery-date{
+      color: rgba(255,255,255,.60);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .gallery-empty{
+      text-align: center;
+      padding: 40px 20px;
+      color: rgba(255,255,255,.60);
+      font-size: 16px;
+    }
+
+    /* Galería Admin */
+    .gallery-admin-list{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .gallery-admin-item{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      backdrop-filter: blur(6px);
+    }
+    .gallery-admin-img{
+      width: 100%;
+      height: 120px;
+      background: rgba(0,0,0,.20);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position: relative;
+      overflow:hidden;
+    }
+    .gallery-admin-img img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+    .gallery-admin-content{
+      padding: 12px;
+    }
+    .gallery-admin-title{
+      font-weight: 900;
+      font-size: 14px;
+      color: rgba(255,255,255,.95);
+      margin-bottom: 4px;
+    }
+    .gallery-admin-meta{
+      display: flex; align-items:center; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .gallery-admin-category{
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: rgba(255,178,74,.20);
+      color: rgba(255,255,255,.90);
+    }
+    .gallery-admin-date{
+      font-size: 11px;
+      color: rgba(255,255,255,.60);
+    }
+    .gallery-admin-actions{
+      display: flex; gap: 8px;
+    }
+    .gallery-admin-actions button{
+      flex: 1;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.80);
+      font-size: 11px; font-weight: 800;
+      cursor: pointer; transition: all .15s ease;
+    }
+    .gallery-admin-actions button:hover{
+      background: rgba(255,42,77,.20);
+      border-color: rgba(255,42,77,.40);
+      color: #fff;
+    }
+
+    /* Configuración Supabase */
+    .supabase-config{
+      display: grid; gap: 20px;
+    }
+    .config-item{
+      padding: 16px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+    }
+    .config-item label{
+      display: block; margin-bottom: 8px;
+      font-size: 13px; font-weight: 800;
+      color: rgba(255,255,255,.90);
+    }
+    .config-item code{
+      background: rgba(255,178,74,.20);
+      color: rgba(255,255,255,.95);
+      padding: 4px 8px; border-radius: 6px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 12px; font-weight: 600;
+    }
+    .config-list{
+      margin: 8px 0; padding: 0;
+      list-style: none; display: grid; gap: 8px;
+    }
+    .config-list li{
+      padding: 8px 12px; border-radius: 8px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 12px; color: rgba(255,255,255,.80);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .config-code{
+      background: rgba(0,0,0,.30);
+      color: rgba(255,255,255,.90);
+      padding: 12px; border-radius: 8px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 11px; line-height: 1.4;
+      overflow-x: auto; white-space: pre;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .config-warning{
+      margin: 8px 0; padding: 12px;
+      background: rgba(255,178,74,.10);
+      border: 1px solid rgba(255,178,74,.30);
+      border-radius: 8px;
+      font-size: 12px; color: rgba(255,255,255,.85);
+      line-height: 1.4;
+    }
+    .config-warning code{
+      background: rgba(255,178,74,.30);
+      color: rgba(255,255,255,.95);
+    }
+    .config-features{
+      display: grid; gap: 12px;
+      margin-top: 12px;
+    }
+    .feature-item{
+      display: flex; align-items:flex-start; gap: 12px;
+      padding: 12px; border-radius: 8px;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .feature-icon{
+      font-size: 20px;
+      display: flex; align-items:center; justify-content:center;
+      width: 32px; height: 32px;
+      background: rgba(255,178,74,.15);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .feature-text{
+      flex: 1;
+    }
+    .feature-text strong{
+      display: block; margin-bottom: 4px;
+      font-size: 13px; font-weight: 800;
+      color: rgba(255,255,255,.90);
+    }
+    .feature-text p{
+      margin: 0; font-size: 11px;
+      color: rgba(255,255,255,.70);
+      line-height: 1.4;
+    }
+
+    /* Panel Admin */
+    .admin-modal{
+      position: fixed; inset:0; z-index: 9999;
+      display: none; align-items:center; justify-content:center;
+      padding: 20px;
+    }
+    .admin-modal.open{ display: flex; }
+    .admin-overlay{
+      position: absolute; inset:0;
+      background: rgba(0,0,0,.80);
+      backdrop-filter: blur(8px);
+    }
+    .admin-card{
+      position: relative;
+      width: min(900px, 100%);
+      max-height: 90vh;
+      background: linear-gradient(180deg, rgba(7,7,10,.98), rgba(7,7,10,.95));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 24px;
+      box-shadow: 0 30px 90px rgba(0,0,0,.70);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .admin-header{
+      display: flex; align-items:center; justify-content:space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .admin-header-actions{
+      display: flex; align-items:center; gap: 8px;
+    }
+    .admin-header h3{
+      margin:0; font-size: 20px; font-weight: 900;
+      background: linear-gradient(135deg, var(--fire1), var(--fire2), var(--fire3));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .admin-back{
+      padding: 8px 16px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.80);
+      font-size: 12px; font-weight: 800;
+      cursor: pointer; transition: all .15s ease;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .admin-back:hover{
+      background: rgba(255,178,74,.20);
+      border-color: rgba(255,178,74,.40);
+      color: #fff;
+      transform: translateX(-2px);
+    }
+    .admin-close{
+      width: 36px; height: 36px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.80);
+      font-size: 20px; font-weight: 700;
+      cursor: pointer; transition: all .15s ease;
+      display: flex; align-items:center; justify-content:center;
+    }
+    .admin-logout{
+      padding: 8px 16px; border-radius: 12px;
+      border: 1px solid rgba(255,42,77,.20);
+      background: rgba(255,42,77,.15);
+      color: rgba(255,255,255,.80);
+      font-size: 12px; font-weight: 800;
+      cursor: pointer; transition: all .15s ease;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .admin-logout:hover{
+      background: rgba(255,42,77,.30);
+      border-color: rgba(255,42,77,.50);
+      color: #fff;
+      transform: translateX(2px);
+    }
+    .admin-close:hover{
+      background: rgba(255,42,77,.20);
+      border-color: rgba(255,42,77,.40);
+      color: #fff;
+    }
+    .admin-tabs{
+      display: flex; border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .admin-tab{
+      flex: 1; padding: 16px;
+      border: none; background: none;
+      color: rgba(255,255,255,.60);
+      font-weight: 800; font-size: 14px;
+      cursor: pointer; transition: all .15s ease;
+      border-bottom: 3px solid transparent;
+    }
+    .admin-tab:hover{
+      color: rgba(255,255,255,.80);
+      background: rgba(255,255,255,.03);
+    }
+    .admin-tab.active{
+      color: rgba(255,255,255,.95);
+      border-bottom-color: var(--fire2);
+      background: rgba(255,178,74,.08);
+    }
+    .admin-content{
+      flex: 1; overflow-y: auto; padding: 24px;
+    }
+    .admin-tab-content{
+      display: none;
+    }
+    .admin-tab-content.active{ display: block; }
+    .admin-section{
+      margin-bottom: 32px;
+    }
+    .admin-section h4{
+      margin:0 0 16px; font-size: 16px; font-weight: 900;
+      color: rgba(255,255,255,.90);
+    }
+    .admin-form{
+      display: grid; gap: 16px;
+    }
+    .form-row{
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .form-group{
+      display: flex; flex-direction: column;
+    }
+    .form-group label{
+      font-size: 12px; font-weight: 800; text-transform: uppercase;
+      color: rgba(255,255,255,.70); margin-bottom: 8px;
+      letter-spacing:.02em;
+    }
+    .form-group input,
+    .form-group textarea{
+      padding: 12px 14px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.90);
+      font-size: 14px; font-weight: 600;
+      transition: all .15s ease;
+    }
+    .form-group input:focus,
+    .admin-list{
+      display: grid; gap: 12px;
+    }
+    .admin-item{
+      padding: 16px; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 16px; align-items:center;
+    }
+    .admin-item-image img{
+      border: 2px solid rgba(255,255,255,.10);
+      transition: transform 0.2s ease;
+    }
+    .admin-item-image img:hover{
+      transform: scale(1.05);
+    }
+    .admin-item-info h5{
+      margin:0 0 4px; font-size: 15px; font-weight: 900;
+      color: rgba(255,255,255,.95);
+    }
+    .admin-item-info p{
+      margin:0; font-size: 13px; color: rgba(255,255,255,.70);
+      line-height: 1.4;
+    }
+    .admin-item-actions{
+      display: flex; gap: 8px;
+    }
+    .admin-btn-small{
+      padding: 8px 12px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.80);
+      font-size: 12px; font-weight: 800;
+      cursor: pointer; transition: all .15s ease;
+    }
+    .admin-btn-small:hover{
+      background: rgba(255,42,77,.20);
+      border-color: rgba(255,42,77,.40);
+      color: #fff;
+    }
+    .admin-info{
+      padding: 16px; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      margin-bottom: 16px;
+    }
+    .admin-info p{
+      margin:0 0 8px; font-size: 14px; color: rgba(255,255,255,.80);
+    }
+    .admin-info p:last-child{ margin-bottom: 0; }
+    .admin-info strong{ color: rgba(255,255,255,.95); }
+
+    @media (max-width: 640px){
+      .form-row{ grid-template-columns: 1fr; }
+      .admin-item{ grid-template-columns: 1fr; gap: 12px; }
+      .admin-item-actions{ justify-content: flex-start; }
+    }
+
     .cta-final{
       padding: 18px; border-radius: 24px;
       border: 1px solid rgba(255,255,255,.12);
@@ -537,6 +1064,38 @@
       transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
     .wsp-float:hover{ transform: translateY(-2px); background: rgba(10,10,12,.82); border-color: rgba(255,255,255,.22); }
+
+    .ig-float{
+      position: fixed; right: 16px; bottom: 90px; z-index: 80;
+      display:flex; align-items:center; gap: 10px;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px; font-weight: 600;
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .ig-float:hover{ transform: translateY(-2px); box-shadow: 0 22px 70px rgba(0,0,0,.65); }
+
+    .ig-ico{
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,.20);
+      border-radius: 50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size: 20px;
+    }
+    .ig-ico::before{
+      content: "📷";
+    }
+    .ig-text{
+      display: flex; flex-direction: column;
+      line-height: 1.2;
+    }
+    .ig-text b{ font-size: 13px; }
+    .ig-text span{ font-size: 11px; opacity: .85; }
 
     .wsp-ico{
       width: 38px; height: 38px;
@@ -596,7 +1155,12 @@
             <a href="#servicios" data-close>Servicios</a>
             <a href="#clases" data-close>Clases</a>
             <a href="#ubicaciones" data-close>Ubicaciones</a>
+            <a href="#merchandise" data-close>Merchandise</a>
+            <a href="#galeria" data-close>Galería</a>
             <a href="#contacto" data-close>Contacto</a>
+            <div class="mobile-admin">
+              <a href="#" id="adminLinkMobile" class="btn-admin">⚙️ Panel Admin</a>
+            </div>
           </div>
         </div>
       </div>
@@ -680,6 +1244,15 @@
         </div>
       </section>
 
+      <!-- Banner Promocional -->
+      <section class="banner-section" style="padding: 10px 0;">
+        <div class="wrap">
+          <div class="banner-container reveal" data-reveal>
+            <img src="https://zgegdqmrvuxxwickywkp.supabase.co/storage/v1/object/public/FIRE%20TEAM/b6cb76f0-87da-4df7-903e-4d48ef906983%20(2).png" alt="Banner FIRE TEAM" class="banner-image">
+          </div>
+        </div>
+      </section>
+
       <section id="beneficios">
         <div class="wrap">
           <div class="section-title reveal" data-reveal>
@@ -759,13 +1332,59 @@
           </div>
         </div>
       </section>
+
+      <!-- Sección de Talles -->
+      <section class="banner-section">
+        <div class="wrap">
+          <div class="section-title reveal" data-reveal>
+            <h2>Merchandise Oficial</h2>
+            <p>Equipamiento oficial FIRE TEAM</p>
+          </div>
+          <div class="banner-container reveal" data-reveal>
+            <img src="https://zgegdqmrvuxxwickywkp.supabase.co/storage/v1/object/public/FIRE%20TEAM/fire%20team%20talles.png" alt="Tabla de Talles FIRE TEAM" class="banner-image">
+          </div>
+        </div>
+      </section>
+
+      <section id="merchandise">
+        <div class="wrap">
+          <div class="merch-grid" id="merchGrid">
+            <!-- Los productos se cargarán dinámicamente desde localStorage -->
+          </div>
+
+          <div class="merch-empty" id="merchEmpty" style="display: none;">
+            <p>Próximamente merchandise disponible</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="galeria">
+        <div class="wrap">
+          <div class="section-title reveal" data-reveal>
+            <h2>Galería de Logros</h2>
+            <p>Nuestros momentos y conquistas</p>
+          </div>
+
+          <div class="gallery-grid" id="galleryGrid">
+            <!-- Las imágenes se cargarán dinámicamente desde localStorage -->
+          </div>
+
+          <div class="gallery-empty" id="galleryEmpty" style="display: none;">
+            <p>Próximamente compartiremos nuestros logros</p>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
       <div class="wrap">
         <div class="foot">
           <div>© <span id="year"></span> FIRE TEAM</div>
-          <div><a href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Creado y diseñado por Ciborg 347</a></div>
+          <div>
+            <a href="https://www.instagram.com/fire_fighters_team/" target="_blank" rel="noopener" style="margin-right: 12px;">📷 Instagram</a>
+            <a href="#" id="adminLink" style="margin-right: 12px;">⚙️ Panel Admin</a>
+            <a href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Creado y diseñado por Ciborg 347</a>
+          </div>
         </div>
       </div>
     </footer>
@@ -777,9 +1396,187 @@
         <span>+5491171297173</span>
       </span>
     </a>
+    
+    <a class="ig-float" id="igFloat" href="https://www.instagram.com/fire_fighters_team/" target="_blank" rel="noopener" aria-label="Seguir en Instagram">
+      <span class="ig-ico" aria-hidden="true"></span>
+      <span class="ig-text">
+        <b>Instagram</b>
+        <span>@fire_fighters_team</span>
+      </span>
+    </a>
   </div><!-- /app -->
 
+  <!-- Modal Login Admin -->
+  <div class="admin-modal" id="loginModal">
+    <div class="admin-overlay" id="loginOverlay"></div>
+    <div class="admin-card" style="max-width: 400px;">
+      <div class="admin-header">
+        <button class="admin-back" id="loginBack" aria-label="Volver">
+          ← Volver
+        </button>
+        <h3>🔐 Acceso Administrador</h3>
+        <button class="admin-close" id="loginClose" aria-label="Cerrar">×</button>
+      </div>
+      
+      <div class="admin-content">
+        <form id="loginForm" class="admin-form">
+          <div class="form-group">
+            <label for="adminEmail">Email</label>
+            <input type="email" id="adminEmail" required placeholder="admin@fireteam.com">
+          </div>
+          <div class="form-group">
+            <label for="adminPassword">Contraseña</label>
+            <input type="password" id="adminPassword" required placeholder="Tu contraseña">
+          </div>
+          <button type="submit" class="admin-btn" style="width: 100%;">
+            Iniciar Sesión
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Panel Admin -->
+  <div class="admin-modal" id="adminModal">
+    <div class="admin-overlay" id="adminOverlay"></div>
+    <div class="admin-card">
+      <div class="admin-header">
+        <button class="admin-back" id="adminBack" aria-label="Volver a FIRE TEAM">
+          ← Volver al Sitio
+        </button>
+        <h3>⚙️ Panel de Administración</h3>
+        <div class="admin-user-info" id="adminUserInfo" style="color: rgba(255,255,255,.70); font-size: 12px; margin-right: auto;">
+          No autenticado
+        </div>
+        <div class="admin-header-actions">
+          <button class="admin-logout" id="adminLogout" aria-label="Cerrar sesión">
+            🚪 Salir
+          </button>
+          <button class="admin-close" id="adminClose" aria-label="Cerrar">×</button>
+        </div>
+      </div>
+      
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="products">Productos</button>
+        <button class="admin-tab" data-tab="gallery">Galería</button>
+        <button class="admin-tab" data-tab="settings">Configuración</button>
+      </div>
+
+      <div class="admin-content">
+        <!-- Tab Productos -->
+        <div class="admin-tab-content active" id="productsTab">
+          <div class="admin-section">
+            <h4>Agregar Producto</h4>
+            <form id="merchForm" class="admin-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Nombre del producto</label>
+                  <input type="text" id="merchName" required>
+                </div>
+                <div class="form-group">
+                  <label>Precio</label>
+                  <input type="text" id="merchPrice" placeholder="$" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea id="merchDesc" rows="3" required></textarea>
+              </div>
+              <div class="form-group">
+                <label>URL de la imagen</label>
+                <input type="url" id="merchImage" placeholder="https://...">
+              </div>
+              <div class="form-group">
+                <label>O subir archivo</label>
+                <input type="file" id="merchFile" accept="image/*">
+                <small style="color: rgba(255,255,255,.60); font-size: 11px; margin-top: 4px; display: block;">Formatos: JPG, PNG, WebP. Máximo 5MB.</small>
+              </div>
+              <div class="form-group">
+                <label>URL de WhatsApp (opcional)</label>
+                <input type="url" id="merchWsp" placeholder="https://wa.me/...">
+              </div>
+              <button type="submit" class="admin-btn">Agregar Producto</button>
+            </form>
+          </div>
+
+          <div class="admin-section">
+            <h4>Productos Existentes</h4>
+            <div class="admin-list" id="adminList">
+              <!-- Los productos se cargarán dinámicamente -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Galería -->
+        <div class="admin-tab-content" id="galleryTab">
+          <div class="admin-section">
+            <h4>Agregar Imagen a Galería</h4>
+            <form id="galleryForm" class="admin-form">
+              <div class="form-group">
+                <label>Título de la imagen</label>
+                <input type="text" id="galleryTitle" required placeholder="Ej: Campeonato 2024">
+              </div>
+              <div class="form-group">
+                <label>Descripción (opcional)</label>
+                <textarea id="galleryDesc" rows="2" placeholder="Breve descripción del logro"></textarea>
+              </div>
+              <div class="form-group">
+                <label>URL de la imagen</label>
+                <input type="url" id="galleryImage" required placeholder="https://...">
+              </div>
+              <div class="form-group">
+                <label>O subir archivo</label>
+                <input type="file" id="galleryFile" accept="image/*">
+                <small style="color: rgba(255,255,255,.60); font-size: 11px; margin-top: 4px; display: block;">Formatos: JPG, PNG, WebP. Máximo 5MB.</small>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Categoría</label>
+                  <select id="galleryCategory">
+                    <option value="torneo">Torneo</option>
+                    <option value="entrenamiento">Entrenamiento</option>
+                    <option value="premio">Premio</option>
+                    <option value="evento">Evento</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Fecha (opcional)</label>
+                  <input type="date" id="galleryDate">
+                </div>
+              </div>
+              <button type="submit" class="admin-btn">Agregar Imagen</button>
+            </form>
+          </div>
+
+          <div class="admin-section">
+            <h4>Imágenes en Galería</h4>
+            <div class="gallery-admin-list" id="galleryAdminList">
+              <!-- Las imágenes se cargarán dinámicamente -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Configuración -->
+        <div class="admin-tab-content" id="settingsTab">
+          <div class="admin-section">
+            <h4>Configuración General</h4>
+            <div class="admin-info">
+              <p><strong>Productos totales:</strong> <span id="totalProducts">0</span></p>
+              <p><strong>Última actualización:</strong> <span id="lastUpdate">Nunca</span></p>
+            </div>
+            <button class="admin-btn danger" id="clearAll">Eliminar todos los productos</button>
+          </div>
+
+          <!-- Configuración técnica oculta -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
+    (function() {
     const WSP_NUMBER = "+5491171297173";
     const WSP_TEXT = "Hola! Quiero info para arrancar en FIRE TEAM. ¿Me pasás horarios, cupos y ubicación?";
 
@@ -839,6 +1636,7 @@
     const INTRO_MAX_MS = 5200;
 
     let done = false;
+    let videoStarted = false;
     const startAt = performance.now();
 
     function finish(){
@@ -860,8 +1658,26 @@
       });
     }
 
+    // Forzar finalización si el video no carga correctamente
+    const forceFinish = setTimeout(() => {
+      if(!done && !videoStarted) {
+        console.log('Video no cargado, forzando finalización');
+        finish();
+      }
+    }, INTRO_MAX_MS);
+
+    introVideo.addEventListener("loadedmetadata", () => {
+      console.log('Video metadata cargado');
+      videoStarted = true;
+    });
+
     introVideo.addEventListener("canplay", async ()=>{
-      try { await introVideo.play(); } catch(e) {}
+      videoStarted = true;
+      console.log('Video puede reproducirse');
+      try { await introVideo.play(); } catch(e) {
+        console.log('Error al reproducir video:', e);
+        finish();
+      }
     });
 
     introVideo.addEventListener("timeupdate", ()=>{
@@ -870,8 +1686,27 @@
       }
     });
 
-    setTimeout(finish, INTRO_MAX_MS);
-    intro.addEventListener("pointerdown", finish);
+    introVideo.addEventListener("error", (e) => {
+      console.log('Error en video:', e);
+      finish();
+    });
+
+    introVideo.addEventListener("stalled", () => {
+      console.log('Video stalled, forzando finalización');
+      setTimeout(finish, 1000);
+    });
+
+    introVideo.addEventListener("ended", () => {
+      console.log('Video terminado naturalmente');
+      finish();
+    });
+
+    introVideo.addEventListener("pointerdown", finish);
+
+    // Limpiar timeout si se finaliza correctamente
+    setTimeout(() => {
+      if(done) clearTimeout(forceFinish);
+    }, INTRO_MAX_MS + 1000);
 
     // Reveals (laterales + alternado)
     const io = new IntersectionObserver((entries)=>{
@@ -912,6 +1747,941 @@
       const isClickInside = topbar.contains(e.target);
       if(!isClickInside) closeMenu();
     });
+
+    // ===== SISTEMA DE MERCHANDISE Y GALERÍA CON SUPABASE =====
+    
+    // ===== CONFIGURACIÓN DE SUPABASE =====
+    // Prevenir ejecución múltiple del script
+    let supabase;
+    if (window.fireteamSupabaseInitialized) {
+        console.log('Script ya ejecutado, usando instancia existente');
+        supabase = window.supabaseClient;
+    } else {
+        window.fireteamSupabaseInitialized = true;
+        
+        const supabaseUrl = 'https://zgegdqmrvuxxwickywkp.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZWdkcW1ydnV4eHdpY2t5d2twIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyNTMzNDEsImV4cCI6MjA4NTgyOTM0MX0.0KSs1fsiaUXUgGI6v1n2IObM6YC2L_5CvzGB0DmC1OQ';
+        
+        try {
+            window.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey, {
+                auth: {
+                    autoRefreshToken: true,
+                    persistSession: true,
+                    detectSessionInUrl: true
+                }
+            });
+            supabase = window.supabaseClient;
+            console.log('Supabase inicializado correctamente con autenticación');
+            
+            // Verificar sesión actual
+            checkAuthSession();
+        } catch (error) {
+            console.error('Error al inicializar Supabase:', error);
+            window.supabaseClient = null;
+            supabase = null;
+        }
+    }
+    
+    // ===== FUNCIONES DE AUTENTICACIÓN =====
+    let currentUser = null;
+    
+    async function checkAuthSession() {
+        if (!supabase) return false;
+        
+        try {
+            const { data: { session }, error } = await supabase.auth.getSession();
+            if (error) {
+                console.error('Error verificando sesión:', error);
+                return false;
+            }
+            
+            if (session) {
+                currentUser = session.user;
+                console.log('Usuario autenticado:', currentUser.email);
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('Error en checkAuthSession:', error);
+            return false;
+        }
+    }
+    
+    async function signIn(email, password) {
+        if (!supabase) {
+            alert('Error: Supabase no está disponible');
+            return false;
+        }
+        
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+            
+            if (error) {
+                alert('Error de autenticación: ' + error.message);
+                return false;
+            }
+            
+            currentUser = data.user;
+            console.log('Login exitoso:', currentUser.email);
+            return true;
+        } catch (error) {
+            console.error('Error en signIn:', error);
+            alert('Error al iniciar sesión');
+            return false;
+        }
+    }
+    
+    async function signOut() {
+        if (!supabase) return;
+        
+        try {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                console.error('Error al cerrar sesión:', error);
+            } else {
+                currentUser = null;
+                console.log('Sesión cerrada correctamente');
+            }
+        } catch (error) {
+            console.error('Error en signOut:', error);
+        }
+    }
+    
+    class ContentManager {
+      constructor() {
+        this.products = [];
+        this.gallery = [];
+        this.loading = true;
+        this.init();
+      }
+
+      async init() {
+        if (!supabase) {
+          console.error('Supabase no está disponible. Verifica la configuración de API.');
+          this.renderProducts();
+          this.renderGallery();
+          this.setupEventListeners();
+          return;
+        }
+        
+        await this.loadProducts();
+        await this.loadGallery();
+        this.renderProducts();
+        this.renderGallery();
+        this.setupAdminPanel();
+        this.setupEventListeners();
+      }
+
+      async loadProducts() {
+        if (!supabase) {
+          console.error('Supabase client no disponible para cargar productos');
+          this.products = [];
+          return;
+        }
+        
+        try {
+          const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .order('created_at', { ascending: false });
+          
+          if (error) {
+            if (error.status === 401) {
+              console.error('❌ ERROR 401: API Key inválida. Ve a https://supabase.com/dashboard/project/zgegdqmrvuxxwickywkp/settings/api para generar una nueva key "anon" y reemplaza la variable supabaseKey en el código.');
+            } else {
+              console.error('Error loading products:', error);
+            }
+            this.products = [];
+          } else {
+            this.products = data || [];
+            console.log(`✅ ${this.products.length} productos cargados correctamente`);
+          }
+        } catch(e) {
+          console.error('Error loading products:', e);
+          this.products = [];
+        }
+      }
+
+      async loadGallery() {
+        if (!supabase) {
+          console.error('Supabase client no disponible para cargar galería');
+          this.gallery = [];
+          return;
+        }
+        
+        try {
+          const { data, error } = await supabase
+            .from('gallery')
+            .select('*')
+            .order('created_at', { ascending: false });
+          
+          if (error) {
+            if (error.status === 401) {
+              console.error('❌ ERROR 401: API Key inválida. Ve a https://supabase.com/dashboard/project/zgegdqmrvuxxwickywkp/settings/api para generar una nueva key "anon" y reemplaza la variable supabaseKey en el código.');
+            } else {
+              console.error('Error loading gallery:', error);
+            }
+            this.gallery = [];
+          } else {
+            this.gallery = data || [];
+            console.log(`✅ ${this.gallery.length} imágenes de galería cargadas correctamente`);
+          }
+        } catch(e) {
+          console.error('Error loading gallery:', e);
+          this.gallery = [];
+        }
+      }
+
+      async saveProducts() {
+        try {
+          // Guardar todos los productos locales en la base de datos
+          for (const product of this.products) {
+            const { error } = await supabase
+              .from('products')
+              .upsert({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                description: product.description,
+                image: product.image,
+                wsp_link: product.wspLink,
+                created_at: product.created_at
+              }, {
+                onConflict: 'id'
+              });
+            
+            if (error) {
+              console.error('Error saving product:', error);
+            }
+          }
+          
+          this.updateStats();
+          console.log('✅ Productos guardados correctamente');
+        } catch(e) {
+          console.error('Error saving products:', e);
+        }
+      }
+
+      async saveGallery() {
+        this.updateStats();
+      }
+
+      async compressImage(file, maxWidth = 1200, quality = 0.8) {
+        return new Promise((resolve) => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          const img = new Image();
+          
+          img.onload = () => {
+            // Calcular nuevas dimensiones manteniendo aspect ratio
+            let { width, height } = img;
+            if (width > maxWidth) {
+              height = (height * maxWidth) / width;
+              width = maxWidth;
+            }
+            
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Dibujar imagen comprimida
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            // Convertir a blob con calidad reducida
+            canvas.toBlob(resolve, 'image/jpeg', quality);
+          };
+          
+          img.onerror = () => resolve(file);
+          img.src = URL.createObjectURL(file);
+        });
+      }
+
+      async uploadImage(file, folder = 'images') {
+        try {
+          if (!file) return null;
+
+          // Validar archivo
+          if (!file.type.startsWith('image/')) {
+            alert('El archivo debe ser una imagen');
+            return null;
+          }
+
+          // Comprimir imagen automáticamente
+          const compressedFile = await this.compressImage(file, 1200, 0.75);
+          
+          // Validar tamaño después de compresión
+          if (compressedFile.size > 2 * 1024 * 1024) { // 2MB después de compresión
+            alert('La imagen comprimida no debe superar los 2MB');
+            return null;
+          }
+
+          const fileName = `${folder}/${Date.now()}_compressed_${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
+          
+          const { data, error } = await supabase.storage
+            .from('fireteam-images')
+            .upload(fileName, compressedFile, {
+              cacheControl: '3600',
+              upsert: false,
+              contentType: 'image/jpeg'
+            });
+
+          if (error) {
+            console.error('Error uploading image:', error);
+            alert('Error al subir la imagen: ' + error.message);
+            return null;
+          }
+
+          // Obtener URL pública optimizada
+          const { data: { publicUrl } } = supabase.storage
+            .from('fireteam-images')
+            .getPublicUrl(fileName);
+
+          return publicUrl;
+        } catch(e) {
+          console.error('Error uploading image:', e);
+          // Si el bucket no existe, continuar sin imagen en lugar de fallar
+          if (e.message && e.message.includes('Bucket not found')) {
+            console.warn('⚠️ Bucket fireteam-images no encontrado. El producto se guardará sin imagen.');
+            alert('⚠️ El bucket de imágenes no está configurado. El producto se guardará sin imagen. Contacta al administrador para configurar el storage.');
+            return ''; // Retornar string vacío en lugar de null
+          }
+          alert('Error al subir la imagen: ' + e.message);
+          return null;
+        }
+      }
+
+      async addProduct(product) {
+        try {
+          const { data, error } = await supabase
+            .from('products')
+            .insert([{
+              name: product.name,
+              price: product.price,
+              description: product.description,
+              image: product.image,
+              wsp_link: product.wspLink,
+              created_at: new Date().toISOString()
+            }])
+            .select()
+            .single();
+
+          if (error) {
+            console.error('Error adding product:', error);
+            return null;
+          }
+
+          await this.loadProducts();
+          this.renderProducts();
+          this.renderAdminList();
+          return data;
+        } catch(e) {
+          console.error('Error adding product:', e);
+          return null;
+        }
+      }
+
+      async updateProduct(id, updates) {
+        try {
+          const { data, error } = await supabase
+            .from('products')
+            .update({
+              name: updates.name,
+              price: updates.price,
+              description: updates.description,
+              image: updates.image,
+              wsp_link: updates.wspLink,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', id)
+            .select()
+            .single();
+
+          if (error) {
+            console.error('Error updating product:', error);
+            return false;
+          }
+
+          await this.loadProducts();
+          this.renderProducts();
+          this.renderAdminList();
+          return true;
+        } catch(e) {
+          console.error('Error updating product:', e);
+          return false;
+        }
+      }
+
+      async deleteProduct(id) {
+        try {
+          const { error } = await supabase
+            .from('products')
+            .delete()
+            .eq('id', id);
+
+          if (error) {
+            console.error('Error deleting product:', error);
+            return;
+          }
+
+          await this.loadProducts();
+          this.renderProducts();
+          this.renderAdminList();
+        } catch(e) {
+          console.error('Error deleting product:', e);
+        }
+      }
+
+      async addGalleryItem(item) {
+        try {
+          const { data, error } = await supabase
+            .from('gallery')
+            .insert([{
+              title: item.title,
+              description: item.description,
+              image: item.image,
+              category: item.category,
+              date: item.date,
+              created_at: new Date().toISOString()
+            }])
+            .select()
+            .single();
+
+          if (error) {
+            console.error('Error adding gallery item:', error);
+            return null;
+          }
+
+          await this.loadGallery();
+          this.renderGallery();
+          this.renderGalleryAdminList();
+          return data;
+        } catch(e) {
+          console.error('Error adding gallery item:', e);
+          return null;
+        }
+      }
+
+      async updateGalleryItem(id, updates) {
+        try {
+          const { data, error } = await supabase
+            .from('gallery')
+            .update({
+              title: updates.title,
+              description: updates.description,
+              image: updates.image,
+              category: updates.category,
+              date: updates.date,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', id)
+            .select()
+            .single();
+
+          if (error) {
+            console.error('Error updating gallery item:', error);
+            return false;
+          }
+
+          await this.loadGallery();
+          this.renderGallery();
+          this.renderGalleryAdminList();
+          return true;
+        } catch(e) {
+          console.error('Error updating gallery item:', e);
+          return false;
+        }
+      }
+
+      async deleteGalleryItem(id) {
+        try {
+          const { error } = await window.fireteamSupabase
+            .from('gallery')
+            .delete()
+            .eq('id', id);
+
+          if (error) {
+            console.error('Error deleting gallery item:', error);
+            return;
+          }
+
+          await this.loadGallery();
+          this.renderGallery();
+          this.renderGalleryAdminList();
+        } catch(e) {
+          console.error('Error deleting gallery item:', e);
+        }
+      }
+
+      renderProducts() {
+        const grid = document.getElementById('merchGrid');
+        const empty = document.getElementById('merchEmpty');
+        
+        if (this.products.length === 0) {
+          grid.style.display = 'none';
+          empty.style.display = 'block';
+          return;
+        }
+
+        grid.style.display = 'grid';
+        empty.style.display = 'none';
+        
+        grid.innerHTML = this.products.map(product => `
+          <div class="merch-item reveal" data-reveal>
+            <div class="merch-img">
+              ${product.image ? 
+                `<img src="${product.image}" alt="${product.name}" onerror="this.onerror=null;this.style.display='none';">` :
+                `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.05)); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.40); font-size: 14px; text-align: center; border: 2px dashed rgba(255,255,255,.20);">Sin imagen</div>`
+              }
+            </div>
+            <div class="merch-content">
+              <h3 class="merch-title">${product.name}</h3>
+              <p class="merch-desc">${product.description}</p>
+              <div class="merch-price">${product.price}</div>
+              <button class="merch-btn" onclick="window.open('${product.wsp_link || `https://wa.me/${WSP_NUMBER.replace(/\D/g, '')}?text=Hola! Quiero info sobre: ${encodeURIComponent(product.name)}`}', '_blank')">
+                Consultar por WhatsApp
+              </button>
+            </div>
+          </div>
+        `).join('');
+
+        // Re-inicializar reveals para nuevos productos
+        requestAnimationFrame(() => {
+          document.querySelectorAll('#merchGrid .reveal').forEach((el, idx) => {
+            if(idx % 2 === 1) el.classList.add('from-right');
+            io.observe(el);
+          });
+        });
+      }
+
+      renderGallery() {
+        const grid = document.getElementById('galleryGrid');
+        const empty = document.getElementById('galleryEmpty');
+        
+        if (this.gallery.length === 0) {
+          grid.style.display = 'none';
+          empty.style.display = 'block';
+          return;
+        }
+
+        grid.style.display = 'grid';
+        empty.style.display = 'none';
+        
+        grid.innerHTML = this.gallery.map(item => {
+          const categoryLabels = {
+            torneo: 'Torneo',
+            entrenamiento: 'Entrenamiento',
+            premio: 'Premio',
+            evento: 'Evento',
+            otro: 'Otro'
+          };
+
+          const dateStr = item.date ? new Date(item.date).toLocaleDateString('es-AR', { 
+            day: 'numeric', 
+            month: 'short', 
+            year: 'numeric' 
+          }) : '';
+
+          return `
+            <div class="gallery-item reveal" data-reveal onclick="contentManager.openGalleryImage('${item.id}')">
+              <div class="gallery-img">
+                ${item.image ? 
+                  `<img src="${item.image}" alt="${item.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\\"color: rgba(255,255,255,.60); display:flex; align-items:center; justify-content:center; height:100%;\\">Error al cargar imagen</span>';">` :
+                  '<span style="color: rgba(255,255,255,.60); display:flex; align-items:center; justify-content:center; height:100%;">Sin imagen</span>'
+                }
+                <div class="gallery-category">${categoryLabels[item.category] || item.category}</div>
+              </div>
+              <div class="gallery-content">
+                <h3 class="gallery-title">${item.title}</h3>
+                ${item.description ? `<p class="gallery-desc">${item.description}</p>` : ''}
+                ${dateStr ? `<div class="gallery-date">${dateStr}</div>` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Re-inicializar reveals para nuevas imágenes
+        requestAnimationFrame(() => {
+          document.querySelectorAll('#galleryGrid .reveal').forEach((el, idx) => {
+            if(idx % 2 === 1) el.classList.add('from-right');
+            io.observe(el);
+          });
+        });
+      }
+
+      renderAdminList() {
+        const list = document.getElementById('adminList');
+        
+        if (this.products.length === 0) {
+          list.innerHTML = '<p style="color: rgba(255,255,255,.60); text-align: center; padding: 20px;">No hay productos agregados</p>';
+          return;
+        }
+
+        list.innerHTML = this.products.map(product => `
+          <div class="admin-item">
+            <div class="admin-item-image">
+              ${product.image ? 
+                `<img src="${product.image}" alt="${product.name}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">` : 
+                `<div style="width: 80px; height: 80px; background: rgba(255,255,255,.10); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.40); font-size: 12px; text-align: center;">Sin imagen</div>`
+              }
+            </div>
+            <div class="admin-item-info">
+              <h5>${product.name}</h5>
+              <p>${product.description}</p>
+              <p><strong>Precio:</strong> ${product.price}</p>
+            </div>
+            <div class="admin-item-actions">
+              <button class="admin-btn-small" onclick="contentManager.editProduct('${product.id}')">Editar</button>
+              <button class="admin-btn-small" onclick="contentManager.deleteProduct('${product.id}')" style="background: rgba(255,42,77,.20); border-color: rgba(255,42,77,.40); color: #fff;">Eliminar</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      renderGalleryAdminList() {
+        const list = document.getElementById('galleryAdminList');
+        
+        if (this.gallery.length === 0) {
+          list.innerHTML = '<p style="color: rgba(255,255,255,.60); text-align: center; padding: 20px;">No hay imágenes en la galería</p>';
+          return;
+        }
+
+        const categoryLabels = {
+          torneo: 'Torneo',
+          entrenamiento: 'Entrenamiento',
+          premio: 'Premio',
+          evento: 'Evento',
+          otro: 'Otro'
+        };
+
+        list.innerHTML = this.gallery.map(item => {
+          const dateStr = item.date ? new Date(item.date).toLocaleDateString('es-AR') : '';
+          
+          return `
+            <div class="gallery-admin-item">
+              <div class="gallery-admin-img">
+                ${item.image ? 
+                  `<img src="${item.image}" alt="${item.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\\"color: rgba(255,255,255,.60);\\">Sin imagen</span>';">` :
+                  '<span style="color: rgba(255,255,255,.60);">Sin imagen</span>'
+                }
+              </div>
+              <div class="gallery-admin-content">
+                <div class="gallery-admin-title">${item.title}</div>
+                <div class="gallery-admin-meta">
+                  <span class="gallery-admin-category">${categoryLabels[item.category] || item.category}</span>
+                  ${dateStr ? `<span class="gallery-admin-date">${dateStr}</span>` : ''}
+                </div>
+                <div class="gallery-admin-actions">
+                  <button onclick="contentManager.editGalleryItem('${item.id}')">Editar</button>
+                  <button onclick="contentManager.deleteGalleryItem('${item.id}')" style="background: rgba(255,42,77,.20); border-color: rgba(255,42,77,.40); color: #fff;">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      editProduct(id) {
+        const product = this.products.find(p => p.id === id);
+        if (!product) return;
+
+        // Llenar formulario con datos del producto
+        document.getElementById('merchName').value = product.name;
+        document.getElementById('merchPrice').value = product.price;
+        document.getElementById('merchDesc').value = product.description;
+        document.getElementById('merchImage').value = product.image || '';
+        document.getElementById('merchWsp').value = product.wsp_link || '';
+
+        // Cambiar botón a modo edición
+        const form = document.getElementById('merchForm');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.textContent = 'Actualizar Producto';
+        submitBtn.dataset.editId = id;
+
+        // Scroll al formulario
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      setupAdminPanel() {
+        // Configurar tabs
+        const tabs = document.querySelectorAll('.admin-tab');
+        const contents = document.querySelectorAll('.admin-tab-content');
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const targetTab = tab.dataset.tab;
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            tab.classList.add('active');
+            document.getElementById(`${targetTab}Tab`).classList.add('active');
+          });
+        });
+
+        // Configurar formulario de galería
+        const galleryForm = document.getElementById('galleryForm');
+        galleryForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const submitBtn = galleryForm.querySelector('button[type="submit"]');
+          const editId = submitBtn.dataset.editId;
+          
+          // Mostrar loading
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Procesando...';
+          
+          try {
+            let imageUrl = document.getElementById('galleryImage').value;
+            const fileInput = document.getElementById('galleryFile');
+            
+            // Si hay archivo, subirlo primero
+            if (fileInput.files && fileInput.files[0]) {
+              const uploadedUrl = await this.uploadImage(fileInput.files[0], 'gallery');
+              if (uploadedUrl) {
+                imageUrl = uploadedUrl;
+              } else {
+                submitBtn.disabled = false;
+                submitBtn.textContent = editId ? 'Actualizar Imagen' : 'Agregar Imagen';
+                return;
+              }
+            }
+            
+            const galleryData = {
+              title: document.getElementById('galleryTitle').value,
+              description: document.getElementById('galleryDesc').value,
+              image: imageUrl,
+              category: document.getElementById('galleryCategory').value,
+              date: document.getElementById('galleryDate').value
+            };
+
+            if (editId) {
+              await this.updateGalleryItem(editId, galleryData);
+              submitBtn.textContent = 'Agregar Imagen';
+              delete submitBtn.dataset.editId;
+            } else {
+              await this.addGalleryItem(galleryData);
+            }
+
+            galleryForm.reset();
+          } catch(e) {
+            console.error('Error en formulario:', e);
+            alert('Error al procesar la imagen');
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = editId ? 'Actualizar Imagen' : 'Agregar Imagen';
+          }
+        });
+
+        // Configurar formulario de productos
+        const merchForm = document.getElementById('merchForm');
+        merchForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const submitBtn = merchForm.querySelector('button[type="submit"]');
+          const editId = submitBtn.dataset.editId;
+          
+          // Mostrar loading
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Procesando...';
+          
+          try {
+            let imageUrl = document.getElementById('merchImage').value;
+            const fileInput = document.getElementById('merchFile');
+            
+            // Si hay archivo, subirlo primero
+            if (fileInput.files && fileInput.files[0]) {
+              const uploadedUrl = await this.uploadImage(fileInput.files[0], 'products');
+              if (uploadedUrl !== null) {
+                imageUrl = uploadedUrl;
+              } else {
+                submitBtn.disabled = false;
+                submitBtn.textContent = editId ? 'Actualizar Producto' : 'Agregar Producto';
+                return;
+              }
+            }
+            
+            const productData = {
+              name: document.getElementById('merchName').value,
+              price: document.getElementById('merchPrice').value,
+              description: document.getElementById('merchDesc').value,
+              image: imageUrl,
+              wspLink: document.getElementById('merchWsp').value
+            };
+
+            if (editId) {
+              await this.updateProduct(editId, productData);
+              submitBtn.textContent = 'Agregar Producto';
+              delete submitBtn.dataset.editId;
+            } else {
+              await this.addProduct(productData);
+            }
+
+            merchForm.reset();
+          } catch(e) {
+            console.error('Error en formulario:', e);
+            alert('Error al procesar el producto');
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = editId ? 'Actualizar Producto' : 'Agregar Producto';
+          }
+        });
+
+        // Botón eliminar todo
+        document.getElementById('clearAll').addEventListener('click', () => {
+          if (confirm('¿Estás seguro de que quieres eliminar todos los productos? Esta acción no se puede deshacer.')) {
+            this.products = [];
+            this.saveProducts();
+            this.renderProducts();
+            this.renderAdminList();
+          }
+        });
+
+        this.renderAdminList();
+        this.renderGalleryAdminList();
+        this.updateStats();
+      }
+
+      updateStats() {
+        const totalItems = this.products.length + this.gallery.length;
+        document.getElementById('totalProducts').textContent = totalItems;
+        
+        const allDates = [
+          ...this.products.map(p => new Date(p.created_at)),
+          ...this.gallery.map(g => new Date(g.created_at))
+        ];
+        
+        const lastUpdate = allDates.length > 0 ? 
+          new Date(Math.max(...allDates)).toLocaleString('es-AR') : 
+          'Nunca';
+        document.getElementById('lastUpdate').textContent = lastUpdate;
+      }
+
+      setupEventListeners() {
+        // Abrir panel admin - múltiples accesos
+        const openAdminModal = async (e) => {
+          e.preventDefault();
+          
+          // Verificar si el usuario está autenticado
+          const isAuthenticated = await checkAuthSession();
+          
+          if (!isAuthenticated) {
+            // Mostrar modal de login
+            document.getElementById('loginModal').classList.add('open');
+            return;
+          }
+          
+          // Abrir panel admin
+          openAdminPanel();
+        };
+
+        // Abrir panel de administración
+        const openAdminPanel = () => {
+          document.getElementById('adminModal').classList.add('open');
+          
+          // Actualizar información del usuario en el panel
+          if (currentUser) {
+            const userInfo = document.getElementById('adminUserInfo');
+            if (userInfo) {
+              userInfo.textContent = `Administrador: ${currentUser.email}`;
+            }
+          }
+        };
+
+        // Footer link
+        document.getElementById('adminLink').addEventListener('click', openAdminModal);
+        
+        // Mobile admin link (si existe)
+        const mobileAdminLink = document.getElementById('adminLinkMobile');
+        if (mobileAdminLink) {
+          mobileAdminLink.addEventListener('click', openAdminModal);
+        }
+        
+        // Header admin link (si existe)
+        const headerAdminLink = document.getElementById('adminLinkHeader');
+        if (headerAdminLink) {
+          headerAdminLink.addEventListener('click', openAdminModal);
+        }
+
+        // Volver a FIRE TEAM
+        document.getElementById('adminBack').addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          document.getElementById('adminModal').classList.remove('open');
+        });
+
+        // Salir del panel
+        document.getElementById('adminLogout').addEventListener('click', async () => {
+          if (confirm('¿Querés salir del panel de administración?')) {
+            // Cerrar sesión de Supabase
+            await signOut();
+            
+            // Cerrar modal
+            document.getElementById('adminModal').classList.remove('open');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+
+        // Cerrar panel admin
+        const closeModal = () => {
+          document.getElementById('adminModal').classList.remove('open');
+        };
+
+        // Event listeners del modal de login
+        document.getElementById('loginBack').addEventListener('click', () => {
+          document.getElementById('loginModal').classList.remove('open');
+        });
+
+        document.getElementById('loginClose').addEventListener('click', () => {
+          document.getElementById('loginModal').classList.remove('open');
+        });
+
+        document.getElementById('loginOverlay').addEventListener('click', () => {
+          document.getElementById('loginModal').classList.remove('open');
+        });
+
+        // Procesar formulario de login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const email = document.getElementById('adminEmail').value;
+          const password = document.getElementById('adminPassword').value;
+          
+          if (!email || !password) {
+            alert('Por favor complete todos los campos');
+            return;
+          }
+          
+          // Intentar login
+          const loginSuccess = await signIn(email, password);
+          
+          if (loginSuccess) {
+            // Cerrar modal de login
+            document.getElementById('loginModal').classList.remove('open');
+            
+            // Limpiar formulario
+            document.getElementById('loginForm').reset();
+            
+            // Abrir panel admin
+            openAdminPanel();
+          }
+        });
+
+        document.getElementById('adminClose').addEventListener('click', closeModal);
+        document.getElementById('adminOverlay').addEventListener('click', closeModal);
+
+        // Cerrar con ESC
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closeModal();
+          }
+        });
+      }
+    }
+
+    // Inicializar el sistema
+    window.contentManager = new ContentManager();
+    }());
   </script>
 </body>
 </html>
