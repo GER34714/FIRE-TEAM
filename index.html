@@ -622,6 +622,51 @@
     .gallery-item:hover .gallery-img img{
       transform: scale(1.05);
     }
+    .gallery-video{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+    .video-overlay{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(0,0,0,.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: all .3s ease;
+    }
+    .video-overlay::before{
+      content: "▶";
+      color: white;
+      font-size: 18px;
+      margin-left: 3px;
+    }
+    .gallery-item:hover .video-overlay{
+      background: rgba(255,42,77,.8);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    .video-badge{
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing:.4px;
+      background: rgba(255,42,77,.90);
+      color: white;
+      backdrop-filter: blur(6px);
+    }
     .gallery-category{
       position: absolute;
       top: 12px; left: 12px;
@@ -1052,74 +1097,60 @@
     }
     footer a{ color: rgba(255,255,255,.80); border-bottom: 1px solid rgba(255,255,255,.22); }
 
+    /* Botones flotantes - Solo iconos */
     .wsp-float{
-      position: fixed; right: 16px; bottom: 16px; z-index: 80;
-      display:flex; align-items:center; gap: 10px;
-      padding: 12px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(10,10,12,.70);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 18px 60px rgba(0,0,0,.55);
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      position: fixed !important; right: 20px !important; bottom: 20px !important; z-index: 9999 !important;
+      display:flex !important; align-items:center; justify-content:center;
+      width: 56px !important; height: 56px !important;
+      border-radius: 50% !important;
+      background: #25D366 !important;
+      color: white !important;
+      text-decoration: none !important;
+      box-shadow: 0 20px 60px rgba(0,0,0,.55) !important;
+      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, opacity .3s ease !important;
+      cursor: pointer !important;
+      -webkit-tap-highlight-color: transparent !important;
     }
-    .wsp-float:hover{ transform: translateY(-2px); background: rgba(10,10,12,.82); border-color: rgba(255,255,255,.22); }
+    .wsp-float:hover{ transform: translateY(-2px); box-shadow: 0 22px 70px rgba(0,0,0,.65); }
 
     .ig-float{
-      position: fixed; right: 16px; bottom: 90px; z-index: 80;
-      display:flex; align-items:center; gap: 10px;
-      padding: 12px 14px;
-      background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 50px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px; font-weight: 600;
-      box-shadow: 0 18px 60px rgba(0,0,0,.55);
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      position: fixed !important; right: 20px !important; bottom: 80px !important; z-index: 9999 !important;
+      display:flex !important; align-items:center; justify-content:center;
+      width: 56px !important; height: 56px !important;
+      border-radius: 50% !important;
+      background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%) !important;
+      color: white !important;
+      text-decoration: none !important;
+      box-shadow: 0 20px 60px rgba(0,0,0,.55) !important;
+      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, opacity .3s ease !important;
+      cursor: pointer !important;
+      -webkit-tap-highlight-color: transparent !important;
     }
     .ig-float:hover{ transform: translateY(-2px); box-shadow: 0 22px 70px rgba(0,0,0,.65); }
 
-    .ig-ico{
-      width: 38px; height: 38px;
-      background: rgba(255,255,255,.20);
-      border-radius: 50%;
-      display:flex; align-items:center; justify-content:center;
-      font-size: 20px;
-    }
-    .ig-ico::before{
-      content: "📷";
-    }
-    .ig-text{
-      display: flex; flex-direction: column;
-      line-height: 1.2;
-    }
-    .ig-text b{ font-size: 13px; }
-    .ig-text span{ font-size: 11px; opacity: .85; }
-
-    .wsp-ico{
-      width: 38px; height: 38px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.14);
-      display:flex; align-items:center; justify-content:center;
-      flex: 0 0 auto;
-      overflow:hidden;
-    }
-    .wsp-ico::before{
-      content:"";
-      width: 22px; height: 22px;
-      background-image: var(--wsp-logo);
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      filter: drop-shadow(0 6px 18px rgba(0,0,0,.45));
-      display:block;
+    /* Ocultar botones cuando el footer es visible */
+    .footer-visible .wsp-float,
+    .footer-visible .ig-float {
+      opacity: 0 !important;
+      transform: translateY(20px) !important;
+      pointer-events: none !important;
     }
 
-    .wsp-text{ display:flex; flex-direction:column; line-height:1.1; }
-    .wsp-text b{ font-size: 13px; color: rgba(255,255,255,.92); }
-    .wsp-text span{ font-size: 12px; color: rgba(255,255,255,.70); margin-top: 2px; }
+    .wsp-ico, .ig-ico{
+      width: 28px; height: 28px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .wsp-ico svg, .ig-ico svg{
+      width: 100%;
+      height: 100%;
+      fill: #fff;
+    }
+
+    @media (max-width: 520px){
+      .wsp-float{ right: 12px; bottom: 12px; padding: 10px 14px; }
+      .ig-float{ right: 12px; bottom: 70px; padding: 10px 14px; }
+      footer{ padding-bottom: 100px; }
+    }
 
     @media (max-width: 980px){
       .grid-3{ grid-template-columns: 1fr; }
@@ -1127,7 +1158,6 @@
       .checks{ grid-template-columns: 1fr; }
     }
     @media (max-width: 520px){
-      .wsp-float{ right: 12px; bottom: 12px; }
       footer{ padding-bottom: 100px; }
     }
   </style>
@@ -1389,22 +1419,24 @@
       </div>
     </footer>
 
-    <a class="wsp-float" id="wspFloat" href="#" rel="noopener" aria-label="Contactar por WhatsApp">
-      <span class="wsp-ico" aria-hidden="true"></span>
-      <span class="wsp-text">
-        <b>WhatsApp</b>
-        <span>+5491171297173</span>
+      </div><!-- /app -->
+
+    <!-- Botones flotantes -->
+    <a class="wsp-float" id="wspFloat" href="#" rel="noopener" aria-label="Contactar por WhatsApp" style="opacity: 1; transform: translateY(0); pointer-events: auto;">
+      <span class="wsp-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
       </span>
     </a>
     
-    <a class="ig-float" id="igFloat" href="https://www.instagram.com/fire_fighters_team/" target="_blank" rel="noopener" aria-label="Seguir en Instagram">
-      <span class="ig-ico" aria-hidden="true"></span>
-      <span class="ig-text">
-        <b>Instagram</b>
-        <span>@fire_fighters_team</span>
+    <a class="ig-float" id="igFloat" href="https://www.instagram.com/fire_fighters_team/" target="_blank" rel="noopener" aria-label="Seguir en Instagram" style="opacity: 1; transform: translateY(0); pointer-events: auto;">
+      <span class="ig-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+        </svg>
       </span>
     </a>
-  </div><!-- /app -->
 
   <!-- Modal Login Admin -->
   <div class="admin-modal" id="loginModal">
@@ -1459,6 +1491,7 @@
       <div class="admin-tabs">
         <button class="admin-tab active" data-tab="products">Productos</button>
         <button class="admin-tab" data-tab="gallery">Galería</button>
+        <button class="admin-tab" data-tab="content">Contenido</button>
         <button class="admin-tab" data-tab="settings">Configuración</button>
       </div>
 
@@ -1510,25 +1543,53 @@
         <!-- Tab Galería -->
         <div class="admin-tab-content" id="galleryTab">
           <div class="admin-section">
-            <h4>Agregar Imagen a Galería</h4>
+            <h4>Agregar Contenido a Galería</h4>
             <form id="galleryForm" class="admin-form">
               <div class="form-group">
-                <label>Título de la imagen</label>
+                <label>Tipo de contenido</label>
+                <select id="galleryType" onchange="toggleGalleryType()">
+                  <option value="image">Imagen</option>
+                  <option value="video">Video</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label>Título</label>
                 <input type="text" id="galleryTitle" required placeholder="Ej: Campeonato 2024">
               </div>
+              
               <div class="form-group">
                 <label>Descripción (opcional)</label>
                 <textarea id="galleryDesc" rows="2" placeholder="Breve descripción del logro"></textarea>
               </div>
-              <div class="form-group">
-                <label>URL de la imagen</label>
-                <input type="url" id="galleryImage" required placeholder="https://...">
+              
+              <!-- Campos para imagen -->
+              <div id="imageFields">
+                <div class="form-group">
+                  <label>URL de la imagen</label>
+                  <input type="url" id="galleryImage" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                  <label>O subir archivo</label>
+                  <input type="file" id="galleryFile" accept="image/*">
+                  <small style="color: rgba(255,255,255,.60); font-size: 11px; margin-top: 4px; display: block;">Formatos: JPG, PNG, WebP. Máximo 5MB.</small>
+                </div>
               </div>
-              <div class="form-group">
-                <label>O subir archivo</label>
-                <input type="file" id="galleryFile" accept="image/*">
-                <small style="color: rgba(255,255,255,.60); font-size: 11px; margin-top: 4px; display: block;">Formatos: JPG, PNG, WebP. Máximo 5MB.</small>
+              
+              <!-- Campos para video -->
+              <div id="videoFields" style="display: none;">
+                <div class="form-group">
+                  <label>URL del video</label>
+                  <input type="url" id="galleryVideo" placeholder="https://www.youtube.com/watch?v=... o URL directa del video">
+                  <small style="color: rgba(255,255,255,.60); font-size: 11px; margin-top: 4px; display: block;">YouTube, Vimeo, o URL directa del video (MP4, WebM).</small>
+                </div>
+                <div class="form-group">
+                  <label>Miniatura del video (opcional)</label>
+                  <input type="url" id="videoThumbnail" placeholder="https://...">
+                  <small style="color: rgba(255,255,255,.60); font-size: 11px; margin-top: 4px; display: block;">Si no se proporciona, se usará la miniatura automática.</small>
+                </div>
               </div>
+              
               <div class="form-row">
                 <div class="form-group">
                   <label>Categoría</label>
@@ -1536,8 +1597,7 @@
                     <option value="torneo">Torneo</option>
                     <option value="entrenamiento">Entrenamiento</option>
                     <option value="premio">Premio</option>
-                    <option value="evento">Evento</option>
-                    <option value="otro">Otro</option>
+                    <option value="video">Video</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -1545,14 +1605,86 @@
                   <input type="date" id="galleryDate">
                 </div>
               </div>
-              <button type="submit" class="admin-btn">Agregar Imagen</button>
+              <button type="submit" class="admin-btn">Agregar Contenido</button>
             </form>
           </div>
 
           <div class="admin-section">
-            <h4>Imágenes en Galería</h4>
+            <h4>Contenido en Galería</h4>
             <div class="gallery-admin-list" id="galleryAdminList">
-              <!-- Las imágenes se cargarán dinámicamente -->
+              <!-- El contenido se cargará dinámicamente -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Contenido -->
+        <div class="admin-tab-content" id="contentTab">
+          <div class="admin-section">
+            <h4>Editar Textos del Sitio</h4>
+            <div class="admin-form">
+              <div class="form-group">
+                <label>Título Principal (Hero)</label>
+                <input type="text" id="heroTitle" placeholder="FIRE TEAM">
+              </div>
+              <div class="form-group">
+                <label>Subtítulo del Hero</label>
+                <textarea id="heroSubtitle" rows="2" placeholder="Clases grupales y personalizadas. Entrená con disciplina y progreso real."></textarea>
+              </div>
+              <div class="form-group">
+                <label>Texto del Botón Principal</label>
+                <input type="text" id="heroButtonText" placeholder="SUMATE AL TEAM">
+              </div>
+              <button type="button" onclick="contentManager.updateHeroContent()" class="admin-btn">Actualizar Hero</button>
+            </div>
+          </div>
+
+          <div class="admin-section">
+            <h4>Sección Beneficios</h4>
+            <div class="admin-form">
+              <div class="form-group">
+                <label>Título de Beneficios</label>
+                <input type="text" id="benefitsTitle" placeholder="Beneficios">
+              </div>
+              <div class="form-group">
+                <label>Subtítulo de Beneficios</label>
+                <textarea id="benefitsSubtitle" rows="2" placeholder="Nuestros métodos y resultados"></textarea>
+              </div>
+              <button type="button" onclick="contentManager.updateBenefitsContent()" class="admin-btn">Actualizar Beneficios</button>
+            </div>
+          </div>
+
+          <div class="admin-section">
+            <h4>Información de Contacto</h4>
+            <div class="admin-form">
+              <div class="form-group">
+                <label>Número de WhatsApp</label>
+                <input type="text" id="wspNumber" placeholder="+5491171297173">
+              </div>
+              <div class="form-group">
+                <label>Mensaje de WhatsApp</label>
+                <textarea id="wspMessage" rows="2" placeholder="Hola! Quiero info para arrancar en FIRE TEAM. ¿Me pasás horarios, cupos y ubicación?"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Instagram URL</label>
+                <input type="url" id="instagramUrl" placeholder="https://www.instagram.com/fire_fighters_team/">
+              </div>
+              <button type="button" onclick="contentManager.updateContactContent()" class="admin-btn">Actualizar Contacto</button>
+            </div>
+          </div>
+
+          <div class="admin-section">
+            <h4>Banner Promocional</h4>
+            <div class="admin-form">
+              <div class="form-group">
+                <label>URL del Banner</label>
+                <input type="url" id="bannerUrl" placeholder="https://...">
+              </div>
+              <div class="form-group">
+                <label>Subir Banner</label>
+                <input type="file" id="bannerFile" accept="image/*">
+                <small style="color: rgba(255,255,255,.60); font-size: 11px; margin-top: 4px; display: block;">Formatos: JPG, PNG, WebP. Máximo 5MB.</small>
+              </div>
+              <button type="button" onclick="contentManager.updateBannerContent()" class="admin-btn">Actualizar Banner</button>
             </div>
           </div>
         </div>
@@ -1856,6 +1988,7 @@
         this.gallery = [];
         this.loading = true;
         this.init();
+        this.loadSavedContent();
       }
 
       async init() {
@@ -2133,20 +2266,33 @@
         }
       }
 
-      async addGalleryItem(item) {
+      async addGalleryItem(title, description, image, category, date, type = 'image', video = null, thumbnail = null) {
+        if (!supabase) {
+          console.error('Supabase client no disponible para agregar item a galería');
+          return null;
+        }
+
         try {
+          const itemData = {
+            title,
+            description,
+            category,
+            date: date || null,
+            type
+          };
+
+          // Add image or video data based on type
+          if (type === 'video') {
+            itemData.video = video;
+            itemData.thumbnail = thumbnail;
+          } else {
+            itemData.image = image;
+          }
+
           const { data, error } = await supabase
             .from('gallery')
-            .insert([{
-              title: item.title,
-              description: item.description,
-              image: item.image,
-              category: item.category,
-              date: item.date,
-              created_at: new Date().toISOString()
-            }])
-            .select()
-            .single();
+            .insert([itemData])
+            .select();
 
           if (error) {
             console.error('Error adding gallery item:', error);
@@ -2157,8 +2303,8 @@
           this.renderGallery();
           this.renderGalleryAdminList();
           return data;
-        } catch(e) {
-          console.error('Error adding gallery item:', e);
+        } catch (error) {
+          console.error('Error adding gallery item:', error);
           return null;
         }
       }
@@ -2256,58 +2402,130 @@
       }
 
       renderGallery() {
-        const grid = document.getElementById('galleryGrid');
-        const empty = document.getElementById('galleryEmpty');
+        const galleryGrid = document.getElementById('galleryGrid');
+        const galleryEmpty = document.getElementById('galleryEmpty');
+        
+        if (!galleryGrid || !galleryEmpty) return;
         
         if (this.gallery.length === 0) {
-          grid.style.display = 'none';
-          empty.style.display = 'block';
+          galleryGrid.style.display = 'none';
+          galleryEmpty.style.display = 'block';
           return;
         }
-
-        grid.style.display = 'grid';
-        empty.style.display = 'none';
         
-        grid.innerHTML = this.gallery.map(item => {
-          const categoryLabels = {
-            torneo: 'Torneo',
-            entrenamiento: 'Entrenamiento',
-            premio: 'Premio',
-            evento: 'Evento',
-            otro: 'Otro'
-          };
-
-          const dateStr = item.date ? new Date(item.date).toLocaleDateString('es-AR', { 
-            day: 'numeric', 
-            month: 'short', 
-            year: 'numeric' 
+        galleryGrid.style.display = 'grid';
+        galleryEmpty.style.display = 'none';
+        
+        galleryGrid.innerHTML = this.gallery.map(item => {
+          const dateStr = item.date ? new Date(item.date).toLocaleDateString('es-AR', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
           }) : '';
-
+          
+          const categoryColors = {
+            torneo: 'rgba(255,178,74,.20)',
+            entrenamiento: 'rgba(42,255,178,.20)',
+            premio: 'rgba(255,42,77,.20)',
+            video: 'rgba(255,42,77,.20)'
+          };
+          
+          const isVideo = item.type === 'video';
+          
           return `
-            <div class="gallery-item reveal" data-reveal onclick="contentManager.openGalleryImage('${item.id}')">
+            <div class="gallery-item reveal" data-reveal onclick="contentManager.openGalleryItem('${item.id}')">
               <div class="gallery-img">
-                ${item.image ? 
-                  `<img src="${item.image}" alt="${item.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\\"color: rgba(255,255,255,.60); display:flex; align-items:center; justify-content:center; height:100%;\\">Error al cargar imagen</span>';">` :
-                  '<span style="color: rgba(255,255,255,.60); display:flex; align-items:center; justify-content:center; height:100%;">Sin imagen</span>'
+                ${isVideo ? 
+                  (item.thumbnail ? 
+                    `<img src="${item.thumbnail}" alt="${item.title}" onerror="this.style.display='none';">` :
+                    `<div style="width:100%; height:100%; background: linear-gradient(135deg, rgba(255,42,77,.3), rgba(255,178,74,.3)); display:flex; align-items:center; justify-content:center; color: white; font-size: 48px;">▶</div>`
+                  ) :
+                  (item.image ? 
+                    `<img src="${item.image}" alt="${item.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\\"color: rgba(255,255,255,.60); display:flex; align-items:center; justify-content:center; height:100%;\\">Error al cargar imagen</span>';">` :
+                    '<span style="color: rgba(255,255,255,.60); display:flex; align-items:center; justify-content:center; height:100%;">Sin imagen</span>'
+                  )
                 }
-                <div class="gallery-category">${categoryLabels[item.category] || item.category}</div>
+                ${isVideo ? '<div class="video-overlay"></div><span class="video-badge">VIDEO</span>' : ''}
+                ${item.category && !isVideo ? `<span class="gallery-category" style="background: ${categoryColors[item.category] || 'rgba(255,255,255,.20)'}">${item.category}</span>` : ''}
               </div>
               <div class="gallery-content">
                 <h3 class="gallery-title">${item.title}</h3>
                 ${item.description ? `<p class="gallery-desc">${item.description}</p>` : ''}
-                ${dateStr ? `<div class="gallery-date">${dateStr}</div>` : ''}
+                ${dateStr ? `<p class="gallery-date">${dateStr}</p>` : ''}
               </div>
             </div>
           `;
         }).join('');
-
-        // Re-inicializar reveals para nuevas imágenes
-        requestAnimationFrame(() => {
-          document.querySelectorAll('#galleryGrid .reveal').forEach((el, idx) => {
-            if(idx % 2 === 1) el.classList.add('from-right');
-            io.observe(el);
+        
+        // Re-inicializar reveals para nuevos elementos
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(entry=>{
+            if(entry.isIntersecting){
+              entry.target.classList.add("in");
+              io.unobserve(entry.target);
+            }
           });
+        }, { threshold: 0.14 });
+        
+        document.querySelectorAll(".gallery-item[data-reveal]").forEach((el, idx) => {
+          if(idx % 2 === 1) el.classList.add("from-right");
+          io.observe(el);
         });
+      }
+
+      openGalleryItem(id) {
+        const item = this.gallery.find(g => g.id === id);
+        if (!item) return;
+        
+        const isVideo = item.type === 'video';
+        
+        // Crear modal para mostrar imagen o video
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+          position: fixed; inset: 0; z-index: 10000;
+          background: rgba(0,0,0,.95); backdrop-filter: blur(10px);
+          display: flex; align-items: center; justify-content: center;
+          padding: 20px; cursor: pointer;
+        `;
+        
+        let mediaContent = '';
+        if (isVideo) {
+          // Procesar URL de video (YouTube, Vimeo, o directa)
+          let videoUrl = item.video;
+          if (videoUrl.includes('youtube.com/watch?v=')) {
+            const videoId = videoUrl.split('v=')[1]?.split('&')[0];
+            videoUrl = `https://www.youtube.com/embed/${videoId}`;
+          } else if (videoUrl.includes('youtu.be/')) {
+            const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
+            videoUrl = `https://www.youtube.com/embed/${videoId}`;
+          } else if (videoUrl.includes('vimeo.com/')) {
+            const videoId = videoUrl.split('vimeo.com/')[1]?.split('?')[0];
+            videoUrl = `https://player.vimeo.com/video/${videoId}`;
+          }
+          
+          mediaContent = `
+            <iframe src="${videoUrl}" style="width: 100%; height: 100%; border: none; border-radius: 12px;" allowfullscreen></iframe>
+          `;
+        } else {
+          mediaContent = `
+            <img src="${item.image}" alt="${item.title}" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px;">
+          `;
+        }
+        
+        modal.innerHTML = `
+          <div style="max-width: 90vw; max-height: 90vh; position: relative;">
+            ${mediaContent}
+            <div style="position: absolute; top: -40px; right: 0; color: white; font-size: 24px; cursor: pointer; background: rgba(0,0,0,.5); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">×</div>
+            <div style="position: absolute; bottom: -40px; left: 0; right: 0; text-align: center; color: white;">
+              <h3 style="margin: 0 0 8px 0;">${item.title}</h3>
+              ${item.description ? `<p style="margin: 0; opacity: 0.8;">${item.description}</p>` : ''}
+              ${isVideo ? `<p style="margin: 4px 0 0 0; opacity: 0.6; font-size: 12px;">Click fuera para cerrar • ${item.video.includes('youtube') ? 'YouTube' : item.video.includes('vimeo') ? 'Vimeo' : 'Video Directo'}</p>` : ''}
+            </div>
+          </div>
+        `;
+        
+        modal.onclick = () => document.body.removeChild(modal);
+        document.body.appendChild(modal);
       }
 
       renderAdminList() {
@@ -2341,35 +2559,40 @@
 
       renderGalleryAdminList() {
         const list = document.getElementById('galleryAdminList');
+        if (!list) return;
         
         if (this.gallery.length === 0) {
-          list.innerHTML = '<p style="color: rgba(255,255,255,.60); text-align: center; padding: 20px;">No hay imágenes en la galería</p>';
+          list.innerHTML = '<p style="color: rgba(255,255,255,.60); text-align: center; padding: 20px;">No hay contenido en la galería</p>';
           return;
         }
-
-        const categoryLabels = {
-          torneo: 'Torneo',
-          entrenamiento: 'Entrenamiento',
-          premio: 'Premio',
-          evento: 'Evento',
-          otro: 'Otro'
-        };
-
+        
         list.innerHTML = this.gallery.map(item => {
-          const dateStr = item.date ? new Date(item.date).toLocaleDateString('es-AR') : '';
+          const dateStr = item.date ? new Date(item.date).toLocaleDateString('es-AR', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          }) : '';
+          
+          const isVideo = item.type === 'video';
           
           return `
             <div class="gallery-admin-item">
               <div class="gallery-admin-img">
-                ${item.image ? 
-                  `<img src="${item.image}" alt="${item.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\\"color: rgba(255,255,255,.60);\\">Sin imagen</span>';">` :
-                  '<span style="color: rgba(255,255,255,.60);">Sin imagen</span>'
+                ${isVideo ? 
+                  (item.thumbnail ? 
+                    `<img src="${item.thumbnail}" alt="${item.title}" onerror="this.style.display='none';">` :
+                    `<div style="width:100%; height:100%; background: linear-gradient(135deg, rgba(255,42,77,.3), rgba(255,178,74,.3)); display:flex; align-items:center; justify-content:center; color: white; font-size: 24px;">▶ VIDEO</div>`
+                  ) :
+                  (item.image ? 
+                    `<img src="${item.image}" alt="${item.title}" onerror="this.style.display='none';">` :
+                    '<span style="color: rgba(255,255,255,.60); display:flex; align-items:center; justify-content:center; height:100%;">Sin imagen</span>'
+                  )
                 }
               </div>
               <div class="gallery-admin-content">
-                <div class="gallery-admin-title">${item.title}</div>
+                <h5 class="gallery-admin-title">${item.title} ${isVideo ? '(Video)' : ''}</h5>
                 <div class="gallery-admin-meta">
-                  <span class="gallery-admin-category">${categoryLabels[item.category] || item.category}</span>
+                  ${item.category ? `<span class="gallery-admin-category">${item.category}</span>` : ''}
                   ${dateStr ? `<span class="gallery-admin-date">${dateStr}</span>` : ''}
                 </div>
                 <div class="gallery-admin-actions">
@@ -2403,78 +2626,275 @@
         form.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
-      setupAdminPanel() {
-        // Configurar tabs
-        const tabs = document.querySelectorAll('.admin-tab');
-        const contents = document.querySelectorAll('.admin-tab-content');
+      // Funciones para editar contenido del sitio
+      async updateHeroContent() {
+        const title = document.getElementById('heroTitle').value;
+        const subtitle = document.getElementById('heroSubtitle').value;
+        const buttonText = document.getElementById('heroButtonText').value;
+        
+        try {
+          // Guardar en localStorage para persistencia
+          localStorage.setItem('fireteam_hero_title', title);
+          localStorage.setItem('fireteam_hero_subtitle', subtitle);
+          localStorage.setItem('fireteam_hero_button', buttonText);
+          
+          // Actualizar el DOM
+          const heroTitleEl = document.querySelector('.fire-title');
+          const heroSubEl = document.querySelector('.sub');
+          const heroButtonEl = document.getElementById('ctaHero');
+          
+          if (heroTitleEl && title) heroTitleEl.textContent = title;
+          if (heroSubEl && subtitle) heroSubEl.textContent = subtitle;
+          if (heroButtonEl && buttonText) heroButtonEl.textContent = buttonText;
+          
+          alert('¡Contenido del Hero actualizado correctamente!');
+        } catch (error) {
+          console.error('Error updating hero content:', error);
+          alert('Error al actualizar el contenido del Hero');
+        }
+      }
 
-        tabs.forEach(tab => {
-          tab.addEventListener('click', () => {
-            const targetTab = tab.dataset.tab;
+      async updateBenefitsContent() {
+        const title = document.getElementById('benefitsTitle').value;
+        const subtitle = document.getElementById('benefitsSubtitle').value;
+        
+        try {
+          localStorage.setItem('fireteam_benefits_title', title);
+          localStorage.setItem('fireteam_benefits_subtitle', subtitle);
+          
+          const benefitsSection = document.getElementById('beneficios');
+          if (benefitsSection) {
+            const titleEl = benefitsSection.querySelector('h2');
+            const subtitleEl = benefitsSection.querySelector('p');
             
-            tabs.forEach(t => t.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
+            if (titleEl && title) titleEl.textContent = title;
+            if (subtitleEl && subtitle) subtitleEl.textContent = subtitle;
+          }
+          
+          alert('¡Contenido de Beneficios actualizado correctamente!');
+        } catch (error) {
+          console.error('Error updating benefits content:', error);
+          alert('Error al actualizar el contenido de Beneficios');
+        }
+      }
+
+      async updateContactContent() {
+        const wspNumber = document.getElementById('wspNumber').value;
+        const wspMessage = document.getElementById('wspMessage').value;
+        const instagramUrl = document.getElementById('instagramUrl').value;
+        
+        try {
+          localStorage.setItem('fireteam_wsp_number', wspNumber);
+          localStorage.setItem('fireteam_wsp_message', wspMessage);
+          localStorage.setItem('fireteam_instagram_url', instagramUrl);
+          
+          // Actualizar enlaces de WhatsApp
+          if (wspNumber && wspMessage) {
+            const txt = encodeURIComponent(wspMessage);
+            const link = `https://wa.me/${wspNumber}?text=${txt}`;
+            
+            const ctaHero = document.getElementById('ctaHero');
+            const ctaFinal = document.getElementById('ctaFinal');
+            const wspFloat = document.getElementById('wspFloat');
+            
+            if (ctaHero) ctaHero.href = link;
+            if (ctaFinal) ctaFinal.href = link;
+            if (wspFloat) wspFloat.href = link;
+          }
+          
+          // Actualizar enlace de Instagram
+          if (instagramUrl) {
+            const igFloat = document.getElementById('igFloat');
+            const footerIg = document.querySelector('footer a[href*="instagram"]');
+            
+            if (igFloat) igFloat.href = instagramUrl;
+            if (footerIg) footerIg.href = instagramUrl;
+          }
+          
+          alert('¡Información de contacto actualizada correctamente!');
+        } catch (error) {
+          console.error('Error updating contact content:', error);
+          alert('Error al actualizar la información de contacto');
+        }
+      }
+
+      async updateBannerContent() {
+        const bannerUrl = document.getElementById('bannerUrl').value;
+        const bannerFile = document.getElementById('bannerFile').files[0];
+        
+        try {
+          let finalUrl = bannerUrl;
+          
+          if (bannerFile) {
+            finalUrl = await this.uploadFile(bannerFile);
+          }
+          
+          if (finalUrl) {
+            localStorage.setItem('fireteam_banner_url', finalUrl);
+            
+            // Actualizar banner en la página
+            const bannerImg = document.querySelector('.banner-image');
+            if (bannerImg) {
+              bannerImg.src = finalUrl;
+            }
+            
+            alert('¡Banner actualizado correctamente!');
+          } else {
+            alert('Por favor proporciona una URL o sube un archivo');
+          }
+        } catch (error) {
+          console.error('Error updating banner:', error);
+          alert('Error al actualizar el banner');
+        }
+      }
+
+      // Cargar contenido guardado al iniciar
+      loadSavedContent() {
+        try {
+          // Hero content
+          const savedTitle = localStorage.getItem('fireteam_hero_title');
+          const savedSubtitle = localStorage.getItem('fireteam_hero_subtitle');
+          const savedButton = localStorage.getItem('fireteam_hero_button');
+          
+          if (savedTitle) document.getElementById('heroTitle').value = savedTitle;
+          if (savedSubtitle) document.getElementById('heroSubtitle').value = savedSubtitle;
+          if (savedButton) document.getElementById('heroButtonText').value = savedButton;
+          
+          // Contact content
+          const savedWspNumber = localStorage.getItem('fireteam_wsp_number');
+          const savedWspMessage = localStorage.getItem('fireteam_wsp_message');
+          const savedInstagramUrl = localStorage.getItem('fireteam_instagram_url');
+          
+          if (savedWspNumber) document.getElementById('wspNumber').value = savedWspNumber;
+          if (savedWspMessage) document.getElementById('wspMessage').value = savedWspMessage;
+          if (savedInstagramUrl) document.getElementById('instagramUrl').value = savedInstagramUrl;
+          
+        } catch (error) {
+          console.error('Error loading saved content:', error);
+        }
+      }
+
+      // Función para cambiar entre campos de imagen y video
+      toggleGalleryType() {
+        const type = document.getElementById('galleryType').value;
+        const imageFields = document.getElementById('imageFields');
+        const videoFields = document.getElementById('videoFields');
+        
+        if (type === 'video') {
+          imageFields.style.display = 'none';
+          videoFields.style.display = 'block';
+          document.getElementById('galleryImage').removeAttribute('required');
+          document.getElementById('galleryVideo').setAttribute('required', 'required');
+        } else {
+          imageFields.style.display = 'block';
+          videoFields.style.display = 'none';
+          document.getElementById('galleryVideo').removeAttribute('required');
+          document.getElementById('galleryImage').setAttribute('required', 'required');
+        }
+      }
+
+      setupAdminPanel() {
+        // Tab switching
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
             
             tab.classList.add('active');
-            document.getElementById(`${targetTab}Tab`).classList.add('active');
+            const contentId = tab.getAttribute('data-tab') + 'Tab';
+            document.getElementById(contentId).classList.add('active');
           });
         });
 
-        // Configurar formulario de galería
-        const galleryForm = document.getElementById('galleryForm');
-        galleryForm.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          
-          const submitBtn = galleryForm.querySelector('button[type="submit"]');
-          const editId = submitBtn.dataset.editId;
-          
-          // Mostrar loading
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Procesando...';
-          
-          try {
-            let imageUrl = document.getElementById('galleryImage').value;
-            const fileInput = document.getElementById('galleryFile');
+        // Product form
+        const productForm = document.getElementById('productForm');
+        if (productForm) {
+          productForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            // Si hay archivo, subirlo primero
-            if (fileInput.files && fileInput.files[0]) {
-              const uploadedUrl = await this.uploadImage(fileInput.files[0], 'gallery');
-              if (uploadedUrl) {
-                imageUrl = uploadedUrl;
-              } else {
-                submitBtn.disabled = false;
-                submitBtn.textContent = editId ? 'Actualizar Imagen' : 'Agregar Imagen';
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            const description = document.getElementById('productDesc').value;
+            const image = document.getElementById('productImage').value;
+            const file = document.getElementById('productFile').files[0];
+            
+            let imageUrl = image;
+            
+            // Upload file if provided
+            if (file) {
+              try {
+                imageUrl = await this.uploadFile(file);
+              } catch (error) {
+                console.error('Error uploading file:', error);
+                alert('Error al subir el archivo');
                 return;
               }
             }
             
-            const galleryData = {
-              title: document.getElementById('galleryTitle').value,
-              description: document.getElementById('galleryDesc').value,
-              image: imageUrl,
-              category: document.getElementById('galleryCategory').value,
-              date: document.getElementById('galleryDate').value
-            };
+            await this.addProduct(name, price, description, imageUrl);
+            productForm.reset();
+          });
+        }
 
-            if (editId) {
-              await this.updateGalleryItem(editId, galleryData);
-              submitBtn.textContent = 'Agregar Imagen';
-              delete submitBtn.dataset.editId;
-            } else {
-              await this.addGalleryItem(galleryData);
+        // Gallery form
+        const galleryForm = document.getElementById('galleryForm');
+        if (galleryForm) {
+          galleryForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const type = document.getElementById('galleryType').value;
+            const title = document.getElementById('galleryTitle').value;
+            const description = document.getElementById('galleryDesc').value;
+            const category = document.getElementById('galleryCategory').value;
+            const date = document.getElementById('galleryDate').value;
+            
+            try {
+              if (type === 'video') {
+                const video = document.getElementById('galleryVideo').value;
+                const thumbnail = document.getElementById('videoThumbnail').value;
+                
+                if (!video) {
+                  alert('Por favor ingresa la URL del video');
+                  return;
+                }
+                
+                await this.addGalleryItem(title, description, null, category, date, 'video', video, thumbnail);
+              } else {
+                const image = document.getElementById('galleryImage').value;
+                const file = document.getElementById('galleryFile').files[0];
+                
+                let imageUrl = image;
+                
+                // Upload file if provided
+                if (file) {
+                  try {
+                    imageUrl = await this.uploadFile(file);
+                  } catch (error) {
+                    console.error('Error uploading file:', error);
+                    alert('Error al subir el archivo');
+                    return;
+                  }
+                }
+                
+                if (!imageUrl) {
+                  alert('Por favor ingresa la URL de la imagen o sube un archivo');
+                  return;
+                }
+                
+                await this.addGalleryItem(title, description, imageUrl, category, date, 'image');
+              }
+              
+              galleryForm.reset();
+              // Reset form type to image
+              document.getElementById('galleryType').value = 'image';
+              toggleGalleryType();
+              
+            } catch (error) {
+              console.error('Error adding gallery item:', error);
+              alert('Error al agregar el contenido a la galería');
             }
-
-            galleryForm.reset();
-          } catch(e) {
-            console.error('Error en formulario:', e);
-            alert('Error al procesar la imagen');
-          } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = editId ? 'Actualizar Imagen' : 'Agregar Imagen';
-          }
-        });
-
-        // Configurar formulario de productos
+          });
+        } // Configurar formulario de productos
         const merchForm = document.getElementById('merchForm');
         merchForm.addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -2527,8 +2947,10 @@
             submitBtn.textContent = editId ? 'Actualizar Producto' : 'Agregar Producto';
           }
         });
+      }
 
-        // Botón eliminar todo
+      // Botón eliminar todo
+      setupClearAllButton() {
         document.getElementById('clearAll').addEventListener('click', () => {
           if (confirm('¿Estás seguro de que quieres eliminar todos los productos? Esta acción no se puede deshacer.')) {
             this.products = [];
@@ -2537,10 +2959,6 @@
             this.renderAdminList();
           }
         });
-
-        this.renderAdminList();
-        this.renderGalleryAdminList();
-        this.updateStats();
       }
 
       updateStats() {
@@ -2676,52 +3094,110 @@
             closeModal();
           }
         });
-
-        // Ocultar botones flotantes al llegar al footer
-        const setupFloatingButtonsObserver = () => {
-          const wspFloat = document.getElementById('wspFloat');
-          const igFloat = document.getElementById('igFloat');
-          const footer = document.querySelector('footer');
-          
-          if (!wspFloat || !igFloat || !footer) return;
-          
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                // El footer es visible - ocultar botones flotantes
-                wspFloat.style.opacity = '0';
-                wspFloat.style.transform = 'translateY(20px)';
-                wspFloat.style.pointerEvents = 'none';
-                
-                igFloat.style.opacity = '0';
-                igFloat.style.transform = 'translateY(20px)';
-                igFloat.style.pointerEvents = 'none';
-              } else {
-                // El footer no es visible - mostrar botones flotantes
-                wspFloat.style.opacity = '1';
-                wspFloat.style.transform = 'translateY(0)';
-                wspFloat.style.pointerEvents = 'auto';
-                
-                igFloat.style.opacity = '1';
-                igFloat.style.transform = 'translateY(0)';
-                igFloat.style.pointerEvents = 'auto';
-              }
-            });
-          }, {
-            threshold: 0.1 // Ocultar cuando el 10% del footer sea visible
-          });
-          
-          observer.observe(footer);
-        };
-
-        // Inicializar el observer
-        setupFloatingButtonsObserver();
       }
+
+    // Initialize the ContentManager
+    init() {
+      this.loadSavedContent();
+      this.loadProducts();
+      this.loadGallery();
+      this.setupAdminPanel();
+      this.setupClearAllButton();
+      this.setupEventListeners();
+    }
+    }
+
+    // Ocultar botones flotantes al llegar al footer con Intersection Observer
+    function setupFloatingButtons() {
+      const wspFloat = document.getElementById('wspFloat');
+      const igFloat = document.getElementById('igFloat');
+      const footer = document.querySelector('footer');
+      
+      if (!wspFloat || !igFloat || !footer) {
+        console.log('No se encontraron los elementos:', {wspFloat, igFloat, footer});
+        return;
+      }
+      
+      console.log('Configurando Intersection Observer para botones flotantes');
+      
+      // Función para mostrar botones
+      const showButtons = () => {
+        console.log('MOSTRANDO botones flotantes');
+        wspFloat.style.opacity = '1';
+        wspFloat.style.transform = 'translateY(0)';
+        wspFloat.style.pointerEvents = 'auto';
+        
+        igFloat.style.opacity = '1';
+        igFloat.style.transform = 'translateY(0)';
+        igFloat.style.pointerEvents = 'auto';
+      };
+      
+      // Función para ocultar botones
+      const hideButtons = () => {
+        console.log('OCULTANDO botones flotantes - Footer visible');
+        wspFloat.style.opacity = '0';
+        wspFloat.style.transform = 'translateY(20px)';
+        wspFloat.style.pointerEvents = 'none';
+        
+        igFloat.style.opacity = '0';
+        igFloat.style.transform = 'translateY(20px)';
+        igFloat.style.pointerEvents = 'none';
+      };
+      
+      // Configurar Intersection Observer para detectar cuando el footer está a punto de ser visible
+      const footerObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting || entry.intersectionRatio > 0) {
+            // Footer es visible - ocultar botones
+            hideButtons();
+          } else {
+            // Footer no es visible - mostrar botones
+            showButtons();
+          }
+        });
+      }, {
+        threshold: 0.1, // Activar cuando 10% del footer sea visible
+        rootMargin: '300px 0px 0px 0px' // Activar 300px antes de que el footer entre en vista
+      });
+      
+      // Observar el footer
+      footerObserver.observe(footer);
+      
+      // Inicializar estado de los botones
+      showButtons();
+      
+      // También agregar scroll como respaldo
+      var scrollTimeout;
+      function handleScroll() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+          const footerRect = footer.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          
+          // Si el footer está a 300px o menos del borde inferior de la ventana
+          if (footerRect.top <= windowHeight + 300) {
+            hideButtons();
+          } else {
+            showButtons();
+          }
+        }, 16); // ~60fps
+      }
+      
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll(); // Verificar posición inicial
+    }
+
+    // Inicializar botones flotantes cuando el DOM esté listo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupFloatingButtons);
+    } else {
+      setupFloatingButtons();
     }
 
     // Inicializar el sistema
     window.contentManager = new ContentManager();
+    window.contentManager.init();
     }());
-  </script>
-</body>
-</html>
+      </script>
+    </body>
+  </html>
