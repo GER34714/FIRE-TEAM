@@ -1358,7 +1358,7 @@
               <a class="btn" id="ctaFinal" href="#" rel="noopener">Consultar por WhatsApp</a>
               <a class="btn secondary" href="#inicio">Volver arriba</a>
             </div>
-            <div class="micro" style="margin-top:12px;">WSP: +5491171297173
+            <div class="micro" style="margin-top:12px;">WSP: +5491171297173</div>
           </div>
         </div>
       </section>
@@ -1454,11 +1454,13 @@
         <form id="loginForm" class="admin-form">
           <div class="form-group">
             <label for="adminEmail">Email</label>
-            <input type="email" id="adminEmail" required placeholder="admin@fireteam.com">
+            <input type="email" id="adminEmail" required placeholder="admin@fireteam.com" value="admin@fireteam.com">
+            <small style="color: rgba(255,255,255,.60); font-size: 11px; margin-top: 4px; display: block;">Usuario por defecto: admin@fireteam.com</small>
           </div>
           <div class="form-group">
             <label for="adminPassword">Contraseña</label>
-            <input type="password" id="adminPassword" required placeholder="Tu contraseña">
+            <input type="password" id="adminPassword" required placeholder="fireteam2024" value="fireteam2024">
+            <small style="color: rgba(255,255,255,.60); font-size: 11px; margin-top: 4px; display: block;">Contraseña por defecto: fireteam2024</small>
           </div>
           <button type="submit" class="admin-btn" style="width: 100%;">
             Iniciar Sesión
@@ -1894,6 +1896,12 @@
         const supabaseUrl = 'https://zgegdqmrvuxxwickywkp.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZWdkcW1ydnV4eHdpY2t5d2twIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyNTMzNDEsImV4cCI6MjA4NTgyOTM0MX0.0KSs1fsiaUXUgGI6v1n2IObM6YC2L_5CvzGB0DmC1OQ';
         
+        // Validar que las credenciales no estén expuestas en producción
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            console.warn('⚠️ WARNING: Usando credenciales de Supabase hardcodeadas en producción');
+            console.warn('⚠️ Considera usar variables de entorno en un entorno de producción real');
+        }
+        
         try {
             window.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey, {
                 auth: {
@@ -1917,50 +1925,66 @@
     // ===== FUNCIONES DE AUTENTICACIÓN =====
     let currentUser = null;
     
+    // Credenciales de administrador por defecto (para acceso inicial)
+    const DEFAULT_ADMIN = {
+      email: 'admin@fireteam.com',
+      password: 'fireteam2024'
+    };
+    
     async function checkAuthSession() {
-        if (!supabase) return false;
+        console.log('🔍 checkAuthSession() called');
+        if (!supabase) {
+            console.log('❌ Supabase not available');
+            return false;
+        }
         
         try {
+            console.log('🔍 Getting current session...');
             const { data: { session }, error } = await supabase.auth.getSession();
             if (error) {
-                console.error('Error verificando sesión:', error);
+                console.error('❌ Error verificando sesión:', error);
                 return false;
             }
             
             if (session) {
                 currentUser = session.user;
-                console.log('Usuario autenticado:', currentUser.email);
+                console.log('✅ Usuario autenticado:', currentUser.email);
                 return true;
             }
+            console.log('🔒 No active session found');
             return false;
         } catch (error) {
-            console.error('Error en checkAuthSession:', error);
+            console.error('❌ Error en checkAuthSession:', error);
             return false;
         }
     }
     
     async function signIn(email, password) {
+        console.log('🔐 signIn() called with email:', email);
         if (!supabase) {
+            console.log('❌ Supabase not available');
             alert('Error: Supabase no está disponible');
             return false;
         }
         
         try {
+            console.log('🔍 Attempting login...');
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: email,
                 password: password
             });
             
             if (error) {
-                alert('Error de autenticación: ' + error.message);
+                console.error('❌ Error en login:', error);
+                alert('Error al iniciar sesión: ' + error.message);
                 return false;
             }
             
             currentUser = data.user;
-            console.log('Login exitoso:', currentUser.email);
+            console.log('✅ Login exitoso:', currentUser.email);
             return true;
         } catch (error) {
-            console.error('Error en signIn:', error);
+            console.error('❌ Error en signIn:', error);
             alert('Error al iniciar sesión');
             return false;
         }
@@ -1992,20 +2016,34 @@
       }
 
       async init() {
+        console.log('🚀 ContentManager init() starting...');
+        
         if (!supabase) {
-          console.error('Supabase no está disponible. Verifica la configuración de API.');
+          console.error('❌ Supabase no está disponible. Verifica la configuración de API.');
           this.renderProducts();
           this.renderGallery();
           this.setupEventListeners();
           return;
         }
         
+        console.log('📥 Loading products...');
         await this.loadProducts();
+        console.log(`📦 Products loaded: ${this.products.length} items`);
+        
+        console.log('📥 Loading gallery...');
         await this.loadGallery();
+        console.log(`🖼️ Gallery loaded: ${this.gallery.length} items`);
+        
+        console.log('🎨 Rendering products and gallery...');
         this.renderProducts();
         this.renderGallery();
+        
+        console.log('⚙️ Setting up UI components...');
+        this.setupGalleryTypeToggle();
         this.setupAdminPanel();
         this.setupEventListeners();
+        
+        console.log('✅ ContentManager initialization complete');
       }
 
       async loadProducts() {
@@ -2342,7 +2380,7 @@
 
       async deleteGalleryItem(id) {
         try {
-          const { error } = await window.fireteamSupabase
+          const { error } = await supabase
             .from('gallery')
             .delete()
             .eq('id', id);
@@ -2361,15 +2399,23 @@
       }
 
       renderProducts() {
+        console.log('🎨 renderProducts() called with', this.products.length, 'products');
         const grid = document.getElementById('merchGrid');
         const empty = document.getElementById('merchEmpty');
         
+        if (!grid || !empty) {
+          console.error('❌ merchGrid or merchEmpty elements not found');
+          return;
+        }
+        
         if (this.products.length === 0) {
+          console.log('📦 No products to display, showing empty state');
           grid.style.display = 'none';
           empty.style.display = 'block';
           return;
         }
 
+        console.log('📦 Displaying', this.products.length, 'products');
         grid.style.display = 'grid';
         empty.style.display = 'none';
         
@@ -2385,7 +2431,7 @@
               <h3 class="merch-title">${product.name}</h3>
               <p class="merch-desc">${product.description}</p>
               <div class="merch-price">${product.price}</div>
-              <button class="merch-btn" onclick="window.open('${product.wsp_link || `https://wa.me/${WSP_NUMBER.replace(/\D/g, '')}?text=Hola! Quiero info sobre: ${encodeURIComponent(product.name)}`}', '_blank')">
+              <button class="merch-btn" onclick="window.open('${product.wsp_link || 'https://wa.me/' + WSP_NUMBER.replace(/\\D/g, '') + '?text=Hola! Quiero info sobre: ' + encodeURIComponent(product.name)}', '_blank')">
                 Consultar por WhatsApp
               </button>
             </div>
@@ -2402,21 +2448,27 @@
       }
 
       renderGallery() {
-        const galleryGrid = document.getElementById('galleryGrid');
-        const galleryEmpty = document.getElementById('galleryEmpty');
+        console.log('🎨 renderGallery() called with', this.gallery.length, 'gallery items');
+        const grid = document.getElementById('galleryGrid');
+        const empty = document.getElementById('galleryEmpty');
         
-        if (!galleryGrid || !galleryEmpty) return;
-        
-        if (this.gallery.length === 0) {
-          galleryGrid.style.display = 'none';
-          galleryEmpty.style.display = 'block';
+        if (!grid || !empty) {
+          console.error('❌ galleryGrid or galleryEmpty elements not found');
           return;
         }
         
-        galleryGrid.style.display = 'grid';
-        galleryEmpty.style.display = 'none';
+        if (this.gallery.length === 0) {
+          console.log('🖼️ No gallery items to display, showing empty state');
+          grid.style.display = 'none';
+          empty.style.display = 'block';
+          return;
+        }
+
+        console.log('🖼️ Displaying', this.gallery.length, 'gallery items');
+        grid.style.display = 'grid';
+        empty.style.display = 'none';
         
-        galleryGrid.innerHTML = this.gallery.map(item => {
+        grid.innerHTML = this.gallery.map(item => {
           const dateStr = item.date ? new Date(item.date).toLocaleDateString('es-AR', {
             day: 'numeric',
             month: 'short',
@@ -2718,6 +2770,60 @@
         }
       }
 
+      async uploadFile(file, folder = 'general') {
+        try {
+          if (!file) return null;
+
+          // Validar archivo
+          if (!file.type.startsWith('image/')) {
+            alert('El archivo debe ser una imagen');
+            return null;
+          }
+
+          // Comprimir imagen automáticamente
+          const compressedFile = await this.compressImage(file, 1200, 0.75);
+          
+          // Validar tamaño después de compresión
+          if (compressedFile.size > 2 * 1024 * 1024) { // 2MB después de compresión
+            alert('La imagen comprimida no debe superar los 2MB');
+            return null;
+          }
+
+          const fileName = `${folder}/${Date.now()}_compressed_${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
+          
+          const { data, error } = await supabase.storage
+            .from('fireteam-images')
+            .upload(fileName, compressedFile, {
+              cacheControl: '3600',
+              upsert: false,
+              contentType: 'image/jpeg'
+            });
+
+          if (error) {
+            console.error('Error uploading file:', error);
+            alert('Error al subir el archivo: ' + error.message);
+            return null;
+          }
+
+          // Obtener URL pública optimizada
+          const { data: { publicUrl } } = supabase.storage
+            .from('fireteam-images')
+            .getPublicUrl(fileName);
+
+          return publicUrl;
+        } catch(e) {
+          console.error('Error uploading file:', e);
+          // Si el bucket no existe, continuar sin archivo en lugar de fallar
+          if (e.message && e.message.includes('Bucket not found')) {
+            console.warn('⚠️ Bucket fireteam-images no encontrado. El archivo no se subirá.');
+            alert('⚠️ El bucket de imágenes no está configurado. Contacta al administrador para configurar el storage.');
+            return '';
+          }
+          alert('Error al subir el archivo: ' + e.message);
+          return null;
+        }
+      }
+
       async updateBannerContent() {
         const bannerUrl = document.getElementById('bannerUrl').value;
         const bannerFile = document.getElementById('bannerFile').files[0];
@@ -2726,7 +2832,7 @@
           let finalUrl = bannerUrl;
           
           if (bannerFile) {
-            finalUrl = await this.uploadFile(bannerFile);
+            finalUrl = await this.uploadFile(bannerFile, 'banners');
           }
           
           if (finalUrl) {
@@ -2775,22 +2881,24 @@
       }
 
       // Función para cambiar entre campos de imagen y video
-      toggleGalleryType() {
-        const type = document.getElementById('galleryType').value;
-        const imageFields = document.getElementById('imageFields');
-        const videoFields = document.getElementById('videoFields');
-        
-        if (type === 'video') {
-          imageFields.style.display = 'none';
-          videoFields.style.display = 'block';
-          document.getElementById('galleryImage').removeAttribute('required');
-          document.getElementById('galleryVideo').setAttribute('required', 'required');
-        } else {
-          imageFields.style.display = 'block';
-          videoFields.style.display = 'none';
-          document.getElementById('galleryVideo').removeAttribute('required');
-          document.getElementById('galleryImage').setAttribute('required', 'required');
-        }
+      setupGalleryTypeToggle() {
+        window.toggleGalleryType = () => {
+          const type = document.getElementById('galleryType').value;
+          const imageFields = document.getElementById('imageFields');
+          const videoFields = document.getElementById('videoFields');
+          
+          if (type === 'video') {
+            imageFields.style.display = 'none';
+            videoFields.style.display = 'block';
+            document.getElementById('galleryImage').removeAttribute('required');
+            document.getElementById('galleryVideo').setAttribute('required', 'required');
+          } else {
+            imageFields.style.display = 'block';
+            videoFields.style.display = 'none';
+            document.getElementById('galleryVideo').removeAttribute('required');
+            document.getElementById('galleryImage').setAttribute('required', 'required');
+          }
+        };
       }
 
       setupAdminPanel() {
@@ -2806,35 +2914,6 @@
           });
         });
 
-        // Product form
-        const productForm = document.getElementById('productForm');
-        if (productForm) {
-          productForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('productName').value;
-            const price = document.getElementById('productPrice').value;
-            const description = document.getElementById('productDesc').value;
-            const image = document.getElementById('productImage').value;
-            const file = document.getElementById('productFile').files[0];
-            
-            let imageUrl = image;
-            
-            // Upload file if provided
-            if (file) {
-              try {
-                imageUrl = await this.uploadFile(file);
-              } catch (error) {
-                console.error('Error uploading file:', error);
-                alert('Error al subir el archivo');
-                return;
-              }
-            }
-            
-            await this.addProduct(name, price, description, imageUrl);
-            productForm.reset();
-          });
-        }
 
         // Gallery form
         const galleryForm = document.getElementById('galleryForm');
@@ -2979,35 +3058,54 @@
       setupEventListeners() {
         // Abrir panel admin - múltiples accesos
         const openAdminModal = async (e) => {
+          console.log('🔐 Admin panel access requested');
           e.preventDefault();
           
           // Verificar si el usuario está autenticado
+          console.log('🔍 Checking authentication status...');
           const isAuthenticated = await checkAuthSession();
+          console.log('🔐 Authentication result:', isAuthenticated);
           
           if (!isAuthenticated) {
+            console.log('🔒 User not authenticated, showing login modal');
             // Mostrar modal de login
             document.getElementById('loginModal').classList.add('open');
             return;
           }
           
+          console.log('✅ User authenticated, opening admin panel');
           // Abrir panel admin
           openAdminPanel();
         };
 
         // Abrir panel de administración
         const openAdminPanel = () => {
-          document.getElementById('adminModal').classList.add('open');
+          console.log('🔓 openAdminPanel() called, opening admin modal');
+          const adminModal = document.getElementById('adminModal');
+          if (!adminModal) {
+            console.error('❌ adminModal element not found');
+            return;
+          }
+          
+          adminModal.classList.add('open');
+          console.log('✅ Admin modal opened successfully');
           
           // Actualizar información del usuario en el panel
           if (currentUser) {
+            console.log('👤 Updating user info for:', currentUser.email);
             const userInfo = document.getElementById('adminUserInfo');
             if (userInfo) {
               userInfo.textContent = `Administrador: ${currentUser.email}`;
+              console.log('✅ User info updated');
+            } else {
+              console.log('⚠️ adminUserInfo element not found');
             }
+          } else {
+            console.log('⚠️ No current user found');
           }
         };
 
-        // Footer link
+        // Footer link - acceso con autenticación Supabase
         document.getElementById('adminLink').addEventListener('click', openAdminModal);
         
         // Mobile admin link (si existe)
@@ -3060,20 +3158,26 @@
 
         // Procesar formulario de login
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
+          console.log('🔐 Login form submitted');
           e.preventDefault();
           
           const email = document.getElementById('adminEmail').value;
           const password = document.getElementById('adminPassword').value;
+          console.log('📝 Login form data:', { email, password: '***' });
           
           if (!email || !password) {
+            console.log('⚠️ Missing email or password');
             alert('Por favor complete todos los campos');
             return;
           }
           
           // Intentar login
+          console.log('🔍 Attempting login...');
           const loginSuccess = await signIn(email, password);
+          console.log('🔐 Login result:', loginSuccess);
           
           if (loginSuccess) {
+            console.log('✅ Login successful, closing login modal and opening admin panel');
             // Cerrar modal de login
             document.getElementById('loginModal').classList.remove('open');
             
@@ -3082,6 +3186,8 @@
             
             // Abrir panel admin
             openAdminPanel();
+          } else {
+            console.log('❌ Login failed');
           }
         });
 
@@ -3096,15 +3202,6 @@
         });
       }
 
-    // Initialize the ContentManager
-    init() {
-      this.loadSavedContent();
-      this.loadProducts();
-      this.loadGallery();
-      this.setupAdminPanel();
-      this.setupClearAllButton();
-      this.setupEventListeners();
-    }
     }
 
     // Ocultar botones flotantes al llegar al footer con Intersection Observer
@@ -3194,10 +3291,10 @@
       setupFloatingButtons();
     }
 
-    // Inicializar el sistema
+    // Initialize ContentManager
     window.contentManager = new ContentManager();
-    window.contentManager.init();
-    }());
-      </script>
-    </body>
-  </html>
+    console.log("JS CARGADO OK");
+    })();
+  </script>
+</body>
+</html>
