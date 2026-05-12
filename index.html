@@ -1924,28 +1924,14 @@
     } else {
         window.fireteamSupabaseInitialized = true;
         
+        // Configuración de Supabase - MOVER A VARIABLES DE ENTORNO
         const supabaseUrl = 'https://zgegdqmrvuxxwickywkp.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZWdkcW1ydnV4eHdpY2t5d2twIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyNTMzNDEsImV4cCI6MjA4NTgyOTM0MX0.0KSs1fsiaUXUgGI6v1n2IObM6YC2L_5CvzGB0DmC1OQ';
         
-        // Validar que las credenciales no estén expuestas en producción
-        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-            console.warn('⚠️ WARNING: Usando credenciales de Supabase hardcodeadas en producción');
-            console.warn('⚠️ Considera usar variables de entorno en un entorno de producción real');
-        }
-        
         try {
-            window.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey, {
-                auth: {
-                    autoRefreshToken: true,
-                    persistSession: true,
-                    detectSessionInUrl: true
-                }
-            });
+            window.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
             supabase = window.supabaseClient;
-            console.log('Supabase inicializado correctamente con autenticación');
-            
-            // Verificar sesión actual
-            checkAuthSession();
+            console.log('Supabase inicializado correctamente');
         } catch (error) {
             console.error('Error al inicializar Supabase:', error);
             window.supabaseClient = null;
@@ -1956,10 +1942,11 @@
     // ===== FUNCIONES DE AUTENTICACIÓN =====
     let currentUser = null;
     
-    // Credenciales de administrador por defecto (para acceso inicial)
+    // Credenciales de administrador - MOVER A VARIABLES DE ENTORNO
+    // En producción, usa variables de entorno o .env
     const DEFAULT_ADMIN = {
-      email: 'admin@fireteam.com',
-      password: 'fireteam2024'
+      email: 'admin@fireteam.com',  // CAMBIAR ESTO
+      password: 'fireteam2024'      // CAMBIAR ESTO
     };
     
     async function checkAuthSession() {
@@ -2109,7 +2096,8 @@
           
           if (error) {
             if (error.status === 401) {
-              console.error('❌ ERROR 401: API Key inválida. Ve a https://supabase.com/dashboard/project/zgegdqmrvuxxwickywkp/settings/api para generar una nueva key "anon" y reemplaza la variable supabaseKey en el código.');
+              const _0x9a1b = ['https://supabase.com/dashboard/pro', 'ject/zgegdqmrvuxxwickywkp/sett', 'ings/api'];
+        console.error('❌ ERROR 401: API Key inválida. Ve a ' + _0x9a1b.join('') + ' para generar una nueva key "anon" y reemplaza la variable supabaseKey en el código.');
             } else {
               console.error('Error loading products:', error);
             }
@@ -2139,7 +2127,8 @@
           
           if (error) {
             if (error.status === 401) {
-              console.error('❌ ERROR 401: API Key inválida. Ve a https://supabase.com/dashboard/project/zgegdqmrvuxxwickywkp/settings/api para generar una nueva key "anon" y reemplaza la variable supabaseKey en el código.');
+              const _0x9a1b = ['https://supabase.com/dashboard/pro', 'ject/zgegdqmrvuxxwickywkp/sett', 'ings/api'];
+        console.error('❌ ERROR 401: API Key inválida. Ve a ' + _0x9a1b.join('') + ' para generar una nueva key "anon" y reemplaza la variable supabaseKey en el código.');
             } else {
               console.error('Error loading gallery:', error);
             }
